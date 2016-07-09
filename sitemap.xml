@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://echo.laily.net/</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/basic-auth</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/body-limit</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/cors</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/crud</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/csrf</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/guide/cookies</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/embed-resources</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/file-upload</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/google-app-engine</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/graceful-shutdown</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/gzip</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/guide/http-%E8%AF%B7%E6%B1%82</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/http2</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/hello-world</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/jsonp</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/jwt</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/jwt</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/logger</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/method-override</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/middleware</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/recover</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/remove-trailing-slash</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/secure</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/static</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/streaming-response</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/subdomains</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/recipes/websocket</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/godoc/echo/</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/godoc/engine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/godoc/fasthttp/</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/godoc/middleware/</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/godoc/standard/</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/guide/%E5%AE%89%E8%A3%85</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/%E6%A6%82%E8%BF%B0</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/guide/%E6%A8%A1%E6%9D%BF</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/guide/%E6%B5%8B%E8%AF%95</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/middleware/%E6%B7%BB%E5%8A%A0%E7%BB%93%E5%B0%BE%E6%96%9C%E6%9D%A0</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/guide/%E8%87%AA%E5%AE%9A%E4%B9%89</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/guide/%E8%B7%AF%E7%94%B1</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/guide/%E8%BF%81%E7%A7%BB</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/guide/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86</loc>
+  </url>
+  
+  <url>
+    <loc>http://echo.laily.net/guide/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6</loc>
+  </url>
+  
+</urlset>

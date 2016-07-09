@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Guides on Go/Golang 框架 Echo 文档</title>
+    <link>http://echo.laily.net/guide/</link>
+    <description>Recent content in Guides on Go/Golang 框架 Echo 文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <atom:link href="http://echo.laily.net/guide/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Cookies</title>
+      <link>http://echo.laily.net/guide/cookies</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/guide/cookies</guid>
+      <description>
+
+&lt;h2 id=&#34;cookies&#34;&gt;Cookies&lt;/h2&gt;
+
+&lt;p&gt;Cookie 是用户在访问网站时服务器发送过来存储在浏览器上的一小段数据。每次用户访问网页，浏览器都把 Cookies 发送回服务器以提醒服务器这个用户以前干过什么。
+Cookie 用来提供一个可靠的途径让服务器记住一些状态信息（比如在线商城中添加物品到购物车）或者记录用户的浏览器行为（比如点击了某个按钮，登录，哪个页面被访问过）。
+Cookie 也可以用来存储用户输入过的表单内容像电话号码，地址等等。&lt;/p&gt;
+
+&lt;h3 id=&#34;cookie-属性&#34;&gt;Cookie 属性&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Attribute&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Optional&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Name&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Value&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Path&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Domain&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Expires&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;Secure&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;HTTPOnly&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;创建一个-cookie&#34;&gt;创建一个 Cookie&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func writeCookie(c echo.Context) error {
+	cookie := new(echo.Cookie)
+	cookie.SetName(&amp;quot;username&amp;quot;)
+	cookie.SetValue(&amp;quot;jon&amp;quot;)
+	cookie.SetExpires(time.Now().Add(24 * time.Hour))
+	c.SetCookie(cookie)
+	return c.String(http.StatusOK, &amp;quot;write a cookie&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Cookie is created using &lt;code&gt;new(echo.Cookie)&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Attributes for the cookie are set using &lt;code&gt;Setter&lt;/code&gt; functions.&lt;/li&gt;
+&lt;li&gt;Finally &lt;code&gt;c.SetCookie(cookies)&lt;/code&gt; adds a &lt;code&gt;Set-Cookie&lt;/code&gt; header in HTTP response.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;读取-cookie&#34;&gt;读取 Cookie&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func readCookie(c echo.Context) error {
+	cookie, err := c.Cookie(&amp;quot;username&amp;quot;)
+	if err != nil {
+		return err
+	}
+	fmt.Println(cookie.Name())
+	fmt.Println(cookie.Value())
+	return c.String(http.StatusOK, &amp;quot;read a cookie&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Cookie is read by name using &lt;code&gt;c.Cookie(&amp;quot;username&amp;quot;)&lt;/code&gt; from the HTTP request.&lt;/li&gt;
+&lt;li&gt;Cookie attributes are accessed using &lt;code&gt;Getter&lt;/code&gt; function.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;读取所有-cookies&#34;&gt;读取所有 Cookies&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func readAllCookies(c echo.Context) error {
+	for _, cookie := range c.Cookies() {
+		fmt.Println(cookie.Name())
+		fmt.Println(cookie.Value())
+	}
+	return c.String(http.StatusOK, &amp;quot;read all cookie&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>HTTP 请求</title>
+      <link>http://echo.laily.net/guide/http-%E8%AF%B7%E6%B1%82</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/guide/http-%E8%AF%B7%E6%B1%82</guid>
+      <description>
+
+&lt;h2 id=&#34;http-请求&#34;&gt;HTTP 请求&lt;/h2&gt;
+
+&lt;h3 id=&#34;action-路径处理&#34;&gt;Action 路径处理&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Context#Path()&lt;/code&gt; 返回在路由注册的Action的路径，它可以被中间件使用来得到访问的目的地址。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;例如&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.Use(func(c echo.Context) error {
+    println(c.Path()) // Prints `/users/:name`
+    return nil
+})
+e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
+    return c.String(http.StatusOK, name)
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;golang-org-x-net-context-对象&#34;&gt;golang.org/x/net/context 对象&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;echo.Context&lt;/code&gt; 内嵌了 &lt;code&gt;context.Context&lt;/code&gt; 接口，所以&lt;code&gt;context.Context&lt;/code&gt; 的所有方法&lt;code&gt;echo.Context&lt;/code&gt;都支持。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;例如&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
+    c.SetNetContext(context.WithValue(nil, &amp;quot;key&amp;quot;, &amp;quot;val&amp;quot;))
+    // Pass it down...
+    // Use it...
+    val := c.Value(&amp;quot;key&amp;quot;).(string)
+    return c.String(http.StatusOK, name)
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;url-参数&#34;&gt;URL 参数&lt;/h3&gt;
+
+&lt;p&gt;URL 参数可以用参数名 &lt;code&gt;Context#Param(name string) string&lt;/code&gt; 和参数索引(序号) &lt;code&gt;Context#P(i int) string&lt;/code&gt; 取得。通过参数索引的方式性能会稍微好一点。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;例如&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error {
+	// By name
+	name := c.Param(&amp;quot;name&amp;quot;)
+
+	// By index
+	name := c.P(0)
+
+	return c.String(http.StatusOK, name)
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ curl http://localhost:1323/users/joe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;请求参数&#34;&gt;请求参数&lt;/h3&gt;
+
+&lt;p&gt;请求参数可以通过参数名获取 &lt;code&gt;Context#QueryParam(name string)&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;例如&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.GET(&amp;quot;/users&amp;quot;, func(c echo.Context) error {
+	name := c.QueryParam(&amp;quot;name&amp;quot;)
+	return c.String(http.StatusOK, name)
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ curl -G -d &amp;quot;name=joe&amp;quot; http://localhost:1323/users
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;表单参数&#34;&gt;表单参数&lt;/h3&gt;
+
+&lt;p&gt;表单参数可以使用参数名获取 &lt;code&gt;Context#FormValue(name string)&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;例如&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.POST(&amp;quot;/users&amp;quot;, func(c echo.Context) error {
+	name := c.FormValue(&amp;quot;name&amp;quot;)
+	return c.String(http.StatusOK, name)
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ curl -d &amp;quot;name=joe&amp;quot; http://localhost:1323/users
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>安装</title>
+      <link>http://echo.laily.net/guide/%E5%AE%89%E8%A3%85</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/guide/%E5%AE%89%E8%A3%85</guid>
+      <description>
+
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+
+&lt;p&gt;Echo 在Go &lt;code&gt;1.5.x&lt;/code&gt; 和 &lt;code&gt;1.6.x&lt;/code&gt; 环境下开发和测试&lt;/p&gt;
+
+&lt;h3 id=&#34;使用-go-get-安装最新稳定版-echo&#34;&gt;使用 &lt;code&gt;go get&lt;/code&gt; 安装最新稳定版 Echo&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ go get github.com/labstack/echo/...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;升级-echo&#34;&gt;升级 Echo&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ go get -u github.com/labstack/echo/...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;从-v1-迁移-guide-migrating&#34;&gt;&lt;a href=&#34;http://echo.laily.net/guide/migrating&#34;&gt;从 v1 迁移&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Echo 使用 GitHub releases 按照 &lt;a href=&#34;http://semver.org&#34;&gt;semantic versioning&lt;/a&gt; 管理版本。
+特别的版本可以使用 &lt;a href=&#34;https://github.com/avelino/awesome-go#package-management&#34;&gt;package manager&lt;/a&gt; 安装。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>模板</title>
+      <link>http://echo.laily.net/guide/%E6%A8%A1%E6%9D%BF</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/guide/%E6%A8%A1%E6%9D%BF</guid>
+      <description>
+
+&lt;h2 id=&#34;模板&#34;&gt;模板&lt;/h2&gt;
+
+&lt;h3 id=&#34;模板渲染&#34;&gt;模板渲染&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Context#Render(code int, name string, data interface{}) error&lt;/code&gt; 用于渲染一个模板，然后发送一个 text/html 的状态响应。我们可以使用任何模板引擎，只要使用&lt;code&gt;Echo.SetRenderer()&lt;/code&gt;注册。&lt;/p&gt;
+
+&lt;p&gt;下面是使用Go &lt;code&gt;html/template&lt;/code&gt;的示例：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;实现 &lt;code&gt;echo.Render&lt;/code&gt; 接口&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Template struct {
+    templates *template.Template
+}
+
+func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+    return t.templates.ExecuteTemplate(w, name, data)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;预编译模板&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;public/views/hello.html&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;{{define &amp;quot;hello&amp;quot;}}Hello, {{.}}!{{end}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;t := &amp;amp;Template{
+    templates: template.Must(template.ParseGlob(&amp;quot;public/views/*.html&amp;quot;)),
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;注册模板&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.SetRenderer(t)
+e.GET(&amp;quot;/hello&amp;quot;, Hello)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;在action中渲染模板&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func Hello(c echo.Context) error {
+    return c.Render(http.StatusOK, &amp;quot;hello&amp;quot;, &amp;quot;World&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>测试</title>
+      <link>http://echo.laily.net/guide/%E6%B5%8B%E8%AF%95</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/guide/%E6%B5%8B%E8%AF%95</guid>
+      <description>
+
+&lt;h2 id=&#34;testing&#34;&gt;Testing&lt;/h2&gt;
+
+&lt;h3 id=&#34;testing-handler&#34;&gt;Testing Handler&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;GET&lt;/code&gt; &lt;code&gt;/users/:id&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Handler below retrieves user by id from the database. If user is not found it returns
+&lt;code&gt;404&lt;/code&gt; error with a message.&lt;/p&gt;
+
+&lt;h4 id=&#34;createuser&#34;&gt;CreateUser&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;POST&lt;/code&gt; &lt;code&gt;/users&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Accepts JSON payload&lt;/li&gt;
+&lt;li&gt;On success &lt;code&gt;201 - Created&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;On error &lt;code&gt;500 - Internal Server Error&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;getuser&#34;&gt;GetUser&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;GET&lt;/code&gt; &lt;code&gt;/users/:email&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;On success &lt;code&gt;200 - OK&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;On error &lt;code&gt;404 - Not Found&lt;/code&gt; if user is not found otherwise &lt;code&gt;500 - Internal Server Error&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;handler.go&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package handler
+
+import (
+	&amp;quot;net/http&amp;quot;
+
+	&amp;quot;github.com/labstack/echo&amp;quot;
+)
+
+type (
+	User struct {
+		Name  string `json:&amp;quot;name&amp;quot; form:&amp;quot;name&amp;quot;`
+		Email string `json:&amp;quot;email&amp;quot; form:&amp;quot;email&amp;quot;`
+	}
+	handler struct {
+		db map[string]*User
+	}
+)
+
+func (h *handler) createUser(c echo.Context) error {
+	u := new(User)
+	if err := c.Bind(u); err != nil {
+		return err
+	}
+	return c.JSON(http.StatusCreated, u)
+}
+
+func (h *handler) getUser(c echo.Context) error {
+	email := c.Param(&amp;quot;email&amp;quot;)
+	user := h.db[email]
+	if user == nil {
+		return echo.NewHTTPError(http.StatusNotFound, &amp;quot;user not found&amp;quot;)
+	}
+	return c.JSON(http.StatusOK, user)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;handler_test.go&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package handler
+
+import (
+	&amp;quot;net/http&amp;quot;
+	&amp;quot;net/http/httptest&amp;quot;
+	&amp;quot;strings&amp;quot;
+	&amp;quot;testing&amp;quot;
+
+	&amp;quot;github.com/labstack/echo&amp;quot;
+	&amp;quot;github.com/labstack/echo/engine/standard&amp;quot;
+	&amp;quot;github.com/stretchr/testify/assert&amp;quot;
+)
+
+var (
+	mockDB = map[string]*User{
+		&amp;quot;jon@labstack.com&amp;quot;: &amp;amp;User{&amp;quot;Jon Snow&amp;quot;, &amp;quot;jon@labstack.com&amp;quot;},
+	}
+	userJSON = `{&amp;quot;name&amp;quot;:&amp;quot;Jon Snow&amp;quot;,&amp;quot;email&amp;quot;:&amp;quot;jon@labstack.com&amp;quot;}`
+)
+
+func TestCreateUser(t *testing.T) {
+	// Setup
+	e := echo.New()
+	req, err := http.NewRequest(echo.POST, &amp;quot;/users&amp;quot;, strings.NewReader(userJSON))
+	if assert.NoError(t, err) {
+		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+		rec := httptest.NewRecorder()
+		c := e.NewContext(standard.NewRequest(req, e.Logger()), standard.NewResponse(rec, e.Logger()))
+		h := &amp;amp;handler{mockDB}
+
+		// Assertions
+		if assert.NoError(t, h.createUser(c)) {
+			assert.Equal(t, http.StatusCreated, rec.Code)
+			assert.Equal(t, userJSON, rec.Body.String())
+		}
+	}
+}
+
+func TestGetUser(t *testing.T) {
+	// Setup
+	e := echo.New()
+	req := new(http.Request)
+	rec := httptest.NewRecorder()
+	c := e.NewContext(standard.NewRequest(req, e.Logger()), standard.NewResponse(rec, e.Logger()))
+	c.SetPath(&amp;quot;/users/:email&amp;quot;)
+	c.SetParamNames(&amp;quot;email&amp;quot;)
+	c.SetParamValues(&amp;quot;jon@labstack.com&amp;quot;)
+	h := &amp;amp;handler{mockDB}
+
+	// Assertions
+	if assert.NoError(t, h.getUser(c)) {
+		assert.Equal(t, http.StatusOK, rec.Code)
+		assert.Equal(t, userJSON, rec.Body.String())
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;using-form-payload&#34;&gt;Using Form Payload&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;f := make(url.Values)
+f.Set(&amp;quot;name&amp;quot;, &amp;quot;Jon Snow&amp;quot;)
+f.Set(&amp;quot;email&amp;quot;, &amp;quot;jon@labstack.com&amp;quot;)
+req, err := http.NewRequest(echo.POST, &amp;quot;/&amp;quot;, strings.NewReader(f.Encode()))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;setting-path-params&#34;&gt;Setting Path Params&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;c.SetParamNames(&amp;quot;id&amp;quot;, &amp;quot;email&amp;quot;)
+c.SetParamValues(&amp;quot;1&amp;quot;, &amp;quot;jon@labstack.com&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;setting-query-params&#34;&gt;Setting Query Params&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;q := make(url.Values)
+q.Set(&amp;quot;email&amp;quot;, &amp;quot;jon@labstack.com&amp;quot;)
+req, err := http.NewRequest(echo.POST, &amp;quot;/?&amp;quot;+q.Encode(), nil)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;testing-middleware&#34;&gt;Testing Middleware&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;TBD&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;You can looking to built-in middleware &lt;a href=&#34;https://github.com/labstack/echo/tree/master/middleware&#34;&gt;test cases&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>自定义</title>
+      <link>http://echo.laily.net/guide/%E8%87%AA%E5%AE%9A%E4%B9%89</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/guide/%E8%87%AA%E5%AE%9A%E4%B9%89</guid>
+      <description>
+
+&lt;h2 id=&#34;自定义&#34;&gt;自定义&lt;/h2&gt;
+
+&lt;h3 id=&#34;http-错误处理&#34;&gt;HTTP 错误处理&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Echo#SetHTTPErrorHandler(h HTTPErrorHandler)&lt;/code&gt; 注册了一个自定义的 &lt;code&gt;Echo#HTTPErrorHandler&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;默认的 HTTP 错误处理规则如下：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;如果错误是&lt;code&gt;Echo#HTTPError&lt;/code&gt;类型则发送一个状态码为 &lt;code&gt;HTTPError.Code&lt;/code&gt;，内容为 &lt;code&gt;HTTPError.Message&lt;/code&gt; 的HTTP 响应。&lt;/li&gt;
+&lt;li&gt;否则返回 &lt;code&gt;500 - Internal Server Error&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;如果开启了 debug 模式，则使用 &lt;code&gt;error.Error()&lt;/code&gt; 返回消息。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;debug&#34;&gt;Debug&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Echo#SetDebug(on bool)&lt;/code&gt; 开启/关闭 debug 模式。&lt;/p&gt;
+
+&lt;h3 id=&#34;日志&#34;&gt;日志&lt;/h3&gt;
+
+&lt;h4 id=&#34;自定义日志&#34;&gt;自定义日志&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;Echo#SetLogger(l log.Logger)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;SetLogger 用来定义一个 自定义日志。&lt;/p&gt;
+
+&lt;h4 id=&#34;日志输出&#34;&gt;日志输出&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;Echo#SetLogOutput(w io.Writer)&lt;/code&gt; 设置日志输出的位置，默认是 &lt;code&gt;os.Stdout&lt;/code&gt;。
+使用 &lt;code&gt;Echo#SetLogOutput(io.Discard)&lt;/code&gt; 完全禁用日志。&lt;/p&gt;
+
+&lt;h4 id=&#34;日志级别&#34;&gt;日志级别&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;Echo#SetLogLevel(l log.Level)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;SetLogLevel 用于设置日志级别，默认是 &lt;code&gt;3&lt;/code&gt; (ERROR).
+可以使用的值：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;0&lt;/code&gt; (DEBUG)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1&lt;/code&gt; (INFO)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;2&lt;/code&gt; (WARN)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;3&lt;/code&gt;   (ERROR)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;4&lt;/code&gt;   (FATAL)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5&lt;/code&gt; (OFF)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;http-engine&#34;&gt;HTTP Engine&lt;/h3&gt;
+
+&lt;p&gt;Echo 现在支持使用 standard 和 &lt;a href=&#34;https://github.com/valyala/fasthttp&#34;&gt;fasthttp&lt;/a&gt; 提供 HTTP 服务。
+Echo 内部实现了这两个引擎的接口，可以根据需要无缝的切换这两种 HTTP 服务。&lt;/p&gt;
+
+&lt;h4 id=&#34;运行一个-standard-http-server&#34;&gt;运行一个 standard HTTP server&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;e.Run(standard.New(&amp;quot;:1323&amp;quot;))&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;运行一个-fasthttp-server&#34;&gt;运行一个 fasthttp server&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;e.Run(fasthttp.New(&amp;quot;:1323&amp;quot;))&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;运行一个带有-tls-配置的-http-服务&#34;&gt;运行一个带有 TLS 配置的 HTTP 服务&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;e.Run(&amp;lt;engine&amp;gt;.WithTLS(&amp;quot;:1323&amp;quot;, &amp;quot;&amp;lt;certFile&amp;gt;&amp;quot;, &amp;quot;&amp;lt;keyFile&amp;gt;&amp;quot;))&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;运行一个带有服务配置文件的-http-服务&#34;&gt;运行一个带有服务配置文件的 HTTP 服务&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;e.Run(&amp;lt;engine&amp;gt;.WithConfig(&amp;lt;config&amp;gt;))&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&#34;配置&#34;&gt;配置&lt;/h5&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;Config struct {
+  Address      string        // TCP address to listen on.
+  Listener     net.Listener  // Custom `net.Listener`. If set, server accepts connections on it.
+  TLSCertFile  string        // TLS certificate file path.
+  TLSKeyFile   string        // TLS key file path.
+  ReadTimeout  time.Duration // Maximum duration before timing out read of the request.
+  WriteTimeout time.Duration // Maximum duration before timing out write of the response.
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;服务实例自己配置属性&#34;&gt;服务实例自己配置属性&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;s := standard.New(&amp;quot;:1323&amp;quot;)
+s.MaxHeaderBytes = 1 &amp;lt;&amp;lt; 20
+e.Run(s)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>路由</title>
+      <link>http://echo.laily.net/guide/%E8%B7%AF%E7%94%B1</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/guide/%E8%B7%AF%E7%94%B1</guid>
+      <description>
+
+&lt;h2 id=&#34;路由&#34;&gt;路由&lt;/h2&gt;
+
+&lt;p&gt;Echo 的路由&lt;a href=&#34;http://echo.laily.net/#performance&#34;&gt;性能非常高&lt;/a&gt; 而且扩展性强。
+该路由基于 &lt;a href=&#34;http://en.wikipedia.org/wiki/Radix_tree&#34;&gt;radix tree&lt;/a&gt; 这个数据结构。它让路由的查询非常快。路由使用了
+ &lt;a href=&#34;https://golang.org/pkg/sync/#Pool&#34;&gt;sync pool&lt;/a&gt; 来重复利用内存并且几乎达到了零内存占用。&lt;/p&gt;
+
+&lt;p&gt;路由线路可以通过制定的HTTP方法，路径和一个匹配的handler来注册。例如，下面的代码则展示了一个路由线路的注册的例子（方法为 &lt;code&gt;GET&lt;/code&gt; ，路径为 &lt;code&gt;/hello&lt;/code&gt; handler能够发送 &lt;code&gt;Hello, World!&lt;/code&gt; HTTP 响应的）。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// Handler
+func hello(c echo.Context) error {
+  	return c.String(http.StatusOK, &amp;quot;Hello, World!&amp;quot;)
+}
+
+// Route
+e.GET(&amp;quot;/hello&amp;quot;, hello)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你可以用 &lt;code&gt;Echo.Any(path string, h Handler)&lt;/code&gt; 来为所有的HTTP方法发送注册handler；如果只想为某些方法注册的话则需要用 &lt;code&gt;Echo.Match(methods []string, path string, h Handler)&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;Echo 通过 &lt;code&gt;func(echo.Context) error&lt;/code&gt; 定义handler方法， &lt;code&gt;echo.Context&lt;/code&gt; 主要
+holds HTTP 请求和响应接口.（holds怎么翻译？？？？？）&lt;/p&gt;
+
+&lt;h3 id=&#34;match-any-任意匹配&#34;&gt;Match-any（任意匹配）&lt;/h3&gt;
+
+&lt;p&gt;匹配零个或多个字符的路径。例如， &lt;code&gt;/users/*&lt;/code&gt; 将会匹配:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/users/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/users/1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/users/1/files/1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/users/anything...&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;path-matching-order&#34;&gt;Path matching order&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Static&lt;/li&gt;
+&lt;li&gt;Param&lt;/li&gt;
+&lt;li&gt;Match any&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;example&#34;&gt;Example&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.GET(&amp;quot;/users/:id&amp;quot;, func(c echo.Context) error {
+	return c.String(http.StatusOK, &amp;quot;/users/:id&amp;quot;)
+})
+
+e.GET(&amp;quot;/users/new&amp;quot;, func(c echo.Context) error {
+	return c.String(http.StatusOK, &amp;quot;/users/new&amp;quot;)
+})
+
+e.GET(&amp;quot;/users/1/files/*&amp;quot;, func(c echo.Context) error {
+	return c.String(http.StatusOK, &amp;quot;/users/1/files/*&amp;quot;)
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Above routes would resolve in the following order:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/users/new&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/users/:id&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/users/1/files/*&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Routes can be written in any order.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;group&#34;&gt;Group&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Echo#Group(prefix string, m ...Middleware) *Group&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Routes with common prefix can be grouped to define a new sub-router with optional
+middleware. In addition to specified middleware group also inherits parent middleware.
+To add middleware later in the group you can use &lt;code&gt;Group.Use(m ...Middleware)&lt;/code&gt;.
+Groups can also be nested.&lt;/p&gt;
+
+&lt;p&gt;In the code below, we create an admin group which requires basic HTTP authentication
+for routes &lt;code&gt;/admin/*&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;g := e.Group(&amp;quot;/admin&amp;quot;)
+g.Use(middleware.BasicAuth(func(username, password string) bool {
+	if username == &amp;quot;joe&amp;quot; &amp;amp;&amp;amp; password == &amp;quot;secret&amp;quot; {
+		return true
+	}
+	return false
+}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;uri-building&#34;&gt;URI building&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Echo.URI&lt;/code&gt; can be used to generate URI for any handler with specified path parameters.
+It&amp;rsquo;s helpful to centralize all your URI patterns which ease in refactoring your
+application.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;e.URI(h, 1)&lt;/code&gt; will generate &lt;code&gt;/users/1&lt;/code&gt; for the route registered below&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// Handler
+h := func(c echo.Context) error {
+	return c.String(http.StatusOK, &amp;quot;OK&amp;quot;)
+}
+
+// Route
+e.GET(&amp;quot;/users/:id&amp;quot;, h)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>迁移</title>
+      <link>http://echo.laily.net/guide/%E8%BF%81%E7%A7%BB</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/guide/%E8%BF%81%E7%A7%BB</guid>
+      <description>
+
+&lt;h2 id=&#34;从-v1-迁移&#34;&gt;从 v1 迁移&lt;/h2&gt;
+
+&lt;h3 id=&#34;更新日志&#34;&gt;更新日志&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;85%的API都保持和以前一样&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Engine&lt;/code&gt; interface to abstract &lt;code&gt;HTTP&lt;/code&gt; server implementation, allowing
+us to use HTTP servers beyond Go standard library. It currently supports standard and &lt;a href=&#34;https://github.com/valyala/fasthttp&#34;&gt;fasthttp&lt;/a&gt; server.&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Context, Request 和 Response 转换成了 interface &lt;a href=&#34;https://github.com/labstack/echo/issues/146&#34;&gt;详细&amp;hellip;&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Handler signature is changed to &lt;code&gt;func (c echo.Context) error&lt;/code&gt;.（处理程序签名改为了 &lt;code&gt;func (c echo.Context) error&lt;/code&gt;）&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Dropped auto wrapping of handler and middleware to enforce compile time check.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;APIs to run middleware before or after the router, which doesn&amp;rsquo;t require &lt;code&gt;Echo#Hook&lt;/code&gt; API now.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ability to define middleware at route level.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Echo#HTTPError&lt;/code&gt; exposed it&amp;rsquo;s fields &lt;code&gt;Code&lt;/code&gt; and &lt;code&gt;Message&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Option to specify log format in logger middleware and default logger.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;api&#34;&gt;API&lt;/h4&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;v1&lt;/th&gt;
+&lt;th&gt;v2&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Context#Query()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Context#QueryParam()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Context#Form()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Context#FormValue()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;faq-常见问题&#34;&gt;FAQ（常见问题）&lt;/h3&gt;
+
+&lt;p&gt;Q. How to access original objects from interfaces?（如何通过接口访问原始对象）&lt;/p&gt;
+
+&lt;p&gt;A. Only if you need to&amp;hellip;（如果你需要的话……）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// `*http.Request`
+c.Request().(*standard.Request).Request
+
+// `*http.URL`
+c.Request().URL().(*standard.URL).URL
+
+// Request `http.Header`
+c.Request().Header().(*standard.Header).Header
+
+// `http.ResponseWriter`
+c.Response().(*standard.Response).ResponseWriter
+
+// Response `http.Header`
+c.Response().Header().(*standard.Header).Header
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Q. 如何使用标准的handler和middleware&lt;/p&gt;
+
+&lt;p&gt;A.如下所示&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+
+import (
+	&amp;quot;net/http&amp;quot;
+
+	&amp;quot;github.com/labstack/echo&amp;quot;
+	&amp;quot;github.com/labstack/echo/engine/standard&amp;quot;
+)
+
+// Standard middleware
+func middleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		println(&amp;quot;standard middleware&amp;quot;)
+		next.ServeHTTP(w, r)
+	})
+}
+
+// Standard handler
+func handler(w http.ResponseWriter, r *http.Request) {
+	println(&amp;quot;standard handler&amp;quot;)
+}
+
+func main() {
+	e := echo.New()
+	e.Use(standard.WrapMiddleware(middleware))
+	e.GET(&amp;quot;/&amp;quot;, standard.WrapHandler(http.HandlerFunc(handler)))
+	e.Run(standard.New(&amp;quot;:1323&amp;quot;))
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;继续&#34;&gt;继续?&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Browse through &lt;a href=&#34;http://echo.laily.net/recipes/hello-world&#34;&gt;recipes&lt;/a&gt; freshly converted to v2.（浏览&lt;a href=&#34;http://echo.laily.net/recipes/hello-world&#34;&gt;recipes&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;阅读文档，深入理解测试实例。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>错误处理</title>
+      <link>http://echo.laily.net/guide/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/guide/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86</guid>
+      <description>
+
+&lt;h2 id=&#34;错误处理&#34;&gt;错误处理&lt;/h2&gt;
+
+&lt;p&gt;Echo 支持从中间件或者action返回 HTTP 错误 集中处理。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在统一的地方记录日志&lt;/li&gt;
+&lt;li&gt;返回自定义的 HTTP 响应&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;例如 一个基本的身份验证中间件验证失败返回
+&lt;code&gt;401 - Unauthorized&lt;/code&gt; 错误, 终止了当前的 HTTP 请求。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+
+import (
+	&amp;quot;net/http&amp;quot;
+
+	&amp;quot;github.com/labstack/echo&amp;quot;
+)
+
+func main() {
+	e := echo.New()
+	e.Use(func(c echo.Context) error {
+		// Extract the credentials from HTTP request header and perform a security
+		// check
+
+		// For invalid credentials
+		return echo.NewHTTPError(http.StatusUnauthorized)
+	})
+	e.GET(&amp;quot;/welcome&amp;quot;, welcome)
+	e.Run(&amp;quot;:1323&amp;quot;)
+}
+
+func welcome(c echo.Context) error {
+	return c.String(http.StatusOK, &amp;quot;Welcome!&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看 &lt;a href=&#34;http://echo.laily.net/guide/customization#http-error-handler&#34;&gt;HTTPErrorHandler&lt;/a&gt; 怎样处理的。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>静态文件</title>
+      <link>http://echo.laily.net/guide/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/guide/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6</guid>
+      <description>
+
+&lt;p&gt;图片，JavaScript，CSS，PDF，字体文件等等&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;静态文件&#34;&gt;静态文件&lt;/h2&gt;
+
+&lt;h3 id=&#34;{#HUGOSHORTCODE-1#&#34;&gt;[使用 Static 中间件](&lt;/h3&gt;
+
+&lt;p&gt;#})&lt;/p&gt;
+
+&lt;h3 id=&#34;使用-echo-static&#34;&gt;使用&lt;code&gt;Echo#Static()&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Echo#Static(prefix, root string)&lt;/code&gt; 用一个路径前缀注册了一个新的路由来提供静态文件的访问服务。改路径前缀作为根目录。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;用法 1&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Static(&amp;quot;/static&amp;quot;, &amp;quot;assets&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样会将所有访问&lt;code&gt;/static/*&lt;/code&gt;的请求去 访问&lt;code&gt;assets&lt;/code&gt;目录。例如，一个访问&lt;code&gt;/static/js/main.js&lt;/code&gt;的请求会匹配到&lt;code&gt;assets/js/main.js&lt;/code&gt;这个文件。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;用法 2&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Static(&amp;quot;/&amp;quot;, &amp;quot;assets&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样会将所有&lt;code&gt;assets&lt;/code&gt;目录的文件使用&lt;code&gt;/*&lt;/code&gt;去访问。例如，一个访问&lt;code&gt;/js/main.js&lt;/code&gt;的请求将会匹配到&lt;code&gt;assets/js/main.js&lt;/code&gt;文件。&lt;/p&gt;
+
+&lt;h3 id=&#34;使用-echo-file&#34;&gt;使用&lt;code&gt;Echo#File()&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Echo#File(path, file string)&lt;/code&gt; 使用一个路径注册一个新的路由去访问某个静态文件。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;用法 1&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;将&lt;code&gt;public/index.html&lt;/code&gt;作为主页。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.File(&amp;quot;/&amp;quot;, &amp;quot;public/index.html&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;用法 2&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;给&lt;code&gt;images/favicon.ico&lt;/code&gt;一个静态路径。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.File(&amp;quot;/favicon.ico&amp;quot;, &amp;quot;images/favicon.ico&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

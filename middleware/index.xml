@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Middlewares on Go/Golang 框架 Echo 文档</title>
+    <link>http://echo.laily.net/middleware/</link>
+    <description>Recent content in Middlewares on Go/Golang 框架 Echo 文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <atom:link href="http://echo.laily.net/middleware/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Basic Auth</title>
+      <link>http://echo.laily.net/middleware/basic-auth</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/basic-auth</guid>
+      <description>
+
+&lt;h2 id=&#34;basicauti-基本认证-中间件&#34;&gt;BasicAuti(基本认证) 中间件&lt;/h2&gt;
+
+&lt;p&gt;BasicAuth 中间件提供了 HTTP 的基本认证方式。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;对于有效的请求则继续执行后面的处理。&lt;/li&gt;
+&lt;li&gt;对于无效的请求，返回&amp;rdquo;401 - Unauthorized&amp;rdquo;响应。&lt;/li&gt;
+&lt;li&gt;对于请求头中&amp;rdquo;Authorization&amp;rdquo;无效或者为空的，返回&amp;rdquo;400 - Bad Request&amp;rdquo; 响应。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;用法&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.BasicAuth(func(username, password string) bool {
+	if username == &amp;quot;joe&amp;quot; &amp;amp;&amp;amp; password == &amp;quot;secret&amp;quot; {
+		return true
+	}
+	return false
+}))
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Body Limit</title>
+      <link>http://echo.laily.net/middleware/body-limit</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/body-limit</guid>
+      <description>
+
+&lt;h2 id=&#34;bodylimit-请求体限制-中间件&#34;&gt;BodyLimit(请求体限制) 中间件&lt;/h2&gt;
+
+&lt;p&gt;BodyLimit 中间件用于设置允许的请求体的最大长度，如果请求的大小超过了该值，则返回&amp;rdquo;413 － Request Entity Too Large&amp;rdquo;响应。
+这个限制的判断取决于请求头的&lt;code&gt;Content-Length&lt;/code&gt;和实际读取到的请求体内容两方面，是非常安全的。&lt;/p&gt;
+
+&lt;p&gt;限制可以指定&lt;code&gt;4x&lt;/code&gt;或者&lt;code&gt;4xB&lt;/code&gt;，x是&amp;rdquo;K, M, G, T, P&amp;rdquo;中的一个。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;用法&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.BodyLimit(&amp;quot;2M&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CORS(访问控制)</title>
+      <link>http://echo.laily.net/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</guid>
+      <description>
+
+&lt;h2 id=&#34;cors-访问控制-中间件&#34;&gt;CORS(访问控制) 中间件&lt;/h2&gt;
+
+&lt;p&gt;CORS 中间件实现了 &lt;a href=&#34;http://www.w3.org/TR/cors&#34;&gt;CORS&lt;/a&gt; 的规格
+CORS 提供给 web 服务器跨站的访问控制，使得跨站的数据传输更安全。&lt;/p&gt;
+
+&lt;h3 id=&#34;配置&#34;&gt;配置&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;CORSConfig struct {
+  // AllowOrigin defines a list of origins that may access the resource.
+  // Optional. Default value []string{&amp;quot;*&amp;quot;}.
+  AllowOrigins []string
+
+  // AllowMethods defines a list methods allowed when accessing the resource.
+  // This is used in response to a preflight request.
+  // Optional. Default value DefaultCORSConfig.AllowMethods.
+  AllowMethods []string
+
+  // AllowHeaders defines a list of request headers that can be used when
+  // making the actual request. This in response to a preflight request.
+  // Optional. Default value []string{}.
+  AllowHeaders []string
+
+  // AllowCredentials indicates whether or not the response to the request
+  // can be exposed when the credentials flag is true. When used as part of
+  // a response to a preflight request, this indicates whether or not the
+  // actual request can be made using credentials.
+  // Optional. Default value false.
+  AllowCredentials bool
+
+  // ExposeHeaders defines a whitelist headers that clients are allowed to
+  // access.
+  // Optional. Default value []string{}.
+  ExposeHeaders []string
+
+  // MaxAge indicates how long (in seconds) the results of a preflight request
+  // can be cached.
+  // Optional. Default value 0.
+  MaxAge int
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultCORSConfig = CORSConfig{
+	AllowOrigins: []string{&amp;quot;*&amp;quot;},
+	AllowMethods: []string{echo.GET, echo.HEAD, echo.PUT, echo.PATCH, echo.POST, echo.DELETE},
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;e.Use(middleware.CORS())&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+  AllowOrigins: []string{&amp;quot;https://labstack.com&amp;quot;, &amp;quot;https://labstack.net&amp;quot;},
+  AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+}))
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CSRF</title>
+      <link>http://echo.laily.net/middleware/csrf</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/csrf</guid>
+      <description>
+
+&lt;h2 id=&#34;csrf-middleware&#34;&gt;CSRF Middleware&lt;/h2&gt;
+
+&lt;p&gt;Cross-site request forgery, also known as one-click attack or session riding and
+abbreviated as CSRF (sometimes pronounced sea-surf) or XSRF, is a type of malicious
+exploit of a website where unauthorized commands are transmitted from a user that
+the website trusts.&lt;/p&gt;
+
+&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;CSRFConfig struct {
+  // Key to create CSRF token.
+  Secret []byte `json:&amp;quot;secret&amp;quot;`
+
+  // TokenLookup is a string in the form of &amp;quot;&amp;lt;source&amp;gt;:&amp;lt;key&amp;gt;&amp;quot; that is used
+  // to extract token from the request.
+  // Optional. Default value &amp;quot;header:X-CSRF-Token&amp;quot;.
+  // Possible values:
+  // - &amp;quot;header:&amp;lt;name&amp;gt;&amp;quot;
+  // - &amp;quot;form:&amp;lt;name&amp;gt;&amp;quot;
+  // - &amp;quot;header:&amp;lt;name&amp;gt;&amp;quot;
+  TokenLookup string `json:&amp;quot;token_lookup&amp;quot;`
+
+  // Context key to store generated CSRF token into context.
+  // Optional. Default value &amp;quot;csrf&amp;quot;.
+  ContextKey string `json:&amp;quot;context_key&amp;quot;`
+
+  // Name of the CSRF cookie. This cookie will store CSRF token.
+  // Optional. Default value &amp;quot;csrf&amp;quot;.
+  CookieName string `json:&amp;quot;cookie_name&amp;quot;`
+
+  // Domain of the CSRF cookie.
+  // Optional. Default value none.
+  CookieDomain string `json:&amp;quot;cookie_domain&amp;quot;`
+
+  // Path of the CSRF cookie.
+  // Optional. Default value none.
+  CookiePath string `json:&amp;quot;cookie_path&amp;quot;`
+
+  // Expiration time of the CSRF cookie.
+  // Optional. Default value 24H.
+  CookieExpires time.Time `json:&amp;quot;cookie_expires&amp;quot;`
+
+  // Indicates if CSRF cookie is secure.
+  CookieSecure bool `json:&amp;quot;cookie_secure&amp;quot;`
+  // Optional. Default value false.
+
+  // Indicates if CSRF cookie is HTTP only.
+  // Optional. Default value false.
+  CookieHTTPOnly bool `json:&amp;quot;cookie_http_only&amp;quot;`
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultCSRFConfig = CSRFConfig{
+  TokenLookup:   &amp;quot;header:&amp;quot; + echo.HeaderXCSRFToken,
+  ContextKey:    &amp;quot;csrf&amp;quot;,
+  CookieName:    &amp;quot;csrf&amp;quot;,
+  CookieExpires: time.Now().Add(24 * time.Hour),
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;e.Use(middleware.CSRF(&amp;quot;secret&amp;quot;))&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
+  TokenLookup: &amp;quot;header:X-XSRF-TOKEN&amp;quot;,
+}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example above uses &lt;code&gt;X-XSRF-TOKEN&lt;/code&gt; request header to extract CSRF token.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Gzip</title>
+      <link>http://echo.laily.net/middleware/gzip</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/gzip</guid>
+      <description>
+
+&lt;h2 id=&#34;gzip-middleware&#34;&gt;Gzip Middleware&lt;/h2&gt;
+
+&lt;p&gt;Gzip middleware compresses HTTP response using gzip compression scheme.&lt;/p&gt;
+
+&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;GzipConfig struct {
+  // Gzip compression level.
+  // Optional. Default value -1.
+  Level int
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultGzipConfig = GzipConfig{
+  Level: -1,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;e.Use(middleware.Gzip())&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
+  Level: 5
+}))
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>JWT</title>
+      <link>http://echo.laily.net/middleware/jwt</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/jwt</guid>
+      <description>
+
+&lt;h2 id=&#34;jwt-middleware&#34;&gt;JWT Middleware&lt;/h2&gt;
+
+&lt;p&gt;JWT provides a JSON Web Token (JWT) authentication middleware.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;For valid token, it sets the user in context and calls next handler.&lt;/li&gt;
+&lt;li&gt;For invalid token, it sends &amp;ldquo;401 - Unauthorized&amp;rdquo; response.&lt;/li&gt;
+&lt;li&gt;For empty or invalid &lt;code&gt;Authorization&lt;/code&gt; header, it sends &amp;ldquo;400 - Bad Request&amp;rdquo;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;JWTConfig struct {
+  // Signing key to validate token.
+  // Required.
+  SigningKey []byte `json:&amp;quot;signing_key&amp;quot;`
+
+  // Signing method, used to check token signing method.
+  // Optional. Default value HS256.
+  SigningMethod string `json:&amp;quot;signing_method&amp;quot;`
+
+  // Context key to store user information from the token into context.
+  // Optional. Default value &amp;quot;user&amp;quot;.
+  ContextKey string `json:&amp;quot;context_key&amp;quot;`
+
+  // TokenLookup is a string in the form of &amp;quot;&amp;lt;source&amp;gt;:&amp;lt;name&amp;gt;&amp;quot; that is used
+  // to extract token from the request.
+  // Optional. Default value &amp;quot;header:Authorization&amp;quot;.
+  // Possible values:
+  // - &amp;quot;header:&amp;lt;name&amp;gt;&amp;quot;
+  // - &amp;quot;form:&amp;lt;name&amp;gt;&amp;quot;
+  TokenLookup string `json:&amp;quot;token_lookup&amp;quot;`
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultJWTConfig = JWTConfig{
+  SigningMethod: AlgorithmHS256,
+  ContextKey:    &amp;quot;user&amp;quot;,
+  TokenLookup:   &amp;quot;header:&amp;quot; + echo.HeaderAuthorization,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;e.Use(middleware.JWT([]byte(&amp;quot;secret&amp;quot;))&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.JWTWithConfig(middleware.JWTConfig{
+  SigningKey: []byte(&amp;quot;secret&amp;quot;),
+  TokenLookup: &amp;quot;query:token&amp;quot;,
+}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;{#HUGOSHORTCODE-1#&#34;&gt;[Recipe](&lt;/h3&gt;
+
+&lt;p&gt;#})&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Logger</title>
+      <link>http://echo.laily.net/middleware/logger</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/logger</guid>
+      <description>
+
+&lt;h2 id=&#34;logger-middleware&#34;&gt;Logger Middleware&lt;/h2&gt;
+
+&lt;p&gt;Logger middleware logs the information about each HTTP request.&lt;/p&gt;
+
+&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;LoggerConfig struct {
+  // Log format which can be constructed using the following tags:
+  //
+  // - time_rfc3339
+  // - id (Request ID - Not implemented)
+  // - remote_ip
+  // - uri
+  // - host
+  // - method
+  // - path
+  // - referer
+  // - user_agent
+  // - status
+  // - latency (In microseconds)
+  // - latency_human (Human readable)
+  // - rx_bytes (Bytes received)
+  // - tx_bytes (Bytes sent)
+  //
+  // Example &amp;quot;${remote_ip} ${status}&amp;quot;
+  //
+  // Optional. Default value DefaultLoggerConfig.Format.
+  Format string
+
+  // Output is a writer where logs are written.
+  // Optional. Default value os.Stdout.
+  Output io.Writer
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultLoggerConfig = LoggerConfig{
+  Format: `{&amp;quot;time&amp;quot;:&amp;quot;${time_rfc3339}&amp;quot;,&amp;quot;remote_ip&amp;quot;:&amp;quot;${remote_ip}&amp;quot;,` +
+    `&amp;quot;method&amp;quot;:&amp;quot;${method}&amp;quot;,&amp;quot;uri&amp;quot;:&amp;quot;${uri}&amp;quot;,&amp;quot;status&amp;quot;:${status}, &amp;quot;latency&amp;quot;:${latency},` +
+    `&amp;quot;latency_human&amp;quot;:&amp;quot;${latency_human}&amp;quot;,&amp;quot;rx_bytes&amp;quot;:${rx_bytes},` +
+    `&amp;quot;tx_bytes&amp;quot;:${tx_bytes}}` + &amp;quot;\n&amp;quot;,
+  color:  color.New(),
+  Output: os.Stdout,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;e.Use(middleware.Logger())&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Sample Output&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{&amp;quot;time&amp;quot;:&amp;quot;2016-05-10T07:02:25-07:00&amp;quot;,&amp;quot;remote_ip&amp;quot;:&amp;quot;::1&amp;quot;,&amp;quot;method&amp;quot;:&amp;quot;GET&amp;quot;,&amp;quot;uri&amp;quot;:&amp;quot;/&amp;quot;,&amp;quot;status&amp;quot;:200, &amp;quot;latency&amp;quot;:55653,&amp;quot;latency_human&amp;quot;:&amp;quot;55.653µs&amp;quot;,&amp;quot;rx_bytes&amp;quot;:0,&amp;quot;tx_bytes&amp;quot;:13}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+  Format: &amp;quot;method=${method}, uri=${uri}, status=${status}\n&amp;quot;,
+}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example above uses a &lt;code&gt;Format&lt;/code&gt; which logs request method and request URI.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Sample Output&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;method=GET, uri=/hello, status=200
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Method Override</title>
+      <link>http://echo.laily.net/middleware/method-override</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/method-override</guid>
+      <description>
+
+&lt;h2 id=&#34;methodoverride-middleware&#34;&gt;MethodOverride Middleware&lt;/h2&gt;
+
+&lt;p&gt;MethodOverride middleware checks for the overridden method from the request and
+uses it instead of the original method.&lt;/p&gt;
+
+&lt;p&gt;For security reasons, only &lt;code&gt;POST&lt;/code&gt; method can be overridden.&lt;/p&gt;
+
+&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;MethodOverrideConfig struct {
+  // Getter is a function that gets overridden method from the request.
+  // Optional. Default values MethodFromHeader(echo.HeaderXHTTPMethodOverride).
+  Getter MethodOverrideGetter
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultMethodOverrideConfig = MethodOverrideConfig{
+  Getter: MethodFromHeader(echo.HeaderXHTTPMethodOverride),
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;e.Pre(middleware.MethodOverride())&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Pre(middleware.MethodOverrideWithConfig(middleware.MethodOverrideConfig{
+  Getter: middleware.MethodFromForm(&amp;quot;_method&amp;quot;),
+}))
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Recover</title>
+      <link>http://echo.laily.net/middleware/recover</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/recover</guid>
+      <description>
+
+&lt;h2 id=&#34;recover-middleware&#34;&gt;Recover Middleware&lt;/h2&gt;
+
+&lt;p&gt;Recover middleware recovers from panics anywhere in the chain, prints stack trace
+and handles the control to the centralized
+&lt;a href=&#34;http://echo.laily.net/guide/%E8%87%AA%E5%AE%9A%E4%B9%89#http-error-handler&#34;&gt;HTTPErrorHandler&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;RecoverConfig struct {
+  // Size of the stack to be printed.
+  // Optional. Default value 4KB.
+  StackSize int
+
+  // DisableStackAll disables formatting stack traces of all other goroutines
+  // into buffer after the trace for the current goroutine.
+  // Optional. Default value false.
+  DisableStackAll bool
+
+  // DisablePrintStack disables printing stack trace.
+  // Optional. Default value as false.
+  DisablePrintStack bool
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultRecoverConfig = RecoverConfig{
+	StackSize:  4 &amp;lt;&amp;lt; 10, // 4 KB
+	StackAll:   true,
+	PrintStack: true,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;e.Use(middleware.Recover())&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.RecoverWithConfig(middleware.RecoverConfig{
+  StackSize:  1 &amp;lt;&amp;lt; 10, // 1 KB
+}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example above uses a &lt;code&gt;StackSize&lt;/code&gt; of 1 KB and default values for &lt;code&gt;DisableStackAll&lt;/code&gt;
+and &lt;code&gt;DisablePrintStack&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Remove Trailing Slash</title>
+      <link>http://echo.laily.net/middleware/remove-trailing-slash</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/remove-trailing-slash</guid>
+      <description>
+
+&lt;h2 id=&#34;removetrailingslash-middleware&#34;&gt;RemoveTrailingSlash Middleware&lt;/h2&gt;
+
+&lt;p&gt;RemoveTrailingSlash middleware removes a trailing slash from the request URI.&lt;/p&gt;
+
+&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;TrailingSlashConfig struct {
+  // Status code to be used when redirecting the request.
+  // Optional, but when provided the request is redirected using this code.
+  RedirectCode int
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Pre(middleware.RemoveTrailingSlash())
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.RemoveTrailingSlashWithConfig(TrailingSlashConfig{
+  RedirectCode: http.StatusMovedPermanently,
+}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will remove a trailing slash from the request URI and redirect with &lt;code&gt;StatusMovedPermanently&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Secure</title>
+      <link>http://echo.laily.net/middleware/secure</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/secure</guid>
+      <description>
+
+&lt;h2 id=&#34;secure-middleware&#34;&gt;Secure Middleware&lt;/h2&gt;
+
+&lt;p&gt;Secure middleware provides protection against cross-site scripting (XSS) attack,
+content type sniffing, clickjacking, insecure connection and other code injection
+attacks.&lt;/p&gt;
+
+&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;SecureConfig struct {
+  // XSSProtection provides protection against cross-site scripting attack (XSS)
+  // by setting the `X-XSS-Protection` header.
+  // Optional. Default value &amp;quot;1; mode=block&amp;quot;.
+  XSSProtection string
+
+  // ContentTypeNosniff provides protection against overriding Content-Type
+  // header by setting the `X-Content-Type-Options` header.
+  // Optional. Default value &amp;quot;nosniff&amp;quot;.
+  ContentTypeNosniff string
+
+  // XFrameOptions can be used to indicate whether or not a browser should
+  // be allowed to render a page in a &amp;lt;frame&amp;gt;, &amp;lt;iframe&amp;gt; or &amp;lt;object&amp;gt; .
+  // Sites can use this to avoid clickjacking attacks, by ensuring that their
+  // content is not embedded into other sites.provides protection against
+  // clickjacking.
+  // Optional. Default value &amp;quot;SAMEORIGIN&amp;quot;.
+  // Possible values:
+  // `SAMEORIGIN` - The page can only be displayed in a frame on the same origin as the page itself.
+  // `DENY` - The page cannot be displayed in a frame, regardless of the site attempting to do so.
+  // `ALLOW-FROM uri` - The page can only be displayed in a frame on the specified origin.
+  XFrameOptions string
+
+  // HSTSMaxAge sets the `Strict-Transport-Security` header to indicate how
+  // long (in seconds) browsers should remember that this site is only to
+  // be accessed using HTTPS. This reduces your exposure to some SSL-stripping
+  // man-in-the-middle (MITM) attacks.
+  // Optional. Default value 0.
+  HSTSMaxAge int
+
+  // HSTSExcludeSubdomains won&#39;t include subdomains tag in the `Strict Transport Security`
+  // header, excluding all subdomains from security policy. It has no effect
+  // unless HSTSMaxAge is set to a non-zero value.
+  // Optional. Default value false.
+  HSTSExcludeSubdomains bool
+
+  // ContentSecurityPolicy sets the `Content-Security-Policy` header providing
+  // security against cross-site scripting (XSS), clickjacking and other code
+  // injection attacks resulting from execution of malicious content in the
+  // trusted web page context.
+  // Optional. Default value &amp;quot;&amp;quot;.
+  ContentSecurityPolicy string
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultSecureConfig = SecureConfig{
+  XSSProtection:      &amp;quot;1; mode=block&amp;quot;,
+  ContentTypeNosniff: &amp;quot;nosniff&amp;quot;,
+  XFrameOptions:      &amp;quot;SAMEORIGIN&amp;quot;,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;e.Use(middleware.Secure())&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.SecureWithConfig(middleware.SecureConfig{
+	XSSProtection:         &amp;quot;&amp;quot;,
+	ContentTypeNosniff:    &amp;quot;&amp;quot;,
+	XFrameOptions:         &amp;quot;&amp;quot;,
+	HSTSMaxAge:            3600,
+	ContentSecurityPolicy: &amp;quot;default-src &#39;self&#39;&amp;quot;,
+}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Passing empty &lt;code&gt;XSSProtection&lt;/code&gt;, &lt;code&gt;ContentTypeNosniff&lt;/code&gt;, &lt;code&gt;XFrameOptions&lt;/code&gt; or &lt;code&gt;ContentSecurityPolicy&lt;/code&gt;
+disables that protection.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Static</title>
+      <link>http://echo.laily.net/middleware/static</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/static</guid>
+      <description>
+
+&lt;h2 id=&#34;static-middleware&#34;&gt;Static Middleware&lt;/h2&gt;
+
+&lt;p&gt;Static middleware can be used to serve static files from the provided root directory.&lt;/p&gt;
+
+&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;StaticConfig struct {
+  // Root directory from where the static content is served.
+  // Required.
+  Root string `json:&amp;quot;root&amp;quot;`
+
+  // Index file for serving a directory.
+  // Optional. Default value &amp;quot;index.html&amp;quot;.
+  Index string `json:&amp;quot;index&amp;quot;`
+
+  // Enable HTML5 mode by forwarding all not-found requests to root so that
+  // SPA (single-page application) can handle the routing.
+  // Optional. Default value false.
+  HTML5 bool `json:&amp;quot;html5&amp;quot;`
+
+  // Enable directory browsing.
+  // Optional. Default value false.
+  Browse bool `json:&amp;quot;browse&amp;quot;`
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultStaticConfig = StaticConfig{
+  Index: &amp;quot;index.html&amp;quot;,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.Static(&amp;quot;/static&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This serves static files from &lt;code&gt;static&lt;/code&gt; directory. For example, a request to &lt;code&gt;/js/main.js&lt;/code&gt;
+will fetch and serve &lt;code&gt;static/js/main.js&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
+  Root:   &amp;quot;static&amp;quot;,
+  Browse: true,
+}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This serves static files from &lt;code&gt;static&lt;/code&gt; directory and enables directory browsing.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>概述</title>
+      <link>http://echo.laily.net/middleware/%E6%A6%82%E8%BF%B0</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/%E6%A6%82%E8%BF%B0</guid>
+      <description>
+
+&lt;h2 id=&#34;中间件&#34;&gt;中间件&lt;/h2&gt;
+
+&lt;p&gt;中间件是一个函数，嵌入在HTTP 的请求和响应之间。它可以获得 &lt;code&gt;Echo#Context&lt;/code&gt; 对象用来进行一些特殊的操作，
+比如记录每个请求或者统计请求数。&lt;/p&gt;
+
+&lt;p&gt;Action的处理在所有的中间件运行完成之后。&lt;/p&gt;
+
+&lt;h3 id=&#34;中间件级别&#34;&gt;中间件级别&lt;/h3&gt;
+
+&lt;h4 id=&#34;root-level-before-router&#34;&gt;Root Level (Before router)&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;Echo#Pre()&lt;/code&gt; 用于注册一个在路由执行之前运行的中间件，可以用来修改请求的一些属性。比如在请求路径结尾添加或者删除一个&amp;rsquo;/&amp;lsquo;来使之能与路由匹配。&lt;/p&gt;
+
+&lt;p&gt;下面的这几个内建中间件应该被注册在这一级别：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;AddTrailingSlash&lt;/li&gt;
+&lt;li&gt;RemoveTrailingSlash&lt;/li&gt;
+&lt;li&gt;MethodOverride&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;注意&lt;/em&gt;: 由于在这个级别路由还没有执行，所以这个级别的中间件不能调用任何 &lt;code&gt;echo.Context&lt;/code&gt; 的 API。&lt;/p&gt;
+
+&lt;h4 id=&#34;root-level-after-router&#34;&gt;Root Level (After router)&lt;/h4&gt;
+
+&lt;p&gt;大部分时间你将用到 &lt;code&gt;Echo#Use()&lt;/code&gt; 在这个级别注册中间件。
+这个级别的中间件运行在路由处理完请求之后，可以调用所有的 &lt;code&gt;echo.Context&lt;/code&gt; API。&lt;/p&gt;
+
+&lt;p&gt;下面的这几个内建中间件应该被注册在这一级别：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;BodyLimit&lt;/li&gt;
+&lt;li&gt;Logger&lt;/li&gt;
+&lt;li&gt;Gzip&lt;/li&gt;
+&lt;li&gt;Recover&lt;/li&gt;
+&lt;li&gt;BasicAuth&lt;/li&gt;
+&lt;li&gt;JWTAuth&lt;/li&gt;
+&lt;li&gt;Secure&lt;/li&gt;
+&lt;li&gt;CORS&lt;/li&gt;
+&lt;li&gt;Static&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;group-level&#34;&gt;Group Level&lt;/h4&gt;
+
+&lt;p&gt;当在路由中创建一个组的时候，可以为这个组注册一个中间件。例如，给 admin 这个组注册一个 BasicAuth 中间件。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;用法&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+admin := e.Group(&amp;quot;/admin&amp;quot;, middleware.BasicAuth())
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也可以在创建组之后用 &lt;code&gt;admin.Use()&lt;/code&gt;注册该中间件。&lt;/p&gt;
+
+&lt;h4 id=&#34;route-level&#34;&gt;Route Level&lt;/h4&gt;
+
+&lt;p&gt;当你创建了一个新的路由，可以选择性的给这个路由注册一个中间件。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;用法&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.GET(&amp;quot;/&amp;quot;, &amp;lt;Handler&amp;gt;, &amp;lt;Middleware...&amp;gt;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;{#HUGOSHORTCODE-1#&#34;&gt;[Writing Custom Middleware](&lt;/h3&gt;
+
+&lt;p&gt;#})&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>添加结尾斜杠</title>
+      <link>http://echo.laily.net/middleware/%E6%B7%BB%E5%8A%A0%E7%BB%93%E5%B0%BE%E6%96%9C%E6%9D%A0</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://echo.laily.net/middleware/%E6%B7%BB%E5%8A%A0%E7%BB%93%E5%B0%BE%E6%96%9C%E6%9D%A0</guid>
+      <description>
+
+&lt;h2 id=&#34;addtrailingslash-添加结尾斜杠-中间件&#34;&gt;AddTrailingSlash(添加结尾斜杠) 中间件&lt;/h2&gt;
+
+&lt;p&gt;AddTrailingSlash 中间件用语在请求 URI 后添加一个斜杠。&lt;/p&gt;
+
+&lt;h3 id=&#34;配置&#34;&gt;配置&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;TrailingSlashConfig struct {
+  // Status code to be used when redirecting the request.
+  // Optional, but when provided the request is redirected using this code.
+  RedirectCode int
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;用法&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Pre(middleware.AddTrailingSlash())
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;自定义配置&#34;&gt;自定义配置&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;用法&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
+e.Use(middleware.AddTrailingSlashWithConfig(TrailingSlashConfig{
+  RedirectCode: http.StatusMovedPermanently,
+}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这将添加一个&amp;rsquo;/&amp;lsquo;在请求的 URI 末尾并且做 &lt;code&gt;StatusMovedPermanenty&lt;/code&gt; 跳转。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
