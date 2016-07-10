@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Guides on Go/Golang 框架 Echo 文档</title>
-    <link>http://echo.laily.net/guide/</link>
+    <link>http://go-echo.org/guide/</link>
     <description>Recent content in Guides on Go/Golang 框架 Echo 文档</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <atom:link href="http://echo.laily.net/guide/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://go-echo.org/guide/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Cookies</title>
-      <link>http://echo.laily.net/guide/cookies</link>
+      <link>http://go-echo.org/guide/cookies</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://echo.laily.net/guide/cookies</guid>
+      <guid>http://go-echo.org/guide/cookies</guid>
       <description>
 
 &lt;h2 id=&#34;cookies&#34;&gt;Cookies&lt;/h2&gt;
@@ -121,10 +121,10 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
     
     <item>
       <title>HTTP 请求</title>
-      <link>http://echo.laily.net/guide/http-%E8%AF%B7%E6%B1%82</link>
+      <link>http://go-echo.org/guide/http-%E8%AF%B7%E6%B1%82</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://echo.laily.net/guide/http-%E8%AF%B7%E6%B1%82</guid>
+      <guid>http://go-echo.org/guide/http-%E8%AF%B7%E6%B1%82</guid>
       <description>
 
 &lt;h2 id=&#34;http-请求&#34;&gt;HTTP 请求&lt;/h2&gt;
@@ -213,10 +213,10 @@ e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
     
     <item>
       <title>安装</title>
-      <link>http://echo.laily.net/guide/%E5%AE%89%E8%A3%85</link>
+      <link>http://go-echo.org/guide/%E5%AE%89%E8%A3%85</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://echo.laily.net/guide/%E5%AE%89%E8%A3%85</guid>
+      <guid>http://go-echo.org/guide/%E5%AE%89%E8%A3%85</guid>
       <description>
 
 &lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
@@ -233,7 +233,7 @@ e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ go get -u github.com/labstack/echo/...
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;从-v1-迁移-guide-migrating&#34;&gt;&lt;a href=&#34;http://echo.laily.net/guide/migrating&#34;&gt;从 v1 迁移&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;从-v1-迁移-guide-migrating&#34;&gt;&lt;a href=&#34;http://go-echo.org/guide/migrating&#34;&gt;从 v1 迁移&lt;/a&gt;&lt;/h3&gt;
 
 &lt;p&gt;Echo 使用 GitHub releases 按照 &lt;a href=&#34;http://semver.org&#34;&gt;semantic versioning&lt;/a&gt; 管理版本。
 特别的版本可以使用 &lt;a href=&#34;https://github.com/avelino/awesome-go#package-management&#34;&gt;package manager&lt;/a&gt; 安装。&lt;/p&gt;
@@ -242,10 +242,10 @@ e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
     
     <item>
       <title>模板</title>
-      <link>http://echo.laily.net/guide/%E6%A8%A1%E6%9D%BF</link>
+      <link>http://go-echo.org/guide/%E6%A8%A1%E6%9D%BF</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://echo.laily.net/guide/%E6%A8%A1%E6%9D%BF</guid>
+      <guid>http://go-echo.org/guide/%E6%A8%A1%E6%9D%BF</guid>
       <description>
 
 &lt;h2 id=&#34;模板&#34;&gt;模板&lt;/h2&gt;
@@ -299,10 +299,10 @@ e.GET(&amp;quot;/hello&amp;quot;, Hello)
     
     <item>
       <title>测试</title>
-      <link>http://echo.laily.net/guide/%E6%B5%8B%E8%AF%95</link>
+      <link>http://go-echo.org/guide/%E6%B5%8B%E8%AF%95</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://echo.laily.net/guide/%E6%B5%8B%E8%AF%95</guid>
+      <guid>http://go-echo.org/guide/%E6%B5%8B%E8%AF%95</guid>
       <description>
 
 &lt;h2 id=&#34;testing&#34;&gt;Testing&lt;/h2&gt;
@@ -461,10 +461,10 @@ req, err := http.NewRequest(echo.POST, &amp;quot;/?&amp;quot;+q.Encode(), nil)
     
     <item>
       <title>自定义</title>
-      <link>http://echo.laily.net/guide/%E8%87%AA%E5%AE%9A%E4%B9%89</link>
+      <link>http://go-echo.org/guide/%E8%87%AA%E5%AE%9A%E4%B9%89</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://echo.laily.net/guide/%E8%87%AA%E5%AE%9A%E4%B9%89</guid>
+      <guid>http://go-echo.org/guide/%E8%87%AA%E5%AE%9A%E4%B9%89</guid>
       <description>
 
 &lt;h2 id=&#34;自定义&#34;&gt;自定义&lt;/h2&gt;
@@ -558,15 +558,15 @@ e.Run(s)
     
     <item>
       <title>路由</title>
-      <link>http://echo.laily.net/guide/%E8%B7%AF%E7%94%B1</link>
+      <link>http://go-echo.org/guide/%E8%B7%AF%E7%94%B1</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://echo.laily.net/guide/%E8%B7%AF%E7%94%B1</guid>
+      <guid>http://go-echo.org/guide/%E8%B7%AF%E7%94%B1</guid>
       <description>
 
 &lt;h2 id=&#34;路由&#34;&gt;路由&lt;/h2&gt;
 
-&lt;p&gt;Echo 的路由&lt;a href=&#34;http://echo.laily.net/#performance&#34;&gt;性能非常高&lt;/a&gt; 而且扩展性强。
+&lt;p&gt;Echo 的路由&lt;a href=&#34;http://go-echo.org/#performance&#34;&gt;性能非常高&lt;/a&gt; 而且扩展性强。
 该路由基于 &lt;a href=&#34;http://en.wikipedia.org/wiki/Radix_tree&#34;&gt;radix tree&lt;/a&gt; 这个数据结构。它让路由的查询非常快。路由使用了
  &lt;a href=&#34;https://golang.org/pkg/sync/#Pool&#34;&gt;sync pool&lt;/a&gt; 来重复利用内存并且几乎达到了零内存占用。&lt;/p&gt;
 
@@ -674,10 +674,10 @@ e.GET(&amp;quot;/users/:id&amp;quot;, h)
     
     <item>
       <title>迁移</title>
-      <link>http://echo.laily.net/guide/%E8%BF%81%E7%A7%BB</link>
+      <link>http://go-echo.org/guide/%E8%BF%81%E7%A7%BB</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://echo.laily.net/guide/%E8%BF%81%E7%A7%BB</guid>
+      <guid>http://go-echo.org/guide/%E8%BF%81%E7%A7%BB</guid>
       <description>
 
 &lt;h2 id=&#34;从-v1-迁移&#34;&gt;从 v1 迁移&lt;/h2&gt;
@@ -786,7 +786,7 @@ func main() {
 &lt;h3 id=&#34;继续&#34;&gt;继续?&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Browse through &lt;a href=&#34;http://echo.laily.net/recipes/hello-world&#34;&gt;recipes&lt;/a&gt; freshly converted to v2.（浏览&lt;a href=&#34;http://echo.laily.net/recipes/hello-world&#34;&gt;recipes&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;Browse through &lt;a href=&#34;http://go-echo.org/recipes/hello-world&#34;&gt;recipes&lt;/a&gt; freshly converted to v2.（浏览&lt;a href=&#34;http://go-echo.org/recipes/hello-world&#34;&gt;recipes&lt;/a&gt;）&lt;/li&gt;
 &lt;li&gt;阅读文档，深入理解测试实例。&lt;/li&gt;
 &lt;/ul&gt;
 </description>
@@ -794,10 +794,10 @@ func main() {
     
     <item>
       <title>错误处理</title>
-      <link>http://echo.laily.net/guide/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86</link>
+      <link>http://go-echo.org/guide/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://echo.laily.net/guide/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86</guid>
+      <guid>http://go-echo.org/guide/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86</guid>
       <description>
 
 &lt;h2 id=&#34;错误处理&#34;&gt;错误处理&lt;/h2&gt;
@@ -838,16 +838,16 @@ func welcome(c echo.Context) error {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;查看 &lt;a href=&#34;http://echo.laily.net/guide/customization#http-error-handler&#34;&gt;HTTPErrorHandler&lt;/a&gt; 怎样处理的。&lt;/p&gt;
+&lt;p&gt;查看 &lt;a href=&#34;http://go-echo.org/guide/customization#http-error-handler&#34;&gt;HTTPErrorHandler&lt;/a&gt; 怎样处理的。&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>静态文件</title>
-      <link>http://echo.laily.net/guide/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6</link>
+      <link>http://go-echo.org/guide/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://echo.laily.net/guide/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6</guid>
+      <guid>http://go-echo.org/guide/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6</guid>
       <description>
 
 &lt;p&gt;图片，JavaScript，CSS，PDF，字体文件等等&amp;hellip;&lt;/p&gt;
