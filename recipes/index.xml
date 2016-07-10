@@ -631,16 +631,16 @@ but is outside the scope of this recipe.&lt;/p&gt;
       <guid>http://go-echo.org/recipes/middleware</guid>
       <description>
 
-&lt;h2 id=&#34;middleware-recipe&#34;&gt;Middleware Recipe&lt;/h2&gt;
+&lt;h2 id=&#34;中间件示例&#34;&gt;中间件示例&lt;/h2&gt;
 
-&lt;h3 id=&#34;how-to-write-a-custom-middleware&#34;&gt;How to write a custom middleware?&lt;/h3&gt;
+&lt;h3 id=&#34;如何写一个自定义中间件&#34;&gt;如何写一个自定义中间件？&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Middleware to collect request count, statuses and uptime.&lt;/li&gt;
-&lt;li&gt;Middleware to write custom &lt;code&gt;Server&lt;/code&gt; header to the response.&lt;/li&gt;
+&lt;li&gt;使用中间件收集请求数、状态和正常运行时间。&lt;/li&gt;
+&lt;li&gt;使用中间件来写自定义服务器响应头。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;server&#34;&gt;Server&lt;/h4&gt;
+&lt;h4 id=&#34;服务端&#34;&gt;服务端&lt;/h4&gt;
 
 &lt;p&gt;&lt;code&gt;server.go&lt;/code&gt;&lt;/p&gt;
 
@@ -648,7 +648,7 @@ but is outside the scope of this recipe.&lt;/p&gt;
 &lt;/pre&gt;
 
 
-&lt;h4 id=&#34;response&#34;&gt;Response&lt;/h4&gt;
+&lt;h4 id=&#34;响应&#34;&gt;响应&lt;/h4&gt;
 
 &lt;p&gt;&lt;em&gt;Headers&lt;/em&gt;&lt;/p&gt;
 
@@ -670,7 +670,7 @@ Server:Echo/2.0
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;maintainers&#34;&gt;Maintainers&lt;/h3&gt;
+&lt;h3 id=&#34;维护者&#34;&gt;维护者&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/vishr&#34;&gt;vishr&lt;/a&gt;&lt;/li&gt;
