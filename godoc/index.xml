@@ -2,54 +2,54 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Godocs on Go/Golang 框架 Echo 文档</title>
-    <link>http://go-echo.org/godoc/</link>
+    <link>http://echo.laily.net/godoc/</link>
     <description>Recent content in Godocs on Go/Golang 框架 Echo 文档</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <atom:link href="http://go-echo.org/godoc/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://echo.laily.net/godoc/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>echo</title>
-      <link>http://go-echo.org/godoc/echo/</link>
+      <link>http://echo.laily.net/godoc/echo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/godoc/echo/</guid>
+      <guid>http://echo.laily.net/godoc/echo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>engine</title>
-      <link>http://go-echo.org/godoc/engine/</link>
+      <link>http://echo.laily.net/godoc/engine/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/godoc/engine/</guid>
+      <guid>http://echo.laily.net/godoc/engine/</guid>
       <description></description>
     </item>
     
     <item>
       <title>fasthttp</title>
-      <link>http://go-echo.org/godoc/fasthttp/</link>
+      <link>http://echo.laily.net/godoc/fasthttp/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/godoc/fasthttp/</guid>
+      <guid>http://echo.laily.net/godoc/fasthttp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>middleware</title>
-      <link>http://go-echo.org/godoc/middleware/</link>
+      <link>http://echo.laily.net/godoc/middleware/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/godoc/middleware/</guid>
+      <guid>http://echo.laily.net/godoc/middleware/</guid>
       <description></description>
     </item>
     
     <item>
       <title>standard</title>
-      <link>http://go-echo.org/godoc/standard/</link>
+      <link>http://echo.laily.net/godoc/standard/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/godoc/standard/</guid>
+      <guid>http://echo.laily.net/godoc/standard/</guid>
       <description></description>
     </item>
     

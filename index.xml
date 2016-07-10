@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Go/Golang 框架 Echo 文档</title>
-    <link>http://go-echo.org/</link>
+    <link>http://echo.laily.net/</link>
     <description>Recent content on Go/Golang 框架 Echo 文档</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <atom:link href="http://go-echo.org/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://echo.laily.net/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Basic Auth</title>
-      <link>http://go-echo.org/middleware/basic-auth</link>
+      <link>http://echo.laily.net/middleware/basic-auth</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/basic-auth</guid>
+      <guid>http://echo.laily.net/middleware/basic-auth</guid>
       <description>
 
 &lt;h2 id=&#34;basicauti-基本认证-中间件&#34;&gt;BasicAuti(基本认证) 中间件&lt;/h2&gt;
@@ -41,10 +41,10 @@ e.Use(middleware.BasicAuth(func(username, password string) bool {
     
     <item>
       <title>Body Limit</title>
-      <link>http://go-echo.org/middleware/body-limit</link>
+      <link>http://echo.laily.net/middleware/body-limit</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/body-limit</guid>
+      <guid>http://echo.laily.net/middleware/body-limit</guid>
       <description>
 
 &lt;h2 id=&#34;bodylimit-请求体限制-中间件&#34;&gt;BodyLimit(请求体限制) 中间件&lt;/h2&gt;
@@ -64,10 +64,10 @@ e.Use(middleware.BodyLimit(&amp;quot;2M&amp;quot;))
     
     <item>
       <title>CORS</title>
-      <link>http://go-echo.org/recipes/cors</link>
+      <link>http://echo.laily.net/recipes/cors</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/cors</guid>
+      <guid>http://echo.laily.net/recipes/cors</guid>
       <description>
 
 &lt;h2 id=&#34;cors-示例&#34;&gt;CORS 示例&lt;/h2&gt;
@@ -94,10 +94,10 @@ e.Use(middleware.BodyLimit(&amp;quot;2M&amp;quot;))
     
     <item>
       <title>CORS(访问控制)</title>
-      <link>http://go-echo.org/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</link>
+      <link>http://echo.laily.net/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</guid>
+      <guid>http://echo.laily.net/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</guid>
       <description>
 
 &lt;h2 id=&#34;cors-访问控制-中间件&#34;&gt;CORS(访问控制) 中间件&lt;/h2&gt;
@@ -168,10 +168,10 @@ e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
     
     <item>
       <title>CRUD</title>
-      <link>http://go-echo.org/recipes/crud</link>
+      <link>http://echo.laily.net/recipes/crud</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/crud</guid>
+      <guid>http://echo.laily.net/recipes/crud</guid>
       <description>
 
 &lt;h2 id=&#34;crud-示例&#34;&gt;CRUD 示例&lt;/h2&gt;
@@ -256,10 +256,10 @@ e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
     
     <item>
       <title>CSRF</title>
-      <link>http://go-echo.org/middleware/csrf</link>
+      <link>http://echo.laily.net/middleware/csrf</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/csrf</guid>
+      <guid>http://echo.laily.net/middleware/csrf</guid>
       <description>
 
 &lt;h2 id=&#34;csrf-middleware&#34;&gt;CSRF Middleware&lt;/h2&gt;
@@ -344,10 +344,10 @@ e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
     
     <item>
       <title>Cookies</title>
-      <link>http://go-echo.org/guide/cookies</link>
+      <link>http://echo.laily.net/guide/cookies</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/guide/cookies</guid>
+      <guid>http://echo.laily.net/guide/cookies</guid>
       <description>
 
 &lt;h2 id=&#34;cookies&#34;&gt;Cookies&lt;/h2&gt;
@@ -455,10 +455,10 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
     
     <item>
       <title>Embed Resources</title>
-      <link>http://go-echo.org/recipes/embed-resources</link>
+      <link>http://echo.laily.net/recipes/embed-resources</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/embed-resources</guid>
+      <guid>http://echo.laily.net/recipes/embed-resources</guid>
       <description>
 
 &lt;h2 id=&#34;embed-resources-recipe&#34;&gt;Embed Resources Recipe&lt;/h2&gt;
@@ -486,10 +486,10 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
     
     <item>
       <title>File Upload</title>
-      <link>http://go-echo.org/recipes/file-upload</link>
+      <link>http://echo.laily.net/recipes/file-upload</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/file-upload</guid>
+      <guid>http://echo.laily.net/recipes/file-upload</guid>
       <description>
 
 &lt;h2 id=&#34;file-upload-recipe&#34;&gt;File Upload Recipe&lt;/h2&gt;
@@ -549,10 +549,10 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
     
     <item>
       <title>Google App Engine</title>
-      <link>http://go-echo.org/recipes/google-app-engine</link>
+      <link>http://echo.laily.net/recipes/google-app-engine</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/google-app-engine</guid>
+      <guid>http://echo.laily.net/recipes/google-app-engine</guid>
       <description>
 
 &lt;h2 id=&#34;google-app-engine-recipe&#34;&gt;Google App Engine Recipe&lt;/h2&gt;
@@ -707,10 +707,10 @@ but is outside the scope of this recipe.&lt;/p&gt;
     
     <item>
       <title>Graceful Shutdown</title>
-      <link>http://go-echo.org/recipes/graceful-shutdown</link>
+      <link>http://echo.laily.net/recipes/graceful-shutdown</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/graceful-shutdown</guid>
+      <guid>http://echo.laily.net/recipes/graceful-shutdown</guid>
       <description>
 
 &lt;h2 id=&#34;graceful-shutdown-recipe&#34;&gt;Graceful Shutdown Recipe&lt;/h2&gt;
@@ -750,10 +750,10 @@ but is outside the scope of this recipe.&lt;/p&gt;
     
     <item>
       <title>Gzip</title>
-      <link>http://go-echo.org/middleware/gzip</link>
+      <link>http://echo.laily.net/middleware/gzip</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/gzip</guid>
+      <guid>http://echo.laily.net/middleware/gzip</guid>
       <description>
 
 &lt;h2 id=&#34;gzip-middleware&#34;&gt;Gzip Middleware&lt;/h2&gt;
@@ -794,10 +794,10 @@ e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
     
     <item>
       <title>HTTP 请求</title>
-      <link>http://go-echo.org/guide/http-%E8%AF%B7%E6%B1%82</link>
+      <link>http://echo.laily.net/guide/http-%E8%AF%B7%E6%B1%82</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/guide/http-%E8%AF%B7%E6%B1%82</guid>
+      <guid>http://echo.laily.net/guide/http-%E8%AF%B7%E6%B1%82</guid>
       <description>
 
 &lt;h2 id=&#34;http-请求&#34;&gt;HTTP 请求&lt;/h2&gt;
@@ -886,10 +886,10 @@ e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
     
     <item>
       <title>HTTP2</title>
-      <link>http://go-echo.org/recipes/http2</link>
+      <link>http://echo.laily.net/recipes/http2</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/http2</guid>
+      <guid>http://echo.laily.net/recipes/http2</guid>
       <description>
 
 &lt;h2 id=&#34;什么是-http2&#34;&gt;什么是 HTTP2?&lt;/h2&gt;
@@ -952,10 +952,10 @@ e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
     
     <item>
       <title>Hello World</title>
-      <link>http://go-echo.org/recipes/hello-world</link>
+      <link>http://echo.laily.net/recipes/hello-world</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/hello-world</guid>
+      <guid>http://echo.laily.net/recipes/hello-world</guid>
       <description>
 
 &lt;h2 id=&#34;hello-world-示例&#34;&gt;Hello World 示例&lt;/h2&gt;

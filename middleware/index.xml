@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Middlewares on Go/Golang 框架 Echo 文档</title>
-    <link>http://go-echo.org/middleware/</link>
+    <link>http://echo.laily.net/middleware/</link>
     <description>Recent content in Middlewares on Go/Golang 框架 Echo 文档</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <atom:link href="http://go-echo.org/middleware/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://echo.laily.net/middleware/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Basic Auth</title>
-      <link>http://go-echo.org/middleware/basic-auth</link>
+      <link>http://echo.laily.net/middleware/basic-auth</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/basic-auth</guid>
+      <guid>http://echo.laily.net/middleware/basic-auth</guid>
       <description>
 
 &lt;h2 id=&#34;basicauti-基本认证-中间件&#34;&gt;BasicAuti(基本认证) 中间件&lt;/h2&gt;
@@ -41,10 +41,10 @@ e.Use(middleware.BasicAuth(func(username, password string) bool {
     
     <item>
       <title>Body Limit</title>
-      <link>http://go-echo.org/middleware/body-limit</link>
+      <link>http://echo.laily.net/middleware/body-limit</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/body-limit</guid>
+      <guid>http://echo.laily.net/middleware/body-limit</guid>
       <description>
 
 &lt;h2 id=&#34;bodylimit-请求体限制-中间件&#34;&gt;BodyLimit(请求体限制) 中间件&lt;/h2&gt;
@@ -64,10 +64,10 @@ e.Use(middleware.BodyLimit(&amp;quot;2M&amp;quot;))
     
     <item>
       <title>CORS(访问控制)</title>
-      <link>http://go-echo.org/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</link>
+      <link>http://echo.laily.net/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</guid>
+      <guid>http://echo.laily.net/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</guid>
       <description>
 
 &lt;h2 id=&#34;cors-访问控制-中间件&#34;&gt;CORS(访问控制) 中间件&lt;/h2&gt;
@@ -138,10 +138,10 @@ e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
     
     <item>
       <title>CSRF</title>
-      <link>http://go-echo.org/middleware/csrf</link>
+      <link>http://echo.laily.net/middleware/csrf</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/csrf</guid>
+      <guid>http://echo.laily.net/middleware/csrf</guid>
       <description>
 
 &lt;h2 id=&#34;csrf-middleware&#34;&gt;CSRF Middleware&lt;/h2&gt;
@@ -226,10 +226,10 @@ e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
     
     <item>
       <title>Gzip</title>
-      <link>http://go-echo.org/middleware/gzip</link>
+      <link>http://echo.laily.net/middleware/gzip</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/gzip</guid>
+      <guid>http://echo.laily.net/middleware/gzip</guid>
       <description>
 
 &lt;h2 id=&#34;gzip-middleware&#34;&gt;Gzip Middleware&lt;/h2&gt;
@@ -270,10 +270,10 @@ e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
     
     <item>
       <title>JWT</title>
-      <link>http://go-echo.org/middleware/jwt</link>
+      <link>http://echo.laily.net/middleware/jwt</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/jwt</guid>
+      <guid>http://echo.laily.net/middleware/jwt</guid>
       <description>
 
 &lt;h2 id=&#34;jwt-middleware&#34;&gt;JWT Middleware&lt;/h2&gt;
@@ -343,10 +343,10 @@ e.Use(middleware.JWTWithConfig(middleware.JWTConfig{
     
     <item>
       <title>Logger</title>
-      <link>http://go-echo.org/middleware/logger</link>
+      <link>http://echo.laily.net/middleware/logger</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/logger</guid>
+      <guid>http://echo.laily.net/middleware/logger</guid>
       <description>
 
 &lt;h2 id=&#34;logger-middleware&#34;&gt;Logger Middleware&lt;/h2&gt;
@@ -426,10 +426,10 @@ e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
     
     <item>
       <title>Method Override</title>
-      <link>http://go-echo.org/middleware/method-override</link>
+      <link>http://echo.laily.net/middleware/method-override</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/method-override</guid>
+      <guid>http://echo.laily.net/middleware/method-override</guid>
       <description>
 
 &lt;h2 id=&#34;methodoverride-middleware&#34;&gt;MethodOverride Middleware&lt;/h2&gt;
@@ -473,17 +473,17 @@ e.Pre(middleware.MethodOverrideWithConfig(middleware.MethodOverrideConfig{
     
     <item>
       <title>Recover</title>
-      <link>http://go-echo.org/middleware/recover</link>
+      <link>http://echo.laily.net/middleware/recover</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/recover</guid>
+      <guid>http://echo.laily.net/middleware/recover</guid>
       <description>
 
 &lt;h2 id=&#34;recover-middleware&#34;&gt;Recover Middleware&lt;/h2&gt;
 
 &lt;p&gt;Recover middleware recovers from panics anywhere in the chain, prints stack trace
 and handles the control to the centralized
-&lt;a href=&#34;http://go-echo.org/guide/%E8%87%AA%E5%AE%9A%E4%B9%89#http-error-handler&#34;&gt;HTTPErrorHandler&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&#34;http://echo.laily.net/guide/%E8%87%AA%E5%AE%9A%E4%B9%89#http-error-handler&#34;&gt;HTTPErrorHandler&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
 
@@ -533,10 +533,10 @@ and &lt;code&gt;DisablePrintStack&lt;/code&gt;.&lt;/p&gt;
     
     <item>
       <title>Remove Trailing Slash</title>
-      <link>http://go-echo.org/middleware/remove-trailing-slash</link>
+      <link>http://echo.laily.net/middleware/remove-trailing-slash</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/remove-trailing-slash</guid>
+      <guid>http://echo.laily.net/middleware/remove-trailing-slash</guid>
       <description>
 
 &lt;h2 id=&#34;removetrailingslash-middleware&#34;&gt;RemoveTrailingSlash Middleware&lt;/h2&gt;
@@ -574,10 +574,10 @@ e.Use(middleware.RemoveTrailingSlashWithConfig(TrailingSlashConfig{
     
     <item>
       <title>Secure</title>
-      <link>http://go-echo.org/middleware/secure</link>
+      <link>http://echo.laily.net/middleware/secure</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/secure</guid>
+      <guid>http://echo.laily.net/middleware/secure</guid>
       <description>
 
 &lt;h2 id=&#34;secure-middleware&#34;&gt;Secure Middleware&lt;/h2&gt;
@@ -667,57 +667,56 @@ disables that protection.&lt;/p&gt;
     
     <item>
       <title>Static</title>
-      <link>http://go-echo.org/middleware/static</link>
+      <link>http://echo.laily.net/middleware/static</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/static</guid>
+      <guid>http://echo.laily.net/middleware/static</guid>
       <description>
 
-&lt;h2 id=&#34;static-middleware&#34;&gt;Static Middleware&lt;/h2&gt;
+&lt;h2 id=&#34;static-中间件&#34;&gt;Static 中间件&lt;/h2&gt;
 
-&lt;p&gt;Static middleware can be used to serve static files from the provided root directory.&lt;/p&gt;
+&lt;p&gt;Static 中间件用于从给定的根目录提供静态资源服务。&lt;/p&gt;
 
-&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;配置&#34;&gt;配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;StaticConfig struct {
-  // Root directory from where the static content is served.
-  // Required.
+  // Root 目录是静态资源所在的目录。
+  // 必须配置。
   Root string `json:&amp;quot;root&amp;quot;`
 
   // Index file for serving a directory.
-  // Optional. Default value &amp;quot;index.html&amp;quot;.
+  // 目录的默认索引文件(index file)
+  // 可选。默认为 &amp;quot;index.html&amp;quot;。
   Index string `json:&amp;quot;index&amp;quot;`
 
-  // Enable HTML5 mode by forwarding all not-found requests to root so that
-  // SPA (single-page application) can handle the routing.
-  // Optional. Default value false.
+  // 开启 HTML5 模式，所有无法匹配的请求都重定向到root目录使单页面应用可以处理该请求。
+  // 可选。默认为 &amp;quot;false&amp;quot;。
   HTML5 bool `json:&amp;quot;html5&amp;quot;`
 
-  // Enable directory browsing.
-  // Optional. Default value false.
+  // 允许浏览目录。
+  // 可选。默认为 false。
   Browse bool `json:&amp;quot;browse&amp;quot;`
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;默认配置&#34;&gt;默认配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultStaticConfig = StaticConfig{
   Index: &amp;quot;index.html&amp;quot;,
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;用法&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
 e.Use(middleware.Static(&amp;quot;/static&amp;quot;))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This serves static files from &lt;code&gt;static&lt;/code&gt; directory. For example, a request to &lt;code&gt;/js/main.js&lt;/code&gt;
-will fetch and serve &lt;code&gt;static/js/main.js&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;这里将&lt;code&gt;static&lt;/code&gt;作为静态资源目录。例如，一个访问&lt;code&gt;/js/main.js&lt;/code&gt;的请求将匹配到&lt;code&gt;static/js/main.js&lt;/code&gt;文件。&lt;/p&gt;
 
-&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;自定义配置&#34;&gt;自定义配置&lt;/h3&gt;
 
-&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;用法&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
 e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
@@ -726,16 +725,16 @@ e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
 }))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This serves static files from &lt;code&gt;static&lt;/code&gt; directory and enables directory browsing.&lt;/p&gt;
+&lt;p&gt;这里从&lt;code&gt;static&lt;/code&gt;目录提供静态资源访问。并且允许浏览该目录。&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>概述</title>
-      <link>http://go-echo.org/middleware/%E6%A6%82%E8%BF%B0</link>
+      <link>http://echo.laily.net/middleware/%E6%A6%82%E8%BF%B0</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/%E6%A6%82%E8%BF%B0</guid>
+      <guid>http://echo.laily.net/middleware/%E6%A6%82%E8%BF%B0</guid>
       <description>
 
 &lt;h2 id=&#34;中间件&#34;&gt;中间件&lt;/h2&gt;
@@ -810,10 +809,10 @@ e.GET(&amp;quot;/&amp;quot;, &amp;lt;Handler&amp;gt;, &amp;lt;Middleware...&amp;
     
     <item>
       <title>添加结尾斜杠</title>
-      <link>http://go-echo.org/middleware/%E6%B7%BB%E5%8A%A0%E7%BB%93%E5%B0%BE%E6%96%9C%E6%9D%A0</link>
+      <link>http://echo.laily.net/middleware/%E6%B7%BB%E5%8A%A0%E7%BB%93%E5%B0%BE%E6%96%9C%E6%9D%A0</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/%E6%B7%BB%E5%8A%A0%E7%BB%93%E5%B0%BE%E6%96%9C%E6%9D%A0</guid>
+      <guid>http://echo.laily.net/middleware/%E6%B7%BB%E5%8A%A0%E7%BB%93%E5%B0%BE%E6%96%9C%E6%9D%A0</guid>
       <description>
 
 &lt;h2 id=&#34;addtrailingslash-添加结尾斜杠-中间件&#34;&gt;AddTrailingSlash(添加结尾斜杠) 中间件&lt;/h2&gt;
