@@ -102,11 +102,11 @@
   </url>
   
   <url>
-    <loc>http://go-echo.org/middleware/secure</loc>
+    <loc>http://go-echo.org/middleware/secure%E5%AE%89%E5%85%A8</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/middleware/static</loc>
+    <loc>http://go-echo.org/middleware/static%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90</loc>
   </url>
   
   <url>

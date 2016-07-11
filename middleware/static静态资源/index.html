@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        安装 - Go/Golang 框架 Echo 文档
+        Static(静态资源) - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,7 +83,7 @@
     <ul class="menu-list">
       
         <li>
-          <a class="is-active" href="http://go-echo.org/guide/%E5%AE%89%E8%A3%85">
+          <a href="http://go-echo.org/guide/%E5%AE%89%E8%A3%85">
             安装
           </a>
           
@@ -252,7 +252,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/middleware/static%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90">
+          <a class="is-active" href="http://go-echo.org/middleware/static%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90">
             Static(静态资源)
           </a>
           
@@ -418,24 +418,59 @@
             <section>
               
 
-<h2 id="安装">安装</h2>
+<h2 id="static-中间件">Static 中间件</h2>
 
-<p>Echo 在Go <code>1.5.x</code> 和 <code>1.6.x</code> 环境下开发和测试</p>
+<p>Static 中间件用于从给定的根目录提供静态资源服务。</p>
 
-<h3 id="使用-go-get-安装最新稳定版-echo">使用 <code>go get</code> 安装最新稳定版 Echo</h3>
+<h3 id="配置">配置</h3>
 
-<pre><code class="language-sh">$ go get github.com/labstack/echo/...
+<pre><code class="language-go">StaticConfig struct {
+  // Root 目录是静态资源所在的目录。
+  // 必须配置。
+  Root string `json:&quot;root&quot;`
+
+  // Index file for serving a directory.
+  // 目录的默认索引文件(index file)
+  // 可选。默认为 &quot;index.html&quot;。
+  Index string `json:&quot;index&quot;`
+
+  // 开启 HTML5 模式，所有无法匹配的请求都重定向到root目录使单页面应用可以处理该请求。
+  // 可选。默认为 &quot;false&quot;。
+  HTML5 bool `json:&quot;html5&quot;`
+
+  // 允许浏览目录。
+  // 可选。默认为 false。
+  Browse bool `json:&quot;browse&quot;`
+}
 </code></pre>
 
-<h3 id="升级-echo">升级 Echo</h3>
+<h3 id="默认配置">默认配置</h3>
 
-<pre><code class="language-sh">$ go get -u github.com/labstack/echo/...
+<pre><code class="language-go">DefaultStaticConfig = StaticConfig{
+  Index: &quot;index.html&quot;,
+}
 </code></pre>
 
-<h3 id="从-v1-迁移-guide-migrating"><a href="http://go-echo.org/guide/migrating">从 v1 迁移</a></h3>
+<p><em>用法</em></p>
 
-<p>Echo 使用 GitHub releases 按照 <a href="http://semver.org">semantic versioning</a> 管理版本。
-特别的版本可以使用 <a href="https://github.com/avelino/awesome-go#package-management">package manager</a> 安装。</p>
+<pre><code class="language-go">e := echo.New()
+e.Use(middleware.Static(&quot;/static&quot;))
+</code></pre>
+
+<p>这里将<code>static</code>作为静态资源目录。例如，一个访问<code>/js/main.js</code>的请求将匹配到<code>static/js/main.js</code>文件。</p>
+
+<h3 id="自定义配置">自定义配置</h3>
+
+<p><em>用法</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
+  Root:   &quot;static&quot;,
+  Browse: true,
+}))
+</code></pre>
+
+<p>这里从<code>static</code>目录提供静态资源访问。并且允许浏览该目录。</p>
 
             </section>
             <footer style="margin-top: 40px;">
