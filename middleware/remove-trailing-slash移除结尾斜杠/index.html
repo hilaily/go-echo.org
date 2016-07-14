@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        Body Limit - Go/Golang 框架 Echo 文档
+        Remove Trailing Slash(移除结尾斜杠) - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -182,7 +182,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="http://go-echo.org/middleware/body-limit">
+          <a href="http://go-echo.org/middleware/body-limit">
             BodyLimit(请求体限制)
           </a>
           
@@ -238,7 +238,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/middleware/remove-trailing-slash%E7%A7%BB%E9%99%A4%E7%BB%93%E5%B0%BE%E6%96%9C%E6%9D%A0">
+          <a class="is-active" href="http://go-echo.org/middleware/remove-trailing-slash%E7%A7%BB%E9%99%A4%E7%BB%93%E5%B0%BE%E6%96%9C%E6%9D%A0">
             RemoveTrailingSlash(移除结尾斜杠)
           </a>
           
@@ -418,18 +418,36 @@
             <section>
               
 
-<h2 id="bodylimit-请求体限制-中间件">BodyLimit(请求体限制) 中间件</h2>
+<h2 id="removetrailingslash-移除结尾斜杠-中间件">RemoveTrailingSlash(移除结尾斜杠) 中间件</h2>
 
-<p>BodyLimit 中间件用于设置允许的请求体的最大长度，如果请求的大小超过了该值，则返回&rdquo;413 － Request Entity Too Large&rdquo;响应。
-这个限制的判断取决于请求头的<code>Content-Length</code>和实际读取到的请求体内容两方面，是非常安全的。</p>
+<p>RemoveTrailingSlash 中间件 会从请求 URI 里移除到最后的斜杠。</p>
 
-<p>限制可以指定<code>4x</code>或者<code>4xB</code>，x是&rdquo;K, M, G, T, P&rdquo;中的一个。</p>
+<h3 id="配置">配置</h3>
+
+<pre><code class="language-go">TrailingSlashConfig struct {
+  // 当重定向一个请求的时候会用到状态码
+  // 可选，但是当提供的请求需要跳转则要使用到。
+  RedirectCode int
+}
+</code></pre>
 
 <p><em>用法</em></p>
 
 <pre><code class="language-go">e := echo.New()
-e.Use(middleware.BodyLimit(&quot;2M&quot;))
+e.Pre(middleware.RemoveTrailingSlash())
 </code></pre>
+
+<h3 id="自定义配置">自定义配置</h3>
+
+<p><em>用法</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Use(middleware.RemoveTrailingSlashWithConfig(TrailingSlashConfig{
+  RedirectCode: http.StatusMovedPermanently,
+}))
+</code></pre>
+
+<p>这样会移除掉最后的斜杠，同时带上<code>StatusMovedPermanently</code>(即301)重定向。</p>
 
             </section>
             <footer style="margin-top: 40px;">

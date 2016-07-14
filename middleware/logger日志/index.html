@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        Body Limit - Go/Golang 框架 Echo 文档
+        Logger(日志) - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -182,7 +182,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="http://go-echo.org/middleware/body-limit">
+          <a href="http://go-echo.org/middleware/body-limit">
             BodyLimit(请求体限制)
           </a>
           
@@ -217,7 +217,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/middleware/logger%E6%97%A5%E5%BF%97">
+          <a class="is-active" href="http://go-echo.org/middleware/logger%E6%97%A5%E5%BF%97">
             Logger(日志)
           </a>
           
@@ -418,17 +418,75 @@
             <section>
               
 
-<h2 id="bodylimit-请求体限制-中间件">BodyLimit(请求体限制) 中间件</h2>
+<h2 id="logger-日志-中间件">Logger(日志) 中间件</h2>
 
-<p>BodyLimit 中间件用于设置允许的请求体的最大长度，如果请求的大小超过了该值，则返回&rdquo;413 － Request Entity Too Large&rdquo;响应。
-这个限制的判断取决于请求头的<code>Content-Length</code>和实际读取到的请求体内容两方面，是非常安全的。</p>
+<p>Logger 中间件记录了每一个请求的信息。</p>
 
-<p>限制可以指定<code>4x</code>或者<code>4xB</code>，x是&rdquo;K, M, G, T, P&rdquo;中的一个。</p>
+<h3 id="配置">配置</h3>
+
+<pre><code class="language-go">LoggerConfig struct {
+  // 日志的格式可以使用下面的标签定义。:
+  //
+  // - time_rfc3339
+  // - id (Request ID - Not implemented)
+  // - remote_ip
+  // - uri
+  // - host
+  // - method
+  // - path
+  // - referer
+  // - user_agent
+  // - status
+  // - latency (In microseconds)
+  // - latency_human (Human readable)
+  // - rx_bytes (Bytes received)
+  // - tx_bytes (Bytes sent)
+  //
+  // 例如 &quot;${remote_ip} ${status}&quot;
+  //
+  // 可选。默认值是 DefaultLoggerConfig.Format.
+  Format string
+
+  // Output 是记录日志的位置。
+  // 可选。默认值是 os.Stdout.
+  Output io.Writer
+}
+</code></pre>
+
+<h3 id="默认配置">默认配置</h3>
+
+<pre><code class="language-go">DefaultLoggerConfig = LoggerConfig{
+  Format: `{&quot;time&quot;:&quot;${time_rfc3339}&quot;,&quot;remote_ip&quot;:&quot;${remote_ip}&quot;,` +
+    `&quot;method&quot;:&quot;${method}&quot;,&quot;uri&quot;:&quot;${uri}&quot;,&quot;status&quot;:${status}, &quot;latency&quot;:${latency},` +
+    `&quot;latency_human&quot;:&quot;${latency_human}&quot;,&quot;rx_bytes&quot;:${rx_bytes},` +
+    `&quot;tx_bytes&quot;:${tx_bytes}}` + &quot;\n&quot;,
+  color:  color.New(),
+  Output: os.Stdout,
+}
+</code></pre>
+
+<p><em>用法</em></p>
+
+<p><code>e.Use(middleware.Logger())</code></p>
+
+<p><em>输出样例</em></p>
+
+<pre><code class="language-js">{&quot;time&quot;:&quot;2016-05-10T07:02:25-07:00&quot;,&quot;remote_ip&quot;:&quot;::1&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;uri&quot;:&quot;/&quot;,&quot;status&quot;:200, &quot;latency&quot;:55653,&quot;latency_human&quot;:&quot;55.653µs&quot;,&quot;rx_bytes&quot;:0,&quot;tx_bytes&quot;:13}
+</code></pre>
+
+<h3 id="自定义配置">自定义配置</h3>
 
 <p><em>用法</em></p>
 
 <pre><code class="language-go">e := echo.New()
-e.Use(middleware.BodyLimit(&quot;2M&quot;))
+e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+  Format: &quot;method=${method}, uri=${uri}, status=${status}\n&quot;,
+}))
+</code></pre>
+
+<p><em>输出样例</em></p>
+
+<pre><code class="language-sh">method=GET, uri=/hello, status=200
 </code></pre>
 
             </section>

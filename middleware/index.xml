@@ -342,21 +342,21 @@ e.Use(middleware.JWTWithConfig(middleware.JWTConfig{
     </item>
     
     <item>
-      <title>Logger</title>
-      <link>http://go-echo.org/middleware/logger</link>
+      <title>Logger(日志)</title>
+      <link>http://go-echo.org/middleware/logger%E6%97%A5%E5%BF%97</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/logger</guid>
+      <guid>http://go-echo.org/middleware/logger%E6%97%A5%E5%BF%97</guid>
       <description>
 
-&lt;h2 id=&#34;logger-middleware&#34;&gt;Logger Middleware&lt;/h2&gt;
+&lt;h2 id=&#34;logger-日志-中间件&#34;&gt;Logger(日志) 中间件&lt;/h2&gt;
 
-&lt;p&gt;Logger middleware logs the information about each HTTP request.&lt;/p&gt;
+&lt;p&gt;Logger 中间件记录了每一个请求的信息。&lt;/p&gt;
 
-&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;配置&#34;&gt;配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;LoggerConfig struct {
-  // Log format which can be constructed using the following tags:
+  // 日志的格式可以使用下面的标签定义。:
   //
   // - time_rfc3339
   // - id (Request ID - Not implemented)
@@ -373,18 +373,18 @@ e.Use(middleware.JWTWithConfig(middleware.JWTConfig{
   // - rx_bytes (Bytes received)
   // - tx_bytes (Bytes sent)
   //
-  // Example &amp;quot;${remote_ip} ${status}&amp;quot;
+  // 例如 &amp;quot;${remote_ip} ${status}&amp;quot;
   //
-  // Optional. Default value DefaultLoggerConfig.Format.
+  // 可选。默认值是 DefaultLoggerConfig.Format.
   Format string
 
-  // Output is a writer where logs are written.
-  // Optional. Default value os.Stdout.
+  // Output 是记录日志的位置。
+  // 可选。默认值是 os.Stdout.
   Output io.Writer
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;默认配置&#34;&gt;默认配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultLoggerConfig = LoggerConfig{
   Format: `{&amp;quot;time&amp;quot;:&amp;quot;${time_rfc3339}&amp;quot;,&amp;quot;remote_ip&amp;quot;:&amp;quot;${remote_ip}&amp;quot;,` +
@@ -396,18 +396,18 @@ e.Use(middleware.JWTWithConfig(middleware.JWTConfig{
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;用法&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;e.Use(middleware.Logger())&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Sample Output&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;输出样例&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{&amp;quot;time&amp;quot;:&amp;quot;2016-05-10T07:02:25-07:00&amp;quot;,&amp;quot;remote_ip&amp;quot;:&amp;quot;::1&amp;quot;,&amp;quot;method&amp;quot;:&amp;quot;GET&amp;quot;,&amp;quot;uri&amp;quot;:&amp;quot;/&amp;quot;,&amp;quot;status&amp;quot;:200, &amp;quot;latency&amp;quot;:55653,&amp;quot;latency_human&amp;quot;:&amp;quot;55.653µs&amp;quot;,&amp;quot;rx_bytes&amp;quot;:0,&amp;quot;tx_bytes&amp;quot;:13}
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;自定义配置&#34;&gt;自定义配置&lt;/h3&gt;
 
-&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;用法&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
 e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
@@ -415,9 +415,7 @@ e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 }))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Example above uses a &lt;code&gt;Format&lt;/code&gt; which logs request method and request URI.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Sample Output&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;输出样例&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;method=GET, uri=/hello, status=200
 &lt;/code&gt;&lt;/pre&gt;
@@ -532,35 +530,35 @@ and &lt;code&gt;DisablePrintStack&lt;/code&gt;.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Remove Trailing Slash</title>
-      <link>http://go-echo.org/middleware/remove-trailing-slash</link>
+      <title>Remove Trailing Slash(移除结尾斜杠)</title>
+      <link>http://go-echo.org/middleware/remove-trailing-slash%E7%A7%BB%E9%99%A4%E7%BB%93%E5%B0%BE%E6%96%9C%E6%9D%A0</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/remove-trailing-slash</guid>
+      <guid>http://go-echo.org/middleware/remove-trailing-slash%E7%A7%BB%E9%99%A4%E7%BB%93%E5%B0%BE%E6%96%9C%E6%9D%A0</guid>
       <description>
 
-&lt;h2 id=&#34;removetrailingslash-middleware&#34;&gt;RemoveTrailingSlash Middleware&lt;/h2&gt;
+&lt;h2 id=&#34;removetrailingslash-移除结尾斜杠-中间件&#34;&gt;RemoveTrailingSlash(移除结尾斜杠) 中间件&lt;/h2&gt;
 
-&lt;p&gt;RemoveTrailingSlash middleware removes a trailing slash from the request URI.&lt;/p&gt;
+&lt;p&gt;RemoveTrailingSlash 中间件 会从请求 URI 里移除到最后的斜杠。&lt;/p&gt;
 
-&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;配置&#34;&gt;配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;TrailingSlashConfig struct {
-  // Status code to be used when redirecting the request.
-  // Optional, but when provided the request is redirected using this code.
+  // 当重定向一个请求的时候会用到状态码
+  // 可选，但是当提供的请求需要跳转则要使用到。
   RedirectCode int
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;用法&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
 e.Pre(middleware.RemoveTrailingSlash())
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;自定义配置&#34;&gt;自定义配置&lt;/h3&gt;
 
-&lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;用法&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e := echo.New()
 e.Use(middleware.RemoveTrailingSlashWithConfig(TrailingSlashConfig{
@@ -568,7 +566,7 @@ e.Use(middleware.RemoveTrailingSlashWithConfig(TrailingSlashConfig{
 }))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This will remove a trailing slash from the request URI and redirect with &lt;code&gt;StatusMovedPermanently&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;这样会移除掉最后的斜杠，同时带上&lt;code&gt;StatusMovedPermanently&lt;/code&gt;(即301)重定向。&lt;/p&gt;
 </description>
     </item>
     
