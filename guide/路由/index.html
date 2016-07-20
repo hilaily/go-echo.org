@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://go-echo.org/styles/bulma.min.css">
     <link rel="stylesheet" href="http://go-echo.org/styles/font-awesome.min.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+    
     <link rel="stylesheet" href="http://go-echo.org/styles/prism.css">
     <link rel="stylesheet" href="http://go-echo.org/styles/echo.css">
 </head>
@@ -28,6 +28,12 @@
     font-weight: bold;
     line-height: 50px;
     margin-right: 30px;
+}
+.my-button{
+    height: 28px;
+    color: #333!important;
+    background-color: #eee;
+    font-weight: bold;
 }
 </style>
 <section class="hero hero-echo">
@@ -48,8 +54,14 @@
         <div class="nav-right nav-menu">
             
           <span class="nav-item">
+            <a class="button my-button" href="https://github.com/Laily123/echo-intro/issues/new" target="_blank" aria-label="Create issue for Laily123/echo-intro on GitHub">
+              反馈
+            </a>
+          </span>
+
+          <span class="nav-item">
             <a class="github-button" href="https://github.com/Laily123/echo-intro" data-icon="octicon-star" data-style="mega" data-count-href="/Laily123/echo-intro/stargazers" data-count-api="/repos/Laily123/echo-intro#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star Laily123/echo-intro on GitHub">
-              翻译中...
+              参与翻译...
             </a>
           </span>
         </div>
@@ -424,23 +436,23 @@
 该路由基于 <a href="http://en.wikipedia.org/wiki/Radix_tree">radix tree</a> 这个数据结构。它让路由的查询非常快。路由使用了
  <a href="https://golang.org/pkg/sync/#Pool">sync pool</a> 来重复利用内存并且几乎达到了零内存占用。</p>
 
-<p>路由线路可以通过制定的HTTP方法，路径和一个匹配的handler来注册。例如，下面的代码则展示了一个路由线路的注册的例子（方法为 <code>GET</code> ，路径为 <code>/hello</code> handler能够发送 <code>Hello, World!</code> HTTP 响应的）。</p>
+<p>路由线路可以通过制定的HTTP方法，路径和一个匹配的handler来注册。例如，下面的代码则展示了一个路由线路的注册的例子，访问方式为 <code>Get</code>，
+访问路径为 <code>/hello</code>，处理结果是返回输出 <code>Hello World</code> 的响应。</p>
 
-<pre><code class="language-go">// Handler
+<pre><code class="language-go">// 业务处理
 func hello(c echo.Context) error {
   	return c.String(http.StatusOK, &quot;Hello, World!&quot;)
 }
 
-// Route
+// 路由
 e.GET(&quot;/hello&quot;, hello)
 </code></pre>
 
 <p>你可以用 <code>Echo.Any(path string, h Handler)</code> 来为所有的HTTP方法发送注册handler；如果只想为某些方法注册的话则需要用 <code>Echo.Match(methods []string, path string, h Handler)</code>。</p>
 
-<p>Echo 通过 <code>func(echo.Context) error</code> 定义handler方法， <code>echo.Context</code> 主要
-holds HTTP 请求和响应接口.（holds怎么翻译？？？？？）</p>
+<p>Echo 通过 <code>func(echo.Context) error</code> 定义handler方法， <code>echo.Context</code> 已经内嵌了 HTTP 请求和响应的接口。</p>
 
-<h3 id="match-any-任意匹配">Match-any（任意匹配）</h3>
+<h3 id="匹配所有">匹配所有</h3>
 
 <p>匹配零个或多个字符的路径。例如， <code>/users/*</code> 将会匹配:</p>
 
@@ -451,15 +463,15 @@ holds HTTP 请求和响应接口.（holds怎么翻译？？？？？）</p>
 <li><code>/users/anything...</code></li>
 </ul>
 
-<h3 id="path-matching-order">Path matching order</h3>
+<h3 id="路径匹配顺序">路径匹配顺序</h3>
 
 <ul>
-<li>Static</li>
-<li>Param</li>
-<li>Match any</li>
+<li>Static (固定路径)</li>
+<li>Param (参数路径)</li>
+<li>Match any (匹配所有)</li>
 </ul>
 
-<h4 id="example">Example</h4>
+<h4 id="示例">示例</h4>
 
 <pre><code class="language-go">e.GET(&quot;/users/:id&quot;, func(c echo.Context) error {
 	return c.String(http.StatusOK, &quot;/users/:id&quot;)
@@ -474,7 +486,7 @@ e.GET(&quot;/users/1/files/*&quot;, func(c echo.Context) error {
 })
 </code></pre>
 
-<p>Above routes would resolve in the following order:</p>
+<p>上面定义的路由将按下面的优先级顺序匹配:</p>
 
 <ul>
 <li><code>/users/new</code></li>
@@ -483,20 +495,19 @@ e.GET(&quot;/users/1/files/*&quot;, func(c echo.Context) error {
 </ul>
 
 <blockquote>
-<p>Routes can be written in any order.</p>
+<p>定义路由的顺序没有限制。</p>
 </blockquote>
 
-<h3 id="group">Group</h3>
+<h3 id="组路由">组路由</h3>
 
 <p><code>Echo#Group(prefix string, m ...Middleware) *Group</code></p>
 
-<p>Routes with common prefix can be grouped to define a new sub-router with optional
-middleware. In addition to specified middleware group also inherits parent middleware.
-To add middleware later in the group you can use <code>Group.Use(m ...Middleware)</code>.
-Groups can also be nested.</p>
+<p>拥有相同前缀的路由可以通过中间件定义一个子路由来化为一组。
+除了一些特殊的中间件，组路由也会继承父中间件。
+在组路由里使用中间件可以用<code>Group.Use(m ...Middleware)</code>。
+组路由可以嵌套。</p>
 
-<p>In the code below, we create an admin group which requires basic HTTP authentication
-for routes <code>/admin/*</code>.</p>
+<p>下面的代码，我们创建了一个 admin 组，使所有的 <code>/admin/*</code> 都要求 HTTP 基本认证。</p>
 
 <pre><code class="language-go">g := e.Group(&quot;/admin&quot;)
 g.Use(middleware.BasicAuth(func(username, password string) bool {
@@ -507,20 +518,19 @@ g.Use(middleware.BasicAuth(func(username, password string) bool {
 }))
 </code></pre>
 
-<h3 id="uri-building">URI building</h3>
+<h3 id="构造uri">构造URI</h3>
 
-<p><code>Echo.URI</code> can be used to generate URI for any handler with specified path parameters.
-It&rsquo;s helpful to centralize all your URI patterns which ease in refactoring your
-application.</p>
+<p><code>Echo.URI</code> 可以用来在任何业务处理代码里生成带有特殊参数的URI。
+这样当你重构自己的应用的时候，可以很方便的集中处理代码。</p>
 
-<p><code>e.URI(h, 1)</code> will generate <code>/users/1</code> for the route registered below</p>
+<p>下面的代码中 <code>e.URI(h, 1)</code> 将生成<code>/users/1</code>。</p>
 
-<pre><code class="language-go">// Handler
+<pre><code class="language-go">// 业务处理
 h := func(c echo.Context) error {
 	return c.String(http.StatusOK, &quot;OK&quot;)
 }
 
-// Route
+// 路由
 e.GET(&quot;/users/:id&quot;, h)
 </code></pre>
 

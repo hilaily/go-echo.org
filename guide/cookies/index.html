@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://go-echo.org/styles/bulma.min.css">
     <link rel="stylesheet" href="http://go-echo.org/styles/font-awesome.min.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+    
     <link rel="stylesheet" href="http://go-echo.org/styles/prism.css">
     <link rel="stylesheet" href="http://go-echo.org/styles/echo.css">
 </head>
@@ -28,6 +28,12 @@
     font-weight: bold;
     line-height: 50px;
     margin-right: 30px;
+}
+.my-button{
+    height: 28px;
+    color: #333!important;
+    background-color: #eee;
+    font-weight: bold;
 }
 </style>
 <section class="hero hero-echo">
@@ -48,8 +54,14 @@
         <div class="nav-right nav-menu">
             
           <span class="nav-item">
+            <a class="button my-button" href="https://github.com/Laily123/echo-intro/issues/new" target="_blank" aria-label="Create issue for Laily123/echo-intro on GitHub">
+              反馈
+            </a>
+          </span>
+
+          <span class="nav-item">
             <a class="github-button" href="https://github.com/Laily123/echo-intro" data-icon="octicon-star" data-style="mega" data-count-href="/Laily123/echo-intro/stargazers" data-count-api="/repos/Laily123/echo-intro#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star Laily123/echo-intro on GitHub">
-              翻译中...
+              参与翻译...
             </a>
           </span>
         </div>
@@ -429,8 +441,8 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
 <table>
 <thead>
 <tr>
-<th align="left">Attribute</th>
-<th align="left">Optional</th>
+<th align="left">属性</th>
+<th align="left">可选</th>
 </tr>
 </thead>
 
@@ -485,9 +497,9 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
 </code></pre>
 
 <ul>
-<li>Cookie is created using <code>new(echo.Cookie)</code>.</li>
-<li>Attributes for the cookie are set using <code>Setter</code> functions.</li>
-<li>Finally <code>c.SetCookie(cookies)</code> adds a <code>Set-Cookie</code> header in HTTP response.</li>
+<li>使用 <code>new(echo.Cookie)</code> 创建Cookie。</li>
+<li>使用 <code>Setter</code> 方法设置 cookie 的属性。</li>
+<li>最后，使用 <code>c.SetCookie(cookies)</code> 来给响应添加 <code>Set-Cookie</code> 头。</li>
 </ul>
 
 <h3 id="读取-cookie">读取 Cookie</h3>
@@ -504,8 +516,8 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
 </code></pre>
 
 <ul>
-<li>Cookie is read by name using <code>c.Cookie(&quot;username&quot;)</code> from the HTTP request.</li>
-<li>Cookie attributes are accessed using <code>Getter</code> function.</li>
+<li>Cookie 通过名称从 HTTP 请求里读取 <code>c.Cookie(&quot;name&quot;)</code>。</li>
+<li>Cookie 的属性使用<code>Getter</code> 方法获取。</li>
 </ul>
 
 <h3 id="读取所有-cookies">读取所有 Cookies</h3>

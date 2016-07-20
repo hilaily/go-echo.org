@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://go-echo.org/styles/bulma.min.css">
     <link rel="stylesheet" href="http://go-echo.org/styles/font-awesome.min.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+    
     <link rel="stylesheet" href="http://go-echo.org/styles/prism.css">
     <link rel="stylesheet" href="http://go-echo.org/styles/echo.css">
 </head>
@@ -28,6 +28,12 @@
     font-weight: bold;
     line-height: 50px;
     margin-right: 30px;
+}
+.my-button{
+    height: 28px;
+    color: #333!important;
+    background-color: #eee;
+    font-weight: bold;
 }
 </style>
 <section class="hero hero-echo">
@@ -48,8 +54,14 @@
         <div class="nav-right nav-menu">
             
           <span class="nav-item">
+            <a class="button my-button" href="https://github.com/Laily123/echo-intro/issues/new" target="_blank" aria-label="Create issue for Laily123/echo-intro on GitHub">
+              反馈
+            </a>
+          </span>
+
+          <span class="nav-item">
             <a class="github-button" href="https://github.com/Laily123/echo-intro" data-icon="octicon-star" data-style="mega" data-count-href="/Laily123/echo-intro/stargazers" data-count-api="/repos/Laily123/echo-intro#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star Laily123/echo-intro on GitHub">
-              翻译中...
+              参与翻译...
             </a>
           </span>
         </div>
@@ -489,12 +501,12 @@ Echo 内部实现了这两个引擎的接口，可以根据需要无缝的切换
 <h5 id="配置">配置</h5>
 
 <pre><code class="language-go">Config struct {
-  Address      string        // TCP address to listen on.
-  Listener     net.Listener  // Custom `net.Listener`. If set, server accepts connections on it.
-  TLSCertFile  string        // TLS certificate file path.
-  TLSKeyFile   string        // TLS key file path.
-  ReadTimeout  time.Duration // Maximum duration before timing out read of the request.
-  WriteTimeout time.Duration // Maximum duration before timing out write of the response.
+  Address      string        // 监听的 TCP 地址。
+  Listener     net.Listener  // 自定义 `net.Listener`. 如果设置了，服务器通过它接受连接。
+  TLSCertFile  string        // TLS 证书文件地址。
+  TLSKeyFile   string        // TLS key 文件地址。
+  ReadTimeout  time.Duration // 读取请求的最大时长。
+  WriteTimeout time.Duration // 返回响应的最大时长。
 }
 </code></pre>
 

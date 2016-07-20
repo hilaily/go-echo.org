@@ -361,8 +361,8 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;Attribute&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;Optional&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;属性&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;可选&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 
@@ -417,9 +417,9 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Cookie is created using &lt;code&gt;new(echo.Cookie)&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Attributes for the cookie are set using &lt;code&gt;Setter&lt;/code&gt; functions.&lt;/li&gt;
-&lt;li&gt;Finally &lt;code&gt;c.SetCookie(cookies)&lt;/code&gt; adds a &lt;code&gt;Set-Cookie&lt;/code&gt; header in HTTP response.&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;new(echo.Cookie)&lt;/code&gt; 创建Cookie。&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;Setter&lt;/code&gt; 方法设置 cookie 的属性。&lt;/li&gt;
+&lt;li&gt;最后，使用 &lt;code&gt;c.SetCookie(cookies)&lt;/code&gt; 来给响应添加 &lt;code&gt;Set-Cookie&lt;/code&gt; 头。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;读取-cookie&#34;&gt;读取 Cookie&lt;/h3&gt;
@@ -436,8 +436,8 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Cookie is read by name using &lt;code&gt;c.Cookie(&amp;quot;username&amp;quot;)&lt;/code&gt; from the HTTP request.&lt;/li&gt;
-&lt;li&gt;Cookie attributes are accessed using &lt;code&gt;Getter&lt;/code&gt; function.&lt;/li&gt;
+&lt;li&gt;Cookie 通过名称从 HTTP 请求里读取 &lt;code&gt;c.Cookie(&amp;quot;name&amp;quot;)&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;Cookie 的属性使用&lt;code&gt;Getter&lt;/code&gt; 方法获取。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;读取所有-cookies&#34;&gt;读取所有 Cookies&lt;/h3&gt;
@@ -809,7 +809,7 @@ e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
 &lt;p&gt;&lt;em&gt;例如&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.Use(func(c echo.Context) error {
-    println(c.Path()) // Prints `/users/:name`
+    println(c.Path()) // 输出 `/users/:name`
     return nil
 })
 e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
@@ -825,8 +825,8 @@ e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
     c.SetNetContext(context.WithValue(nil, &amp;quot;key&amp;quot;, &amp;quot;val&amp;quot;))
-    // Pass it down...
-    // Use it...
+    // 向后传递...
+    // 使用它...
     val := c.Value(&amp;quot;key&amp;quot;).(string)
     return c.String(http.StatusOK, name)
 })
@@ -839,10 +839,10 @@ e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
 &lt;p&gt;&lt;em&gt;例如&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error {
-	// By name
+	// 通过名称
 	name := c.Param(&amp;quot;name&amp;quot;)
 
-	// By index
+	// 通过索引值
 	name := c.P(0)
 
 	return c.String(http.StatusOK, name)
