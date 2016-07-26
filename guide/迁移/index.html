@@ -436,22 +436,14 @@
 
 <ul>
 <li>85%的API都保持和以前一样</li>
-<li><code>Engine</code> interface to abstract <code>HTTP</code> server implementation, allowing
-us to use HTTP servers beyond Go standard library. It currently supports standard and <a href="https://github.com/valyala/fasthttp">fasthttp</a> server.</li>
-
-<li><p>Context, Request 和 Response 转换成了 interface <a href="https://github.com/labstack/echo/issues/146">详细&hellip;</a></p></li>
-
-<li><p>Handler signature is changed to <code>func (c echo.Context) error</code>.（处理程序签名改为了 <code>func (c echo.Context) error</code>）</p></li>
-
-<li><p>Dropped auto wrapping of handler and middleware to enforce compile time check.</p></li>
-
-<li><p>APIs to run middleware before or after the router, which doesn&rsquo;t require <code>Echo#Hook</code> API now.</p></li>
-
-<li><p>Ability to define middleware at route level.</p></li>
-
-<li><p><code>Echo#HTTPError</code> exposed it&rsquo;s fields <code>Code</code> and <code>Message</code>.</p></li>
-
-<li><p>Option to specify log format in logger middleware and default logger.</p></li>
+<li><code>Engine</code> 接口抽象的实现了 <code>HTTP</code> 服务，允许我们在 GO 标准库上使用 HTTP 服务。它现在支持标准服务和 <a href="https://github.com/valyala/fasthttp">fasthttp</a> 服务。</li>
+<li>Context, Request 和 Response 转换成了接口<a href="https://github.com/labstack/echo/issues/146">详细&hellip;</a>。</li>
+<li>处理程序签名改为了 <code>func (c echo.Context) error</code>。</li>
+<li>Dropped auto wrapping of handler and middleware to enforce compile time check.</li>
+<li>在路由之前运行的中间件的 API，现在不需要<code>Echo#Hook</code> 了。</li>
+<li>能够在 route 级别定义中间件了。</li>
+<li><code>Echo#HTTPError</code> 暴露了它的<code>Code</code> 和 <code>Message</code> 值。</li>
+<li>可选的指定中间件日志和默认日志的格式。</li>
 </ul>
 
 <h4 id="api">API</h4>
@@ -479,9 +471,9 @@ us to use HTTP servers beyond Go standard library. It currently supports standar
 
 <h3 id="faq-常见问题">FAQ（常见问题）</h3>
 
-<p>Q. How to access original objects from interfaces?（如何通过接口访问原始对象）</p>
+<p>Q. 如何通过接口访问原始对象</p>
 
-<p>A. Only if you need to&hellip;（如果你需要的话……）</p>
+<p>A. 如果你需要的话&hellip;</p>
 
 <pre><code class="language-go">// `*http.Request`
 c.Request().(*standard.Request).Request
@@ -499,7 +491,7 @@ c.Response().(*standard.Response).ResponseWriter
 c.Response().Header().(*standard.Header).Header
 </code></pre>
 
-<p>Q. 如何使用标准的handler和middleware</p>
+<p>Q. 如何使用标准的业务处理和中间件</p>
 
 <p>A.如下所示</p>
 
@@ -512,7 +504,7 @@ import (
 	&quot;github.com/labstack/echo/engine/standard&quot;
 )
 
-// Standard middleware
+// 标准中间件
 func middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		println(&quot;standard middleware&quot;)
@@ -520,7 +512,7 @@ func middleware(next http.Handler) http.Handler {
 	})
 }
 
-// Standard handler
+// 标准业务处理
 func handler(w http.ResponseWriter, r *http.Request) {
 	println(&quot;standard handler&quot;)
 }
@@ -536,7 +528,7 @@ func main() {
 <h3 id="继续">继续?</h3>
 
 <ul>
-<li>Browse through <a href="http://go-echo.org/recipes/hello-world">recipes</a> freshly converted to v2.（浏览<a href="http://go-echo.org/recipes/hello-world">recipes</a>）</li>
+<li>浏览刚刚转换到 v2 的<a href="http://go-echo.org/recipes/hello-world">recipes</a>。</li>
 <li>阅读文档，深入理解测试实例。</li>
 </ul>
 

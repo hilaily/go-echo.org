@@ -305,32 +305,31 @@ e.GET(&amp;quot;/hello&amp;quot;, Hello)
       <guid>http://go-echo.org/guide/%E6%B5%8B%E8%AF%95</guid>
       <description>
 
-&lt;h2 id=&#34;testing&#34;&gt;Testing&lt;/h2&gt;
+&lt;h2 id=&#34;测试&#34;&gt;测试&lt;/h2&gt;
 
-&lt;h3 id=&#34;testing-handler&#34;&gt;Testing Handler&lt;/h3&gt;
+&lt;h3 id=&#34;测试业务逻辑&#34;&gt;测试业务逻辑&lt;/h3&gt;
 
 &lt;p&gt;&lt;code&gt;GET&lt;/code&gt; &lt;code&gt;/users/:id&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Handler below retrieves user by id from the database. If user is not found it returns
-&lt;code&gt;404&lt;/code&gt; error with a message.&lt;/p&gt;
+&lt;p&gt;这个业务是根据用户的 id 从数据库取到该用户数据，如果用户不存在则返回&lt;code&gt;404&lt;/code&gt;和提示语句。&lt;/p&gt;
 
-&lt;h4 id=&#34;createuser&#34;&gt;CreateUser&lt;/h4&gt;
+&lt;h4 id=&#34;创建-user&#34;&gt;创建 User&lt;/h4&gt;
 
 &lt;p&gt;&lt;code&gt;POST&lt;/code&gt; &lt;code&gt;/users&lt;/code&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Accepts JSON payload&lt;/li&gt;
-&lt;li&gt;On success &lt;code&gt;201 - Created&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;On error &lt;code&gt;500 - Internal Server Error&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;接受 JSON 格式的数据。&lt;/li&gt;
+&lt;li&gt;创建成功返回 &lt;code&gt;201 - Created&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;发生错误返回 &lt;code&gt;500 - Internal Server Error&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;getuser&#34;&gt;GetUser&lt;/h4&gt;
+&lt;h4 id=&#34;获取-user&#34;&gt;获取 User&lt;/h4&gt;
 
 &lt;p&gt;&lt;code&gt;GET&lt;/code&gt; &lt;code&gt;/users/:email&lt;/code&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;On success &lt;code&gt;200 - OK&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;On error &lt;code&gt;404 - Not Found&lt;/code&gt; if user is not found otherwise &lt;code&gt;500 - Internal Server Error&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;获取成功返回 &lt;code&gt;200 - OK&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;发生错误返回 &lt;code&gt;404 - Not Found&lt;/code&gt; if user is not found otherwise &lt;code&gt;500 - Internal Server Error&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;code&gt;handler.go&lt;/code&gt;&lt;/p&gt;
@@ -394,7 +393,7 @@ var (
 )
 
 func TestCreateUser(t *testing.T) {
-	// Setup
+	// 设置
 	e := echo.New()
 	req, err := http.NewRequest(echo.POST, &amp;quot;/users&amp;quot;, strings.NewReader(userJSON))
 	if assert.NoError(t, err) {
@@ -403,7 +402,7 @@ func TestCreateUser(t *testing.T) {
 		c := e.NewContext(standard.NewRequest(req, e.Logger()), standard.NewResponse(rec, e.Logger()))
 		h := &amp;amp;handler{mockDB}
 
-		// Assertions
+		// 断言
 		if assert.NoError(t, h.createUser(c)) {
 			assert.Equal(t, http.StatusCreated, rec.Code)
 			assert.Equal(t, userJSON, rec.Body.String())
@@ -412,7 +411,7 @@ func TestCreateUser(t *testing.T) {
 }
 
 func TestGetUser(t *testing.T) {
-	// Setup
+	// 设置
 	e := echo.New()
 	req := new(http.Request)
 	rec := httptest.NewRecorder()
@@ -422,7 +421,7 @@ func TestGetUser(t *testing.T) {
 	c.SetParamValues(&amp;quot;jon@labstack.com&amp;quot;)
 	h := &amp;amp;handler{mockDB}
 
-	// Assertions
+	// 断言
 	if assert.NoError(t, h.getUser(c)) {
 		assert.Equal(t, http.StatusOK, rec.Code)
 		assert.Equal(t, userJSON, rec.Body.String())
@@ -430,7 +429,7 @@ func TestGetUser(t *testing.T) {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;using-form-payload&#34;&gt;Using Form Payload&lt;/h4&gt;
+&lt;h4 id=&#34;使用-form-表单提交&#34;&gt;使用 Form 表单提交&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;f := make(url.Values)
 f.Set(&amp;quot;name&amp;quot;, &amp;quot;Jon Snow&amp;quot;)
@@ -438,24 +437,24 @@ f.Set(&amp;quot;email&amp;quot;, &amp;quot;jon@labstack.com&amp;quot;)
 req, err := http.NewRequest(echo.POST, &amp;quot;/&amp;quot;, strings.NewReader(f.Encode()))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;setting-path-params&#34;&gt;Setting Path Params&lt;/h4&gt;
+&lt;h4 id=&#34;设置-url-参数&#34;&gt;设置 URL 参数&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;c.SetParamNames(&amp;quot;id&amp;quot;, &amp;quot;email&amp;quot;)
 c.SetParamValues(&amp;quot;1&amp;quot;, &amp;quot;jon@labstack.com&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;setting-query-params&#34;&gt;Setting Query Params&lt;/h4&gt;
+&lt;h4 id=&#34;设置请求参数&#34;&gt;设置请求参数&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;q := make(url.Values)
 q.Set(&amp;quot;email&amp;quot;, &amp;quot;jon@labstack.com&amp;quot;)
 req, err := http.NewRequest(echo.POST, &amp;quot;/?&amp;quot;+q.Encode(), nil)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;testing-middleware&#34;&gt;Testing Middleware&lt;/h3&gt;
+&lt;h3 id=&#34;测试中间件&#34;&gt;测试中间件&lt;/h3&gt;
 
-&lt;p&gt;&lt;em&gt;TBD&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;待更新&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;You can looking to built-in middleware &lt;a href=&#34;https://github.com/labstack/echo/tree/master/middleware&#34;&gt;test cases&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;你可以在&lt;a href=&#34;https://github.com/labstack/echo/tree/master/middleware&#34;&gt;这里&lt;/a&gt;查看框架自带中间件的测试代码。&lt;/p&gt;
 </description>
     </item>
     
@@ -684,22 +683,14 @@ e.GET(&amp;quot;/users/:id&amp;quot;, h)
 
 &lt;ul&gt;
 &lt;li&gt;85%的API都保持和以前一样&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Engine&lt;/code&gt; interface to abstract &lt;code&gt;HTTP&lt;/code&gt; server implementation, allowing
-us to use HTTP servers beyond Go standard library. It currently supports standard and &lt;a href=&#34;https://github.com/valyala/fasthttp&#34;&gt;fasthttp&lt;/a&gt; server.&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Context, Request 和 Response 转换成了 interface &lt;a href=&#34;https://github.com/labstack/echo/issues/146&#34;&gt;详细&amp;hellip;&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Handler signature is changed to &lt;code&gt;func (c echo.Context) error&lt;/code&gt;.（处理程序签名改为了 &lt;code&gt;func (c echo.Context) error&lt;/code&gt;）&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Dropped auto wrapping of handler and middleware to enforce compile time check.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;APIs to run middleware before or after the router, which doesn&amp;rsquo;t require &lt;code&gt;Echo#Hook&lt;/code&gt; API now.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Ability to define middleware at route level.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;Echo#HTTPError&lt;/code&gt; exposed it&amp;rsquo;s fields &lt;code&gt;Code&lt;/code&gt; and &lt;code&gt;Message&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Option to specify log format in logger middleware and default logger.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Engine&lt;/code&gt; 接口抽象的实现了 &lt;code&gt;HTTP&lt;/code&gt; 服务，允许我们在 GO 标准库上使用 HTTP 服务。它现在支持标准服务和 &lt;a href=&#34;https://github.com/valyala/fasthttp&#34;&gt;fasthttp&lt;/a&gt; 服务。&lt;/li&gt;
+&lt;li&gt;Context, Request 和 Response 转换成了接口&lt;a href=&#34;https://github.com/labstack/echo/issues/146&#34;&gt;详细&amp;hellip;&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;处理程序签名改为了 &lt;code&gt;func (c echo.Context) error&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;Dropped auto wrapping of handler and middleware to enforce compile time check.&lt;/li&gt;
+&lt;li&gt;在路由之前运行的中间件的 API，现在不需要&lt;code&gt;Echo#Hook&lt;/code&gt; 了。&lt;/li&gt;
+&lt;li&gt;能够在 route 级别定义中间件了。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Echo#HTTPError&lt;/code&gt; 暴露了它的&lt;code&gt;Code&lt;/code&gt; 和 &lt;code&gt;Message&lt;/code&gt; 值。&lt;/li&gt;
+&lt;li&gt;可选的指定中间件日志和默认日志的格式。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h4 id=&#34;api&#34;&gt;API&lt;/h4&gt;
@@ -727,9 +718,9 @@ us to use HTTP servers beyond Go standard library. It currently supports standar
 
 &lt;h3 id=&#34;faq-常见问题&#34;&gt;FAQ（常见问题）&lt;/h3&gt;
 
-&lt;p&gt;Q. How to access original objects from interfaces?（如何通过接口访问原始对象）&lt;/p&gt;
+&lt;p&gt;Q. 如何通过接口访问原始对象&lt;/p&gt;
 
-&lt;p&gt;A. Only if you need to&amp;hellip;（如果你需要的话……）&lt;/p&gt;
+&lt;p&gt;A. 如果你需要的话&amp;hellip;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// `*http.Request`
 c.Request().(*standard.Request).Request
@@ -747,7 +738,7 @@ c.Response().(*standard.Response).ResponseWriter
 c.Response().Header().(*standard.Header).Header
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Q. 如何使用标准的handler和middleware&lt;/p&gt;
+&lt;p&gt;Q. 如何使用标准的业务处理和中间件&lt;/p&gt;
 
 &lt;p&gt;A.如下所示&lt;/p&gt;
 
@@ -760,7 +751,7 @@ import (
 	&amp;quot;github.com/labstack/echo/engine/standard&amp;quot;
 )
 
-// Standard middleware
+// 标准中间件
 func middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		println(&amp;quot;standard middleware&amp;quot;)
@@ -768,7 +759,7 @@ func middleware(next http.Handler) http.Handler {
 	})
 }
 
-// Standard handler
+// 标准业务处理
 func handler(w http.ResponseWriter, r *http.Request) {
 	println(&amp;quot;standard handler&amp;quot;)
 }
@@ -784,7 +775,7 @@ func main() {
 &lt;h3 id=&#34;继续&#34;&gt;继续?&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Browse through &lt;a href=&#34;http://go-echo.org/recipes/hello-world&#34;&gt;recipes&lt;/a&gt; freshly converted to v2.（浏览&lt;a href=&#34;http://go-echo.org/recipes/hello-world&#34;&gt;recipes&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;浏览刚刚转换到 v2 的&lt;a href=&#34;http://go-echo.org/recipes/hello-world&#34;&gt;recipes&lt;/a&gt;。&lt;/li&gt;
 &lt;li&gt;阅读文档，深入理解测试实例。&lt;/li&gt;
 &lt;/ul&gt;
 </description>

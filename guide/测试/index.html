@@ -430,32 +430,31 @@
             <section>
               
 
-<h2 id="testing">Testing</h2>
+<h2 id="测试">测试</h2>
 
-<h3 id="testing-handler">Testing Handler</h3>
+<h3 id="测试业务逻辑">测试业务逻辑</h3>
 
 <p><code>GET</code> <code>/users/:id</code></p>
 
-<p>Handler below retrieves user by id from the database. If user is not found it returns
-<code>404</code> error with a message.</p>
+<p>这个业务是根据用户的 id 从数据库取到该用户数据，如果用户不存在则返回<code>404</code>和提示语句。</p>
 
-<h4 id="createuser">CreateUser</h4>
+<h4 id="创建-user">创建 User</h4>
 
 <p><code>POST</code> <code>/users</code></p>
 
 <ul>
-<li>Accepts JSON payload</li>
-<li>On success <code>201 - Created</code></li>
-<li>On error <code>500 - Internal Server Error</code></li>
+<li>接受 JSON 格式的数据。</li>
+<li>创建成功返回 <code>201 - Created</code>。</li>
+<li>发生错误返回 <code>500 - Internal Server Error</code>。</li>
 </ul>
 
-<h4 id="getuser">GetUser</h4>
+<h4 id="获取-user">获取 User</h4>
 
 <p><code>GET</code> <code>/users/:email</code></p>
 
 <ul>
-<li>On success <code>200 - OK</code></li>
-<li>On error <code>404 - Not Found</code> if user is not found otherwise <code>500 - Internal Server Error</code></li>
+<li>获取成功返回 <code>200 - OK</code></li>
+<li>发生错误返回 <code>404 - Not Found</code> if user is not found otherwise <code>500 - Internal Server Error</code></li>
 </ul>
 
 <p><code>handler.go</code></p>
@@ -519,7 +518,7 @@ var (
 )
 
 func TestCreateUser(t *testing.T) {
-	// Setup
+	// 设置
 	e := echo.New()
 	req, err := http.NewRequest(echo.POST, &quot;/users&quot;, strings.NewReader(userJSON))
 	if assert.NoError(t, err) {
@@ -528,7 +527,7 @@ func TestCreateUser(t *testing.T) {
 		c := e.NewContext(standard.NewRequest(req, e.Logger()), standard.NewResponse(rec, e.Logger()))
 		h := &amp;handler{mockDB}
 
-		// Assertions
+		// 断言
 		if assert.NoError(t, h.createUser(c)) {
 			assert.Equal(t, http.StatusCreated, rec.Code)
 			assert.Equal(t, userJSON, rec.Body.String())
@@ -537,7 +536,7 @@ func TestCreateUser(t *testing.T) {
 }
 
 func TestGetUser(t *testing.T) {
-	// Setup
+	// 设置
 	e := echo.New()
 	req := new(http.Request)
 	rec := httptest.NewRecorder()
@@ -547,7 +546,7 @@ func TestGetUser(t *testing.T) {
 	c.SetParamValues(&quot;jon@labstack.com&quot;)
 	h := &amp;handler{mockDB}
 
-	// Assertions
+	// 断言
 	if assert.NoError(t, h.getUser(c)) {
 		assert.Equal(t, http.StatusOK, rec.Code)
 		assert.Equal(t, userJSON, rec.Body.String())
@@ -555,7 +554,7 @@ func TestGetUser(t *testing.T) {
 }
 </code></pre>
 
-<h4 id="using-form-payload">Using Form Payload</h4>
+<h4 id="使用-form-表单提交">使用 Form 表单提交</h4>
 
 <pre><code class="language-go">f := make(url.Values)
 f.Set(&quot;name&quot;, &quot;Jon Snow&quot;)
@@ -563,24 +562,24 @@ f.Set(&quot;email&quot;, &quot;jon@labstack.com&quot;)
 req, err := http.NewRequest(echo.POST, &quot;/&quot;, strings.NewReader(f.Encode()))
 </code></pre>
 
-<h4 id="setting-path-params">Setting Path Params</h4>
+<h4 id="设置-url-参数">设置 URL 参数</h4>
 
 <pre><code class="language-go">c.SetParamNames(&quot;id&quot;, &quot;email&quot;)
 c.SetParamValues(&quot;1&quot;, &quot;jon@labstack.com&quot;)
 </code></pre>
 
-<h4 id="setting-query-params">Setting Query Params</h4>
+<h4 id="设置请求参数">设置请求参数</h4>
 
 <pre><code class="language-go">q := make(url.Values)
 q.Set(&quot;email&quot;, &quot;jon@labstack.com&quot;)
 req, err := http.NewRequest(echo.POST, &quot;/?&quot;+q.Encode(), nil)
 </code></pre>
 
-<h3 id="testing-middleware">Testing Middleware</h3>
+<h3 id="测试中间件">测试中间件</h3>
 
-<p><em>TBD</em></p>
+<p><em>待更新</em></p>
 
-<p>You can looking to built-in middleware <a href="https://github.com/labstack/echo/tree/master/middleware">test cases</a>.</p>
+<p>你可以在<a href="https://github.com/labstack/echo/tree/master/middleware">这里</a>查看框架自带中间件的测试代码。</p>
 
             </section>
             <footer style="margin-top: 40px;">
