@@ -208,8 +208,8 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/middleware/csrf">
-            CSRF
+          <a href="http://go-echo.org/middleware/csrf%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0">
+            CSRF(跨站请求伪造)
           </a>
           
         </li>
@@ -430,17 +430,17 @@
             <section>
               
 
-<h2 id="jwt-middleware">JWT Middleware</h2>
+<h2 id="jwt-中间件">JWT 中间件</h2>
 
-<p>JWT provides a JSON Web Token (JWT) authentication middleware.</p>
+<p>JSON Web Token(JWT)是一个非常轻巧的规范。这个规范允许我们使用JWT在用户和服务器之间传递安全可靠的信息。</p>
 
 <ul>
-<li>For valid token, it sets the user in context and calls next handler.</li>
-<li>For invalid token, it sends &ldquo;401 - Unauthorized&rdquo; response.</li>
-<li>For empty or invalid <code>Authorization</code> header, it sends &ldquo;400 - Bad Request&rdquo;.</li>
+<li>对于有效的令牌，它将用户设置为上下文，并调用下一个处理程序。</li>
+<li>对于无效的令牌，它发送&rdquo;401 - Unauthorized&rdquo;的响应。</li>
+<li>对于空的或无效的<code>Authorization</code>头，它发送&rdquo;400 - Bad Request&rdquo;。</li>
 </ul>
 
-<h3 id="configuration">Configuration</h3>
+<h3 id="配置">配置</h3>
 
 <pre><code class="language-go">JWTConfig struct {
   // Signing key to validate token.
@@ -465,7 +465,7 @@
 }
 </code></pre>
 
-<h3 id="default-configuration">Default Configuration</h3>
+<h3 id="默认配置">默认配置</h3>
 
 <pre><code class="language-go">DefaultJWTConfig = JWTConfig{
   SigningMethod: AlgorithmHS256,
@@ -478,7 +478,7 @@
 
 <p><code>e.Use(middleware.JWT([]byte(&quot;secret&quot;))</code></p>
 
-<h3 id="custom-configuration">Custom Configuration</h3>
+<h3 id="自定义配置">自定义配置</h3>
 
 <p><em>Usage</em></p>
 

@@ -208,8 +208,8 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/middleware/csrf">
-            CSRF
+          <a href="http://go-echo.org/middleware/csrf%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0">
+            CSRF(跨站请求伪造)
           </a>
           
         </li>
@@ -430,14 +430,13 @@
             <section>
               
 
-<h2 id="methodoverride-middleware">MethodOverride Middleware</h2>
+<h2 id="methodoverride-中间件">MethodOverride 中间件</h2>
 
-<p>MethodOverride middleware checks for the overridden method from the request and
-uses it instead of the original method.</p>
+<p>MethodOverride中间件检查从请求中重写的方法，并使用它来代替原来的方法。</p>
 
-<p>For security reasons, only <code>POST</code> method can be overridden.</p>
+<p>出于安全原因，只有<code>POST</code>方法可以被重写。</p>
 
-<h3 id="configuration">Configuration</h3>
+<h3 id="配置">配置</h3>
 
 <pre><code class="language-go">MethodOverrideConfig struct {
   // Getter is a function that gets overridden method from the request.
@@ -446,7 +445,7 @@ uses it instead of the original method.</p>
 }
 </code></pre>
 
-<h3 id="default-configuration">Default Configuration</h3>
+<h3 id="默认配置">默认配置</h3>
 
 <pre><code class="language-go">DefaultMethodOverrideConfig = MethodOverrideConfig{
   Getter: MethodFromHeader(echo.HeaderXHTTPMethodOverride),
@@ -457,7 +456,7 @@ uses it instead of the original method.</p>
 
 <p><code>e.Pre(middleware.MethodOverride())</code></p>
 
-<h3 id="custom-configuration">Custom Configuration</h3>
+<h3 id="自定义配置">自定义配置</h3>
 
 <p><em>Usage</em></p>
 

@@ -111,7 +111,7 @@ CORS 提供给 web 服务器跨站的访问控制，使得跨站的数据传输�
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;默认配置&#34;&gt;默认配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultCORSConfig = CORSConfig{
 	AllowOrigins: []string{&amp;quot;*&amp;quot;},
@@ -123,7 +123,7 @@ CORS 提供给 web 服务器跨站的访问控制，使得跨站的数据传输�
 
 &lt;p&gt;&lt;code&gt;e.Use(middleware.CORS())&lt;/code&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;自定义配置&#34;&gt;自定义配置&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
 
@@ -137,21 +137,18 @@ e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
     </item>
     
     <item>
-      <title>CSRF</title>
-      <link>http://go-echo.org/middleware/csrf</link>
+      <title>CSRF(跨站请求伪造)</title>
+      <link>http://go-echo.org/middleware/csrf%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/csrf</guid>
+      <guid>http://go-echo.org/middleware/csrf%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0</guid>
       <description>
 
-&lt;h2 id=&#34;csrf-middleware&#34;&gt;CSRF Middleware&lt;/h2&gt;
+&lt;h2 id=&#34;csrf-middleware-跨站请求伪造&#34;&gt;CSRF Middleware(跨站请求伪造)&lt;/h2&gt;
 
-&lt;p&gt;Cross-site request forgery, also known as one-click attack or session riding and
-abbreviated as CSRF (sometimes pronounced sea-surf) or XSRF, is a type of malicious
-exploit of a website where unauthorized commands are transmitted from a user that
-the website trusts.&lt;/p&gt;
+&lt;p&gt;CSRF（Cross-site request forgery跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。 跟跨网站脚本（XSS）相比，XSS 利用的是用户对指定网站的信任，CSRF 利用的是网站对用户网页浏览器的信任。&lt;/p&gt;
 
-&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;配置&#34;&gt;配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;CSRFConfig struct {
   // Key to create CSRF token.
@@ -196,7 +193,7 @@ the website trusts.&lt;/p&gt;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;默认配置&#34;&gt;默认配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultCSRFConfig = CSRFConfig{
   TokenLookup:   &amp;quot;header:&amp;quot; + echo.HeaderXCSRFToken,
@@ -210,7 +207,7 @@ the website trusts.&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;e.Use(middleware.CSRF(&amp;quot;secret&amp;quot;))&lt;/code&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;自定义配置&#34;&gt;自定义配置&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
 
@@ -234,9 +231,9 @@ e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
 
 &lt;h2 id=&#34;gzip-middleware&#34;&gt;Gzip Middleware&lt;/h2&gt;
 
-&lt;p&gt;Gzip middleware compresses HTTP response using gzip compression scheme.&lt;/p&gt;
+&lt;p&gt;Gzip 中间件使用 gzip 压缩方案来对HTTP响应进行压缩。&lt;/p&gt;
 
-&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;配置&#34;&gt;配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;GzipConfig struct {
   // Gzip compression level.
@@ -245,7 +242,7 @@ e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;默认配置&#34;&gt;默认配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultGzipConfig = GzipConfig{
   Level: -1,
@@ -256,7 +253,7 @@ e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
 
 &lt;p&gt;&lt;code&gt;e.Use(middleware.Gzip())&lt;/code&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;自定义配置&#34;&gt;自定义配置&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
 
@@ -276,17 +273,17 @@ e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
       <guid>http://go-echo.org/middleware/jwt</guid>
       <description>
 
-&lt;h2 id=&#34;jwt-middleware&#34;&gt;JWT Middleware&lt;/h2&gt;
+&lt;h2 id=&#34;jwt-中间件&#34;&gt;JWT 中间件&lt;/h2&gt;
 
-&lt;p&gt;JWT provides a JSON Web Token (JWT) authentication middleware.&lt;/p&gt;
+&lt;p&gt;JSON Web Token(JWT)是一个非常轻巧的规范。这个规范允许我们使用JWT在用户和服务器之间传递安全可靠的信息。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;For valid token, it sets the user in context and calls next handler.&lt;/li&gt;
-&lt;li&gt;For invalid token, it sends &amp;ldquo;401 - Unauthorized&amp;rdquo; response.&lt;/li&gt;
-&lt;li&gt;For empty or invalid &lt;code&gt;Authorization&lt;/code&gt; header, it sends &amp;ldquo;400 - Bad Request&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;对于有效的令牌，它将用户设置为上下文，并调用下一个处理程序。&lt;/li&gt;
+&lt;li&gt;对于无效的令牌，它发送&amp;rdquo;401 - Unauthorized&amp;rdquo;的响应。&lt;/li&gt;
+&lt;li&gt;对于空的或无效的&lt;code&gt;Authorization&lt;/code&gt;头，它发送&amp;rdquo;400 - Bad Request&amp;rdquo;。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;配置&#34;&gt;配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;JWTConfig struct {
   // Signing key to validate token.
@@ -311,7 +308,7 @@ e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;默认配置&#34;&gt;默认配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultJWTConfig = JWTConfig{
   SigningMethod: AlgorithmHS256,
@@ -324,7 +321,7 @@ e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
 
 &lt;p&gt;&lt;code&gt;e.Use(middleware.JWT([]byte(&amp;quot;secret&amp;quot;))&lt;/code&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;自定义配置&#34;&gt;自定义配置&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
 
@@ -430,14 +427,13 @@ e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
       <guid>http://go-echo.org/middleware/method-override</guid>
       <description>
 
-&lt;h2 id=&#34;methodoverride-middleware&#34;&gt;MethodOverride Middleware&lt;/h2&gt;
+&lt;h2 id=&#34;methodoverride-中间件&#34;&gt;MethodOverride 中间件&lt;/h2&gt;
 
-&lt;p&gt;MethodOverride middleware checks for the overridden method from the request and
-uses it instead of the original method.&lt;/p&gt;
+&lt;p&gt;MethodOverride中间件检查从请求中重写的方法，并使用它来代替原来的方法。&lt;/p&gt;
 
-&lt;p&gt;For security reasons, only &lt;code&gt;POST&lt;/code&gt; method can be overridden.&lt;/p&gt;
+&lt;p&gt;出于安全原因，只有&lt;code&gt;POST&lt;/code&gt;方法可以被重写。&lt;/p&gt;
 
-&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;配置&#34;&gt;配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;MethodOverrideConfig struct {
   // Getter is a function that gets overridden method from the request.
@@ -446,7 +442,7 @@ uses it instead of the original method.&lt;/p&gt;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;默认配置&#34;&gt;默认配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultMethodOverrideConfig = MethodOverrideConfig{
   Getter: MethodFromHeader(echo.HeaderXHTTPMethodOverride),
@@ -457,7 +453,7 @@ uses it instead of the original method.&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;e.Pre(middleware.MethodOverride())&lt;/code&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;自定义配置&#34;&gt;自定义配置&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
 
@@ -833,7 +829,7 @@ e.Use(middleware.AddTrailingSlashWithConfig(TrailingSlashConfig{
 }))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这将添加一个&amp;rsquo;/&amp;lsquo;在请求的 URI 末尾并且做 &lt;code&gt;StatusMovedPermanenty&lt;/code&gt; 跳转。&lt;/p&gt;
+&lt;p&gt;这将在请求的 URI 的末尾添加一个&amp;rsquo;/&amp;lsquo;并且做 &lt;code&gt;StatusMovedPermanenty&lt;/code&gt; 跳转。&lt;/p&gt;
 </description>
     </item>
     

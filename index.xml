@@ -141,7 +141,7 @@ CORS 提供给 web 服务器跨站的访问控制，使得跨站的数据传输�
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;默认配置&#34;&gt;默认配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultCORSConfig = CORSConfig{
 	AllowOrigins: []string{&amp;quot;*&amp;quot;},
@@ -153,7 +153,7 @@ CORS 提供给 web 服务器跨站的访问控制，使得跨站的数据传输�
 
 &lt;p&gt;&lt;code&gt;e.Use(middleware.CORS())&lt;/code&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;自定义配置&#34;&gt;自定义配置&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
 
@@ -255,21 +255,18 @@ e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
     </item>
     
     <item>
-      <title>CSRF</title>
-      <link>http://go-echo.org/middleware/csrf</link>
+      <title>CSRF(跨站请求伪造)</title>
+      <link>http://go-echo.org/middleware/csrf%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/csrf</guid>
+      <guid>http://go-echo.org/middleware/csrf%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0</guid>
       <description>
 
-&lt;h2 id=&#34;csrf-middleware&#34;&gt;CSRF Middleware&lt;/h2&gt;
+&lt;h2 id=&#34;csrf-middleware-跨站请求伪造&#34;&gt;CSRF Middleware(跨站请求伪造)&lt;/h2&gt;
 
-&lt;p&gt;Cross-site request forgery, also known as one-click attack or session riding and
-abbreviated as CSRF (sometimes pronounced sea-surf) or XSRF, is a type of malicious
-exploit of a website where unauthorized commands are transmitted from a user that
-the website trusts.&lt;/p&gt;
+&lt;p&gt;CSRF（Cross-site request forgery跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。 跟跨网站脚本（XSS）相比，XSS 利用的是用户对指定网站的信任，CSRF 利用的是网站对用户网页浏览器的信任。&lt;/p&gt;
 
-&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;配置&#34;&gt;配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;CSRFConfig struct {
   // Key to create CSRF token.
@@ -314,7 +311,7 @@ the website trusts.&lt;/p&gt;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;默认配置&#34;&gt;默认配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultCSRFConfig = CSRFConfig{
   TokenLookup:   &amp;quot;header:&amp;quot; + echo.HeaderXCSRFToken,
@@ -328,7 +325,7 @@ the website trusts.&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;e.Use(middleware.CSRF(&amp;quot;secret&amp;quot;))&lt;/code&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;自定义配置&#34;&gt;自定义配置&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
 
@@ -758,9 +755,9 @@ but is outside the scope of this recipe.&lt;/p&gt;
 
 &lt;h2 id=&#34;gzip-middleware&#34;&gt;Gzip Middleware&lt;/h2&gt;
 
-&lt;p&gt;Gzip middleware compresses HTTP response using gzip compression scheme.&lt;/p&gt;
+&lt;p&gt;Gzip 中间件使用 gzip 压缩方案来对HTTP响应进行压缩。&lt;/p&gt;
 
-&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;配置&#34;&gt;配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;GzipConfig struct {
   // Gzip compression level.
@@ -769,7 +766,7 @@ but is outside the scope of this recipe.&lt;/p&gt;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;default-configuration&#34;&gt;Default Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;默认配置&#34;&gt;默认配置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;DefaultGzipConfig = GzipConfig{
   Level: -1,
@@ -780,7 +777,7 @@ but is outside the scope of this recipe.&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;e.Use(middleware.Gzip())&lt;/code&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;custom-configuration&#34;&gt;Custom Configuration&lt;/h3&gt;
+&lt;h3 id=&#34;自定义配置&#34;&gt;自定义配置&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;Usage&lt;/em&gt;&lt;/p&gt;
 

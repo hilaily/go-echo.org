@@ -235,7 +235,7 @@ e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
 
 &lt;h3 id=&#34;从-v1-迁移-guide-migrating&#34;&gt;&lt;a href=&#34;http://go-echo.org/guide/migrating&#34;&gt;从 v1 迁移&lt;/a&gt;&lt;/h3&gt;
 
-&lt;p&gt;Echo 使用 GitHub releases 按照 &lt;a href=&#34;http://semver.org&#34;&gt;semantic versioning&lt;/a&gt; 管理版本。
+&lt;p&gt;基于 &lt;a href=&#34;http://semver.org&#34;&gt;semantic versioning&lt;/a&gt; 的管理版本，Echo 使用 GitHub releases 。
 特别的版本可以使用 &lt;a href=&#34;https://github.com/avelino/awesome-go#package-management&#34;&gt;package manager&lt;/a&gt; 安装。&lt;/p&gt;
 </description>
     </item>

@@ -208,8 +208,8 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/middleware/csrf">
-            CSRF
+          <a href="http://go-echo.org/middleware/csrf%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0">
+            CSRF(跨站请求伪造)
           </a>
           
         </li>
@@ -432,9 +432,9 @@
 
 <h2 id="gzip-middleware">Gzip Middleware</h2>
 
-<p>Gzip middleware compresses HTTP response using gzip compression scheme.</p>
+<p>Gzip 中间件使用 gzip 压缩方案来对HTTP响应进行压缩。</p>
 
-<h3 id="configuration">Configuration</h3>
+<h3 id="配置">配置</h3>
 
 <pre><code class="language-go">GzipConfig struct {
   // Gzip compression level.
@@ -443,7 +443,7 @@
 }
 </code></pre>
 
-<h3 id="default-configuration">Default Configuration</h3>
+<h3 id="默认配置">默认配置</h3>
 
 <pre><code class="language-go">DefaultGzipConfig = GzipConfig{
   Level: -1,
@@ -454,7 +454,7 @@
 
 <p><code>e.Use(middleware.Gzip())</code></p>
 
-<h3 id="custom-configuration">Custom Configuration</h3>
+<h3 id="自定义配置">自定义配置</h3>
 
 <p><em>Usage</em></p>
 
