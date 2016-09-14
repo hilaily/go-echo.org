@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        CORS - Go/Golang 框架 Echo 文档
+        CORS(访问控制) - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -208,7 +208,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/cors">
+          <a class="is-active" href="http://go-echo.org/cors">
             CORS(访问控制)
           </a>
           
@@ -300,7 +300,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="http://go-echo.org/cors">
+          <a href="http://go-echo.org/cors">
             CORS
           </a>
           
@@ -437,25 +437,69 @@
             <section>
               
 
-<h2 id="cors-示例">CORS 示例</h2>
+<h2 id="cors-访问控制-中间件">CORS(访问控制) 中间件</h2>
 
-<h3 id="服务端">服务端</h3>
+<p>CORS 中间件实现了 <a href="http://www.w3.org/TR/cors">CORS</a> 的规格
+CORS 提供给 web 服务器跨站的访问控制，使得跨站的数据传输更安全。</p>
 
-<p><code>server.go</code></p>
+<h3 id="配置">配置</h3>
 
-<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/cors/server.go">
-</pre>
+<pre><code class="language-go">CORSConfig struct {
+  // AllowOrigin defines a list of origins that may access the resource.
+  // Optional. Default value []string{&quot;*&quot;}.
+  AllowOrigins []string
 
+  // AllowMethods defines a list methods allowed when accessing the resource.
+  // This is used in response to a preflight request.
+  // Optional. Default value DefaultCORSConfig.AllowMethods.
+  AllowMethods []string
 
-<h3 id="中间件">中间件</h3>
+  // AllowHeaders defines a list of request headers that can be used when
+  // making the actual request. This in response to a preflight request.
+  // Optional. Default value []string{}.
+  AllowHeaders []string
 
-<ul>
-<li><a href="https://github.com/vishr">vishr</a></li>
-</ul>
+  // AllowCredentials indicates whether or not the response to the request
+  // can be exposed when the credentials flag is true. When used as part of
+  // a response to a preflight request, this indicates whether or not the
+  // actual request can be made using credentials.
+  // Optional. Default value false.
+  AllowCredentials bool
 
-<h3 id="{#HUGOSHORTCODE-2#">[Source Code](</h3>
+  // ExposeHeaders defines a whitelist headers that clients are allowed to
+  // access.
+  // Optional. Default value []string{}.
+  ExposeHeaders []string
 
-<p>#})</p>
+  // MaxAge indicates how long (in seconds) the results of a preflight request
+  // can be cached.
+  // Optional. Default value 0.
+  MaxAge int
+}
+</code></pre>
+
+<h3 id="默认配置">默认配置</h3>
+
+<pre><code class="language-go">DefaultCORSConfig = CORSConfig{
+	AllowOrigins: []string{&quot;*&quot;},
+	AllowMethods: []string{echo.GET, echo.HEAD, echo.PUT, echo.PATCH, echo.POST, echo.DELETE},
+}
+</code></pre>
+
+<p><em>Usage</em></p>
+
+<p><code>e.Use(middleware.CORS())</code></p>
+
+<h3 id="自定义配置">自定义配置</h3>
+
+<p><em>Usage</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+  AllowOrigins: []string{&quot;https://labstack.com&quot;, &quot;https://labstack.net&quot;},
+  AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+}))
+</code></pre>
 
             </section>
             <footer style="margin-top: 40px;">
