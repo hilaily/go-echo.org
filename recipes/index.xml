@@ -10,10 +10,10 @@
     
     <item>
       <title>CORS</title>
-      <link>http://go-echo.org/cors</link>
+      <link>http://go-echo.org/recipes/cors</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/cors</guid>
+      <guid>http://go-echo.org/recipes/cors</guid>
       <description>
 
 &lt;h2 id=&#34;cors-示例&#34;&gt;CORS 示例&lt;/h2&gt;
@@ -40,10 +40,10 @@
     
     <item>
       <title>CRUD</title>
-      <link>http://go-echo.org/crud</link>
+      <link>http://go-echo.org/recipes/crud</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/crud</guid>
+      <guid>http://go-echo.org/recipes/crud</guid>
       <description>
 
 &lt;h2 id=&#34;crud-示例&#34;&gt;CRUD 示例&lt;/h2&gt;
@@ -128,10 +128,10 @@
     
     <item>
       <title>Embed Resources</title>
-      <link>http://go-echo.org/embed-resources</link>
+      <link>http://go-echo.org/recipes/embed-resources</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/embed-resources</guid>
+      <guid>http://go-echo.org/recipes/embed-resources</guid>
       <description>
 
 &lt;h2 id=&#34;embed-resources-recipe&#34;&gt;Embed Resources Recipe&lt;/h2&gt;
@@ -159,10 +159,10 @@
     
     <item>
       <title>File Upload</title>
-      <link>http://go-echo.org/file-upload</link>
+      <link>http://go-echo.org/recipes/file-upload</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/file-upload</guid>
+      <guid>http://go-echo.org/recipes/file-upload</guid>
       <description>
 
 &lt;h2 id=&#34;file-upload-recipe&#34;&gt;File Upload Recipe&lt;/h2&gt;
@@ -222,10 +222,10 @@
     
     <item>
       <title>Google App Engine</title>
-      <link>http://go-echo.org/google-app-engine</link>
+      <link>http://go-echo.org/recipes/google-app-engine</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/google-app-engine</guid>
+      <guid>http://go-echo.org/recipes/google-app-engine</guid>
       <description>
 
 &lt;h2 id=&#34;google-app-engine-recipe&#34;&gt;Google App Engine Recipe&lt;/h2&gt;
@@ -380,10 +380,10 @@ but is outside the scope of this recipe.&lt;/p&gt;
     
     <item>
       <title>Graceful Shutdown</title>
-      <link>http://go-echo.org/graceful-shutdown</link>
+      <link>http://go-echo.org/recipes/graceful-shutdown</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/graceful-shutdown</guid>
+      <guid>http://go-echo.org/recipes/graceful-shutdown</guid>
       <description>
 
 &lt;h2 id=&#34;graceful-shutdown-recipe&#34;&gt;Graceful Shutdown Recipe&lt;/h2&gt;
@@ -423,10 +423,10 @@ but is outside the scope of this recipe.&lt;/p&gt;
     
     <item>
       <title>HTTP2</title>
-      <link>http://go-echo.org/http2</link>
+      <link>http://go-echo.org/recipes/http2</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/http2</guid>
+      <guid>http://go-echo.org/recipes/http2</guid>
       <description>
 
 &lt;h2 id=&#34;什么是-http2&#34;&gt;什么是 HTTP2?&lt;/h2&gt;
@@ -489,10 +489,10 @@ but is outside the scope of this recipe.&lt;/p&gt;
     
     <item>
       <title>Hello World</title>
-      <link>http://go-echo.org/hello-world</link>
+      <link>http://go-echo.org/recipes/hello-world</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/hello-world</guid>
+      <guid>http://go-echo.org/recipes/hello-world</guid>
       <description>
 
 &lt;h2 id=&#34;hello-world-示例&#34;&gt;Hello World 示例&lt;/h2&gt;
@@ -519,10 +519,10 @@ but is outside the scope of this recipe.&lt;/p&gt;
     
     <item>
       <title>JSONP</title>
-      <link>http://go-echo.org/jsonp</link>
+      <link>http://go-echo.org/recipes/jsonp</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/jsonp</guid>
+      <guid>http://go-echo.org/recipes/jsonp</guid>
       <description>
 
 &lt;h2 id=&#34;jsonp-recipe&#34;&gt;JSONP Recipe&lt;/h2&gt;
@@ -559,10 +559,10 @@ but is outside the scope of this recipe.&lt;/p&gt;
     
     <item>
       <title>JWT</title>
-      <link>http://go-echo.org/jwt</link>
+      <link>http://go-echo.org/recipes/jwt</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/jwt</guid>
+      <guid>http://go-echo.org/recipes/jwt</guid>
       <description>
 
 &lt;h2 id=&#34;jwt-recipe&#34;&gt;JWT Recipe&lt;/h2&gt;
@@ -625,10 +625,10 @@ but is outside the scope of this recipe.&lt;/p&gt;
     
     <item>
       <title>Middleware</title>
-      <link>http://go-echo.org/middleware</link>
+      <link>http://go-echo.org/recipes/middleware</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware</guid>
+      <guid>http://go-echo.org/recipes/middleware</guid>
       <description>
 
 &lt;h2 id=&#34;中间件示例&#34;&gt;中间件示例&lt;/h2&gt;
@@ -684,10 +684,10 @@ Server:Echo/2.0
     
     <item>
       <title>Streaming Response</title>
-      <link>http://go-echo.org/streaming-response</link>
+      <link>http://go-echo.org/recipes/streaming-response</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/streaming-response</guid>
+      <guid>http://go-echo.org/recipes/streaming-response</guid>
       <description>
 
 &lt;h2 id=&#34;streaming-response-recipe&#34;&gt;Streaming Response Recipe&lt;/h2&gt;
@@ -733,10 +733,10 @@ Server:Echo/2.0
     
     <item>
       <title>Subdomains</title>
-      <link>http://go-echo.org/subdomains</link>
+      <link>http://go-echo.org/recipes/subdomains</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/subdomains</guid>
+      <guid>http://go-echo.org/recipes/subdomains</guid>
       <description>
 
 &lt;h2 id=&#34;subdomains-recipe&#34;&gt;Subdomains Recipe&lt;/h2&gt;
@@ -762,10 +762,10 @@ Server:Echo/2.0
     
     <item>
       <title>WebSocket</title>
-      <link>http://go-echo.org/websocket</link>
+      <link>http://go-echo.org/recipes/websocket</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/websocket</guid>
+      <guid>http://go-echo.org/recipes/websocket</guid>
       <description>
 
 &lt;h2 id=&#34;websocket-recipe&#34;&gt;WebSocket Recipe&lt;/h2&gt;

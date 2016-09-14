@@ -6,67 +6,67 @@
   </url>
   
   <url>
-    <loc>http://go-echo.org/basic-auth</loc>
+    <loc>http://go-echo.org/middleware/basic-auth</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/body-limit</loc>
+    <loc>http://go-echo.org/middleware/body-limit</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/cors</loc>
+    <loc>http://go-echo.org/recipes/cors</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/cors</loc>
+    <loc>http://go-echo.org/middleware/cors</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/crud</loc>
+    <loc>http://go-echo.org/recipes/crud</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/csrf</loc>
+    <loc>http://go-echo.org/middleware/ecsrf</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/context</loc>
+    <loc>http://go-echo.org/guide/context</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/cookies</loc>
+    <loc>http://go-echo.org/guide/cookies</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/embed-resources</loc>
+    <loc>http://go-echo.org/recipes/embed-resources</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/file-upload</loc>
+    <loc>http://go-echo.org/recipes/file-upload</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/google-app-engine</loc>
+    <loc>http://go-echo.org/recipes/google-app-engine</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/graceful-shutdown</loc>
+    <loc>http://go-echo.org/recipes/graceful-shutdown</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/gzip</loc>
+    <loc>http://go-echo.org/middleware/gzip</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/request</loc>
+    <loc>http://go-echo.org/guide/request</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/http2</loc>
+    <loc>http://go-echo.org/recipes/http2</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/hello-world</loc>
+    <loc>http://go-echo.org/recipes/hello-world</loc>
   </url>
   
   <url>
@@ -74,55 +74,55 @@
   </url>
   
   <url>
-    <loc>http://go-echo.org/jsonp</loc>
+    <loc>http://go-echo.org/recipes/jsonp</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/jwt</loc>
+    <loc>http://go-echo.org/middleware/jwt</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/jwt</loc>
+    <loc>http://go-echo.org/recipes/jwt</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/logger</loc>
+    <loc>http://go-echo.org/middleware/logger</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/method-override</loc>
+    <loc>http://go-echo.org/middleware/method-override</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/middleware</loc>
+    <loc>http://go-echo.org/recipes/middleware</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/recover</loc>
+    <loc>http://go-echo.org/middleware/recover</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/remove-trailing-slash</loc>
+    <loc>http://go-echo.org/middleware/remove-trailing-slash</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/secure</loc>
+    <loc>http://go-echo.org/middleware/secure</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/static</loc>
+    <loc>http://go-echo.org/middleware/static</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/streaming-response</loc>
+    <loc>http://go-echo.org/recipes/streaming-response</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/subdomains</loc>
+    <loc>http://go-echo.org/recipes/subdomains</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/websocket</loc>
+    <loc>http://go-echo.org/recipes/websocket</loc>
   </url>
   
   <url>
@@ -146,43 +146,43 @@
   </url>
   
   <url>
-    <loc>http://go-echo.org/installation</loc>
+    <loc>http://go-echo.org/guide/installation</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/overview</loc>
+    <loc>http://go-echo.org/middleware/overview</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/templates</loc>
+    <loc>http://go-echo.org/guide/templates</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/testing</loc>
+    <loc>http://go-echo.org/guide/testing</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/add-trailing-slash</loc>
+    <loc>http://go-echo.org/middleware/add-trailing-slash</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/customization</loc>
+    <loc>http://go-echo.org/guide/customization</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/routing</loc>
+    <loc>http://go-echo.org/guide/routing</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/migrating</loc>
+    <loc>http://go-echo.org/guide/migrating</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/error-handling</loc>
+    <loc>http://go-echo.org/guide/error-handling</loc>
   </url>
   
   <url>
-    <loc>http://go-echo.org/static-files</loc>
+    <loc>http://go-echo.org/guide/static-files</loc>
   </url>
   
 </urlset>

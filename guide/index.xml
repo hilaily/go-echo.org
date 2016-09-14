@@ -10,10 +10,10 @@
     
     <item>
       <title>Context</title>
-      <link>http://go-echo.org/context</link>
+      <link>http://go-echo.org/guide/context</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/context</guid>
+      <guid>http://go-echo.org/guide/context</guid>
       <description>
 
 &lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
@@ -83,10 +83,10 @@ As Context is an interface, it is easy to extend it with custom APIs.&lt;/p&gt;
     
     <item>
       <title>Cookies</title>
-      <link>http://go-echo.org/cookies</link>
+      <link>http://go-echo.org/guide/cookies</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/cookies</guid>
+      <guid>http://go-echo.org/guide/cookies</guid>
       <description>
 
 &lt;h2 id=&#34;cookies&#34;&gt;Cookies&lt;/h2&gt;
@@ -194,10 +194,10 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
     
     <item>
       <title>HTTP 请求</title>
-      <link>http://go-echo.org/request</link>
+      <link>http://go-echo.org/guide/request</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/request</guid>
+      <guid>http://go-echo.org/guide/request</guid>
       <description>
 
 &lt;h2 id=&#34;http-请求&#34;&gt;HTTP 请求&lt;/h2&gt;
@@ -286,10 +286,10 @@ e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
     
     <item>
       <title>安装</title>
-      <link>http://go-echo.org/installation</link>
+      <link>http://go-echo.org/guide/installation</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/installation</guid>
+      <guid>http://go-echo.org/guide/installation</guid>
       <description>
 
 &lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
@@ -315,10 +315,10 @@ e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
     
     <item>
       <title>模板</title>
-      <link>http://go-echo.org/templates</link>
+      <link>http://go-echo.org/guide/templates</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/templates</guid>
+      <guid>http://go-echo.org/guide/templates</guid>
       <description>
 
 &lt;h2 id=&#34;模板&#34;&gt;模板&lt;/h2&gt;
@@ -372,10 +372,10 @@ e.GET(&amp;quot;/hello&amp;quot;, Hello)
     
     <item>
       <title>测试</title>
-      <link>http://go-echo.org/testing</link>
+      <link>http://go-echo.org/guide/testing</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/testing</guid>
+      <guid>http://go-echo.org/guide/testing</guid>
       <description>
 
 &lt;h2 id=&#34;测试&#34;&gt;测试&lt;/h2&gt;
@@ -533,10 +533,10 @@ req, err := http.NewRequest(echo.POST, &amp;quot;/?&amp;quot;+q.Encode(), nil)
     
     <item>
       <title>自定义</title>
-      <link>http://go-echo.org/customization</link>
+      <link>http://go-echo.org/guide/customization</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/customization</guid>
+      <guid>http://go-echo.org/guide/customization</guid>
       <description>
 
 &lt;h2 id=&#34;自定义&#34;&gt;自定义&lt;/h2&gt;
@@ -630,10 +630,10 @@ e.Run(s)
     
     <item>
       <title>路由</title>
-      <link>http://go-echo.org/routing</link>
+      <link>http://go-echo.org/guide/routing</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/routing</guid>
+      <guid>http://go-echo.org/guide/routing</guid>
       <description>
 
 &lt;h2 id=&#34;路由&#34;&gt;路由&lt;/h2&gt;
@@ -744,10 +744,10 @@ e.GET(&amp;quot;/users/:id&amp;quot;, h)
     
     <item>
       <title>迁移</title>
-      <link>http://go-echo.org/migrating</link>
+      <link>http://go-echo.org/guide/migrating</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/migrating</guid>
+      <guid>http://go-echo.org/guide/migrating</guid>
       <description>
 
 &lt;h2 id=&#34;从-v1-迁移&#34;&gt;从 v1 迁移&lt;/h2&gt;
@@ -856,10 +856,10 @@ func main() {
     
     <item>
       <title>错误处理</title>
-      <link>http://go-echo.org/error-handling</link>
+      <link>http://go-echo.org/guide/error-handling</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/error-handling</guid>
+      <guid>http://go-echo.org/guide/error-handling</guid>
       <description>
 
 &lt;h2 id=&#34;错误处理&#34;&gt;错误处理&lt;/h2&gt;
@@ -905,10 +905,10 @@ func welcome(c echo.Context) error {
     
     <item>
       <title>静态文件</title>
-      <link>http://go-echo.org/static-files</link>
+      <link>http://go-echo.org/guide/static-files</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/static-files</guid>
+      <guid>http://go-echo.org/guide/static-files</guid>
       <description>
 
 &lt;p&gt;图片，JavaScript，CSS，PDF，字体文件等等&amp;hellip;&lt;/p&gt;

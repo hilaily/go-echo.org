@@ -10,10 +10,10 @@
     
     <item>
       <title>Basic Auth</title>
-      <link>http://go-echo.org/basic-auth</link>
+      <link>http://go-echo.org/middleware/basic-auth</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/basic-auth</guid>
+      <guid>http://go-echo.org/middleware/basic-auth</guid>
       <description>
 
 &lt;h2 id=&#34;basicauti-基本认证-中间件&#34;&gt;BasicAuti(基本认证) 中间件&lt;/h2&gt;
@@ -41,10 +41,10 @@ e.Use(middleware.BasicAuth(func(username, password string) bool {
     
     <item>
       <title>Body Limit</title>
-      <link>http://go-echo.org/body-limit</link>
+      <link>http://go-echo.org/middleware/body-limit</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/body-limit</guid>
+      <guid>http://go-echo.org/middleware/body-limit</guid>
       <description>
 
 &lt;h2 id=&#34;bodylimit-请求体限制-中间件&#34;&gt;BodyLimit(请求体限制) 中间件&lt;/h2&gt;
@@ -64,10 +64,10 @@ e.Use(middleware.BodyLimit(&amp;quot;2M&amp;quot;))
     
     <item>
       <title>CORS(访问控制)</title>
-      <link>http://go-echo.org/cors</link>
+      <link>http://go-echo.org/middleware/cors</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/cors</guid>
+      <guid>http://go-echo.org/middleware/cors</guid>
       <description>
 
 &lt;h2 id=&#34;cors-访问控制-中间件&#34;&gt;CORS(访问控制) 中间件&lt;/h2&gt;
@@ -138,10 +138,10 @@ e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
     
     <item>
       <title>CSRF(跨站请求伪造)</title>
-      <link>http://go-echo.org/csrf</link>
+      <link>http://go-echo.org/middleware/ecsrf</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/csrf</guid>
+      <guid>http://go-echo.org/middleware/ecsrf</guid>
       <description>
 
 &lt;h2 id=&#34;csrf-middleware-跨站请求伪造&#34;&gt;CSRF Middleware(跨站请求伪造)&lt;/h2&gt;
@@ -223,10 +223,10 @@ e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
     
     <item>
       <title>Gzip</title>
-      <link>http://go-echo.org/gzip</link>
+      <link>http://go-echo.org/middleware/gzip</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/gzip</guid>
+      <guid>http://go-echo.org/middleware/gzip</guid>
       <description>
 
 &lt;h2 id=&#34;gzip-middleware&#34;&gt;Gzip Middleware&lt;/h2&gt;
@@ -267,10 +267,10 @@ e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
     
     <item>
       <title>JWT</title>
-      <link>http://go-echo.org/jwt</link>
+      <link>http://go-echo.org/middleware/jwt</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/jwt</guid>
+      <guid>http://go-echo.org/middleware/jwt</guid>
       <description>
 
 &lt;h2 id=&#34;jwt-中间件&#34;&gt;JWT 中间件&lt;/h2&gt;
@@ -340,10 +340,10 @@ e.Use(middleware.JWTWithConfig(middleware.JWTConfig{
     
     <item>
       <title>Logger(日志)</title>
-      <link>http://go-echo.org/logger</link>
+      <link>http://go-echo.org/middleware/logger</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/logger</guid>
+      <guid>http://go-echo.org/middleware/logger</guid>
       <description>
 
 &lt;h2 id=&#34;logger-日志-中间件&#34;&gt;Logger(日志) 中间件&lt;/h2&gt;
@@ -421,10 +421,10 @@ e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
     
     <item>
       <title>Method Override</title>
-      <link>http://go-echo.org/method-override</link>
+      <link>http://go-echo.org/middleware/method-override</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/method-override</guid>
+      <guid>http://go-echo.org/middleware/method-override</guid>
       <description>
 
 &lt;h2 id=&#34;methodoverride-中间件&#34;&gt;MethodOverride 中间件&lt;/h2&gt;
@@ -467,17 +467,17 @@ e.Pre(middleware.MethodOverrideWithConfig(middleware.MethodOverrideConfig{
     
     <item>
       <title>Recover</title>
-      <link>http://go-echo.org/recover</link>
+      <link>http://go-echo.org/middleware/recover</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recover</guid>
+      <guid>http://go-echo.org/middleware/recover</guid>
       <description>
 
 &lt;h2 id=&#34;recover-middleware&#34;&gt;Recover Middleware&lt;/h2&gt;
 
 &lt;p&gt;Recover middleware recovers from panics anywhere in the chain, prints stack trace
 and handles the control to the centralized
-&lt;a href=&#34;http://go-echo.org/customization#http-error-handler&#34;&gt;HTTPErrorHandler&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&#34;http://go-echo.org/guide/customization#http-error-handler&#34;&gt;HTTPErrorHandler&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
 
@@ -527,10 +527,10 @@ and &lt;code&gt;DisablePrintStack&lt;/code&gt;.&lt;/p&gt;
     
     <item>
       <title>Remove Trailing Slash(移除结尾斜杠)</title>
-      <link>http://go-echo.org/remove-trailing-slash</link>
+      <link>http://go-echo.org/middleware/remove-trailing-slash</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/remove-trailing-slash</guid>
+      <guid>http://go-echo.org/middleware/remove-trailing-slash</guid>
       <description>
 
 &lt;h2 id=&#34;removetrailingslash-移除结尾斜杠-中间件&#34;&gt;RemoveTrailingSlash(移除结尾斜杠) 中间件&lt;/h2&gt;
@@ -568,10 +568,10 @@ e.Use(middleware.RemoveTrailingSlashWithConfig(TrailingSlashConfig{
     
     <item>
       <title>Secure(安全)</title>
-      <link>http://go-echo.org/secure</link>
+      <link>http://go-echo.org/middleware/secure</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/secure</guid>
+      <guid>http://go-echo.org/middleware/secure</guid>
       <description>
 
 &lt;h2 id=&#34;secure-中间件&#34;&gt;Secure 中间件&lt;/h2&gt;
@@ -652,10 +652,10 @@ e.Use(middleware.SecureWithConfig(middleware.SecureConfig{
     
     <item>
       <title>Static(静态资源)</title>
-      <link>http://go-echo.org/static</link>
+      <link>http://go-echo.org/middleware/static</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/static</guid>
+      <guid>http://go-echo.org/middleware/static</guid>
       <description>
 
 &lt;h2 id=&#34;static-中间件&#34;&gt;Static 中间件&lt;/h2&gt;
@@ -716,10 +716,10 @@ e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
     
     <item>
       <title>概述</title>
-      <link>http://go-echo.org/overview</link>
+      <link>http://go-echo.org/middleware/overview</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/overview</guid>
+      <guid>http://go-echo.org/middleware/overview</guid>
       <description>
 
 &lt;h2 id=&#34;中间件&#34;&gt;中间件&lt;/h2&gt;
@@ -794,10 +794,10 @@ e.GET(&amp;quot;/&amp;quot;, &amp;lt;Handler&amp;gt;, &amp;lt;Middleware...&amp;
     
     <item>
       <title>添加结尾斜杠</title>
-      <link>http://go-echo.org/add-trailing-slash</link>
+      <link>http://go-echo.org/middleware/add-trailing-slash</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/add-trailing-slash</guid>
+      <guid>http://go-echo.org/middleware/add-trailing-slash</guid>
       <description>
 
 &lt;h2 id=&#34;addtrailingslash-添加结尾斜杠-中间件&#34;&gt;AddTrailingSlash(添加结尾斜杠) 中间件&lt;/h2&gt;
