@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        JWT - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -356,7 +356,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/jwt">
+          <a class="is-active" href="http://go-echo.org/jwt">
             JWT
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,63 @@
           <article class="content">
             <section>
               
+
+<h2 id="jwt-recipe">JWT Recipe</h2>
+
+<ul>
+<li>JWT authentication using HS256 algorithm.</li>
+<li>JWT is retrieved from <code>Authorization</code> request header.</li>
+</ul>
+
+<h3 id="server">Server</h3>
+
+<p><code>server.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/jwt/server.go">
+</pre>
+
+
+<h3 id="client">Client</h3>
+
+<p><code>curl</code></p>
+
+<h4 id="login">Login</h4>
+
+<p>Login using username and password to retrieve a token.</p>
+
+<pre><code class="language-sh">curl -X POST -d 'username=jon' -d 'password=shhh!' localhost:1323/login
+</code></pre>
+
+<p><em>Response</em></p>
+
+<pre><code class="language-js">{
+  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjE5NTcxMzZ9.RB3arc4-OyzASAaUhC2W3ReWaXAt_z2Fd3BN4aWTgEY&quot;
+}
+</code></pre>
+
+<h4 id="request">Request</h4>
+
+<p>Request a restricted resource using the token in <code>Authorization</code> request header.</p>
+
+<pre><code class="language-sh">curl localhost:1323/restricted -H &quot;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjE5NTcxMzZ9.RB3arc4-OyzASAaUhC2W3ReWaXAt_z2Fd3BN4aWTgEY&quot;
+</code></pre>
+
+<p><em>Response</em></p>
+
+<pre><code>Welcome Jon Snow!
+</code></pre>
+
+<h3 id="maintainers">Maintainers</h3>
+
+<ul>
+<li><a href="https://github.com/vishr">vishr</a></li>
+<li><a href="https://github.com/axdg">axdg</a></li>
+</ul>
+
+<h3 id="{#HUGOSHORTCODE-2#">[Source Code](</h3>
+
+<p>#})</p>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

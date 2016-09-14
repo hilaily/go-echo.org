@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        Recover - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -250,7 +250,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/recover">
+          <a class="is-active" href="http://go-echo.org/recover">
             Recover
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,57 @@
           <article class="content">
             <section>
               
+
+<h2 id="recover-middleware">Recover Middleware</h2>
+
+<p>Recover middleware recovers from panics anywhere in the chain, prints stack trace
+and handles the control to the centralized
+<a href="http://go-echo.org/customization#http-error-handler">HTTPErrorHandler</a>.</p>
+
+<h3 id="configuration">Configuration</h3>
+
+<pre><code class="language-go">RecoverConfig struct {
+  // Size of the stack to be printed.
+  // Optional. Default value 4KB.
+  StackSize int
+
+  // DisableStackAll disables formatting stack traces of all other goroutines
+  // into buffer after the trace for the current goroutine.
+  // Optional. Default value false.
+  DisableStackAll bool
+
+  // DisablePrintStack disables printing stack trace.
+  // Optional. Default value as false.
+  DisablePrintStack bool
+}
+</code></pre>
+
+<h3 id="default-configuration">Default Configuration</h3>
+
+<pre><code class="language-go">DefaultRecoverConfig = RecoverConfig{
+	StackSize:  4 &lt;&lt; 10, // 4 KB
+	StackAll:   true,
+	PrintStack: true,
+}
+</code></pre>
+
+<p><em>Usage</em></p>
+
+<p><code>e.Use(middleware.Recover())</code></p>
+
+<h3 id="custom-configuration">Custom Configuration</h3>
+
+<p><em>Usage</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Use(middleware.RecoverWithConfig(middleware.RecoverConfig{
+  StackSize:  1 &lt;&lt; 10, // 1 KB
+}))
+</code></pre>
+
+<p>Example above uses a <code>StackSize</code> of 1 KB and default values for <code>DisableStackAll</code>
+and <code>DisablePrintStack</code>.</p>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

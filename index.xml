@@ -10,10 +10,10 @@
     
     <item>
       <title>Basic Auth</title>
-      <link>http://go-echo.org/middleware/basic-auth</link>
+      <link>http://go-echo.org/basic-auth</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/basic-auth</guid>
+      <guid>http://go-echo.org/basic-auth</guid>
       <description>
 
 &lt;h2 id=&#34;basicauti-基本认证-中间件&#34;&gt;BasicAuti(基本认证) 中间件&lt;/h2&gt;
@@ -41,10 +41,10 @@ e.Use(middleware.BasicAuth(func(username, password string) bool {
     
     <item>
       <title>Body Limit</title>
-      <link>http://go-echo.org/middleware/body-limit</link>
+      <link>http://go-echo.org/body-limit</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/body-limit</guid>
+      <guid>http://go-echo.org/body-limit</guid>
       <description>
 
 &lt;h2 id=&#34;bodylimit-请求体限制-中间件&#34;&gt;BodyLimit(请求体限制) 中间件&lt;/h2&gt;
@@ -64,10 +64,10 @@ e.Use(middleware.BodyLimit(&amp;quot;2M&amp;quot;))
     
     <item>
       <title>CORS</title>
-      <link>http://go-echo.org/recipes/cors</link>
+      <link>http://go-echo.org/cors</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/cors</guid>
+      <guid>http://go-echo.org/cors</guid>
       <description>
 
 &lt;h2 id=&#34;cors-示例&#34;&gt;CORS 示例&lt;/h2&gt;
@@ -94,10 +94,10 @@ e.Use(middleware.BodyLimit(&amp;quot;2M&amp;quot;))
     
     <item>
       <title>CORS(访问控制)</title>
-      <link>http://go-echo.org/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</link>
+      <link>http://go-echo.org/cors</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/cors%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6</guid>
+      <guid>http://go-echo.org/cors</guid>
       <description>
 
 &lt;h2 id=&#34;cors-访问控制-中间件&#34;&gt;CORS(访问控制) 中间件&lt;/h2&gt;
@@ -168,10 +168,10 @@ e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
     
     <item>
       <title>CRUD</title>
-      <link>http://go-echo.org/recipes/crud</link>
+      <link>http://go-echo.org/crud</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/crud</guid>
+      <guid>http://go-echo.org/crud</guid>
       <description>
 
 &lt;h2 id=&#34;crud-示例&#34;&gt;CRUD 示例&lt;/h2&gt;
@@ -256,10 +256,10 @@ e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
     
     <item>
       <title>CSRF(跨站请求伪造)</title>
-      <link>http://go-echo.org/middleware/csrf%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0</link>
+      <link>http://go-echo.org/csrf</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/csrf%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0</guid>
+      <guid>http://go-echo.org/csrf</guid>
       <description>
 
 &lt;h2 id=&#34;csrf-middleware-跨站请求伪造&#34;&gt;CSRF Middleware(跨站请求伪造)&lt;/h2&gt;
@@ -340,11 +340,84 @@ e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
     </item>
     
     <item>
-      <title>Cookies</title>
-      <link>http://go-echo.org/guide/cookies</link>
+      <title>Context</title>
+      <link>http://go-echo.org/context</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/guide/cookies</guid>
+      <guid>http://go-echo.org/context</guid>
+      <description>
+
+&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
+
+&lt;p&gt;echo.Context represents the context of the current HTTP request.
+It holds request and response reference, path, path parameters, data, registered handler and APIs to read request and write response.
+Context is 100% compatible with standard context.Context.
+As Context is an interface, it is easy to extend it with custom APIs.&lt;/p&gt;
+
+&lt;h3 id=&#34;extending-context&#34;&gt;Extending Context&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Define a custom context&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;    type CustomContext struct {
+	echo.Context
+    }
+
+    func (c *CustomContext) Foo() {
+        println(&amp;quot;foo&amp;quot;)
+    }
+
+    func (c *CustomContext) Bar() {
+        println(&amp;quot;bar&amp;quot;)
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Create a middleware to extend default context&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;    e.Use(func(h echo.HandlerFunc) echo.HandlerFunc {
+        return func(c echo.Context) error {
+            cc := &amp;amp;CustomContext{c}
+            return h(cc)
+        }
+    })
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This middleware should be registered before any other middleware.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Use in handler&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.Get(&amp;quot;/&amp;quot;, func(c echo.Context) error {
+	cc := c.(*CustomContext)
+	cc.Foo()
+	cc.Bar()
+	return cc.String(200, &amp;quot;OK&amp;quot;)
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;standard-context&#34;&gt;Standard Context&lt;/h3&gt;
+
+&lt;p&gt;echo.Context embeds standard context.Context interface, so all it’s functions are available right from echo.Context.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Example&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
+    c.SetContext(context.WithValue(nil, &amp;quot;key&amp;quot;, &amp;quot;val&amp;quot;))
+    // Pass it down...
+    // Use it...
+    val := c.Value(&amp;quot;key&amp;quot;).(string)
+    return c.String(http.StatusOK, name)
+})
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Cookies</title>
+      <link>http://go-echo.org/cookies</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://go-echo.org/cookies</guid>
       <description>
 
 &lt;h2 id=&#34;cookies&#34;&gt;Cookies&lt;/h2&gt;
@@ -452,10 +525,10 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
     
     <item>
       <title>Embed Resources</title>
-      <link>http://go-echo.org/recipes/embed-resources</link>
+      <link>http://go-echo.org/embed-resources</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/embed-resources</guid>
+      <guid>http://go-echo.org/embed-resources</guid>
       <description>
 
 &lt;h2 id=&#34;embed-resources-recipe&#34;&gt;Embed Resources Recipe&lt;/h2&gt;
@@ -483,10 +556,10 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
     
     <item>
       <title>File Upload</title>
-      <link>http://go-echo.org/recipes/file-upload</link>
+      <link>http://go-echo.org/file-upload</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/file-upload</guid>
+      <guid>http://go-echo.org/file-upload</guid>
       <description>
 
 &lt;h2 id=&#34;file-upload-recipe&#34;&gt;File Upload Recipe&lt;/h2&gt;
@@ -546,10 +619,10 @@ Cookie 也可以用来存储用户输入过的表单内容像电话号码，地�
     
     <item>
       <title>Google App Engine</title>
-      <link>http://go-echo.org/recipes/google-app-engine</link>
+      <link>http://go-echo.org/google-app-engine</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/google-app-engine</guid>
+      <guid>http://go-echo.org/google-app-engine</guid>
       <description>
 
 &lt;h2 id=&#34;google-app-engine-recipe&#34;&gt;Google App Engine Recipe&lt;/h2&gt;
@@ -704,10 +777,10 @@ but is outside the scope of this recipe.&lt;/p&gt;
     
     <item>
       <title>Graceful Shutdown</title>
-      <link>http://go-echo.org/recipes/graceful-shutdown</link>
+      <link>http://go-echo.org/graceful-shutdown</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/graceful-shutdown</guid>
+      <guid>http://go-echo.org/graceful-shutdown</guid>
       <description>
 
 &lt;h2 id=&#34;graceful-shutdown-recipe&#34;&gt;Graceful Shutdown Recipe&lt;/h2&gt;
@@ -747,10 +820,10 @@ but is outside the scope of this recipe.&lt;/p&gt;
     
     <item>
       <title>Gzip</title>
-      <link>http://go-echo.org/middleware/gzip</link>
+      <link>http://go-echo.org/gzip</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/middleware/gzip</guid>
+      <guid>http://go-echo.org/gzip</guid>
       <description>
 
 &lt;h2 id=&#34;gzip-middleware&#34;&gt;Gzip Middleware&lt;/h2&gt;
@@ -791,10 +864,10 @@ e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
     
     <item>
       <title>HTTP 请求</title>
-      <link>http://go-echo.org/guide/http-%E8%AF%B7%E6%B1%82</link>
+      <link>http://go-echo.org/request</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/guide/http-%E8%AF%B7%E6%B1%82</guid>
+      <guid>http://go-echo.org/request</guid>
       <description>
 
 &lt;h2 id=&#34;http-请求&#34;&gt;HTTP 请求&lt;/h2&gt;
@@ -883,10 +956,10 @@ e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
     
     <item>
       <title>HTTP2</title>
-      <link>http://go-echo.org/recipes/http2</link>
+      <link>http://go-echo.org/http2</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://go-echo.org/recipes/http2</guid>
+      <guid>http://go-echo.org/http2</guid>
       <description>
 
 &lt;h2 id=&#34;什么是-http2&#34;&gt;什么是 HTTP2?&lt;/h2&gt;
@@ -942,36 +1015,6 @@ e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;{#HUGOSHORTCODE-2#&#34;&gt;[Source Code](&lt;/h3&gt;
-
-&lt;p&gt;#})&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hello World</title>
-      <link>http://go-echo.org/recipes/hello-world</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://go-echo.org/recipes/hello-world</guid>
-      <description>
-
-&lt;h2 id=&#34;hello-world-示例&#34;&gt;Hello World 示例&lt;/h2&gt;
-
-&lt;h3 id=&#34;服务器&#34;&gt;服务器&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;server.go&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre data-src=&#34;https://raw.githubusercontent.com/labstack/echox/master/recipe/hello-world/server.go&#34;&gt;
-&lt;/pre&gt;
-
-
-&lt;h3 id=&#34;维护者&#34;&gt;维护者&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/vishr&#34;&gt;vishr&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;{#HUGOSHORTCODE-2#&#34;&gt;[源码](&lt;/h3&gt;
 
 &lt;p&gt;#})&lt;/p&gt;
 </description>

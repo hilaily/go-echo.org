@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        File Upload - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -335,7 +335,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/file-upload">
+          <a class="is-active" href="http://go-echo.org/file-upload">
             File Upload
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,60 @@
           <article class="content">
             <section>
               
+
+<h2 id="file-upload-recipe">File Upload Recipe</h2>
+
+<h3 id="how-to-upload-single-file-with-fields">How to upload single file with fields?</h3>
+
+<h4 id="server">Server</h4>
+
+<p><code>server.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/file-upload/single/server.go">
+</pre>
+
+
+<h4 id="client">Client</h4>
+
+<p><code>index.html</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/file-upload/single/public/index.html">
+</pre>
+
+
+<h3 id="how-to-upload-multiple-files-with-fields">How to upload multiple files with fields?</h3>
+
+<h4 id="server-1">Server</h4>
+
+<p><code>server.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/file-upload/multiple/server.go">
+</pre>
+
+
+<h4 id="client-1">Client</h4>
+
+<p><code>index.html</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/file-upload/multiple/public/index.html">
+</pre>
+
+
+<h3 id="maintainers">Maintainers</h3>
+
+<ul>
+<li><a href="https://github.com/vishr">vishr</a></li>
+</ul>
+
+<h3 id="source-code">Source Code</h3>
+
+<ul>
+<li><a href="https://github.com/labstack/echox/tree/master/recipe/file-upload/single
+">single</a></li>
+<li><a href="https://github.com/labstack/echox/tree/master/recipe/file-upload/multiple
+">multiple</a></li>
+</ul>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

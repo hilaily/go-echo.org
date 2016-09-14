@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        Method Override - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -243,7 +243,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/method-override">
+          <a class="is-active" href="http://go-echo.org/method-override">
             MethodOverride
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,43 @@
           <article class="content">
             <section>
               
+
+<h2 id="methodoverride-中间件">MethodOverride 中间件</h2>
+
+<p>MethodOverride中间件检查从请求中重写的方法，并使用它来代替原来的方法。</p>
+
+<p>出于安全原因，只有<code>POST</code>方法可以被重写。</p>
+
+<h3 id="配置">配置</h3>
+
+<pre><code class="language-go">MethodOverrideConfig struct {
+  // Getter is a function that gets overridden method from the request.
+  // Optional. Default values MethodFromHeader(echo.HeaderXHTTPMethodOverride).
+  Getter MethodOverrideGetter
+}
+</code></pre>
+
+<h3 id="默认配置">默认配置</h3>
+
+<pre><code class="language-go">DefaultMethodOverrideConfig = MethodOverrideConfig{
+  Getter: MethodFromHeader(echo.HeaderXHTTPMethodOverride),
+}
+</code></pre>
+
+<p><em>Usage</em></p>
+
+<p><code>e.Pre(middleware.MethodOverride())</code></p>
+
+<h3 id="自定义配置">自定义配置</h3>
+
+<p><em>Usage</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Pre(middleware.MethodOverrideWithConfig(middleware.MethodOverrideConfig{
+  Getter: middleware.MethodFromForm(&quot;_method&quot;),
+}))
+</code></pre>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

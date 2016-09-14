@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        Google App Engine - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -363,7 +363,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/google-app-engine">
+          <a class="is-active" href="http://go-echo.org/google-app-engine">
             Google App Engine
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,155 @@
           <article class="content">
             <section>
               
+
+<h2 id="google-app-engine-recipe">Google App Engine Recipe</h2>
+
+<p>Google App Engine (GAE) provides a range of hosting options from pure PaaS (App Engine Classic)
+through Managed VMs to fully self-managed or container-driven Compute Engine instances. Echo
+works great with all of these but requires a few changes to the usual examples to run on the
+AppEngine Classic and Managed VM options. With a small amount of effort though it&rsquo;s possible
+to produce a codebase that will run on these and also non-managed platforms automatically.</p>
+
+<p>We&rsquo;ll walk through the changes needed to support each option.</p>
+
+<h3 id="standalone">Standalone</h3>
+
+<p>Wait? What? I thought this was about AppEngine! Bear with me - the easiest way to show the changes
+required is to start with a setup for standalone and work from there plus there&rsquo;s no reason we
+wouldn&rsquo;t want to retain the ability to run our app anywhere, right?</p>
+
+<p>We take advantage of the go <a href="http://golang.org/pkg/go/build/">build constraints or tags</a> to change
+how we create and run the Echo server for each platform while keeping the rest of the application
+(e.g. handler wireup) the same across all of them.</p>
+
+<p>First, we have the normal setup based on the examples but we split it into two files - <code>app.go</code> will
+be common to all variations and holds the Echo instance variable. We initialise it from a function
+and because it is a <code>var</code> this will happen <em>before</em> any <code>init()</code> functions run - a feature that we&rsquo;ll
+use to connect our handlers later.</p>
+
+<p><code>app.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/google-app-engine/app.go">
+</pre>
+
+
+<p>A separate source file contains the function to create the Echo instance and add the static
+file handlers and middleware. Note the build tag on the first line which says to use this when <em>not</em>
+bulding with appengine or appenginevm tags (which thoese platforms automatically add for us). We also
+have the <code>main()</code> function to start serving our app as normal. This should all be very familiar.</p>
+
+<p><code>app-standalone.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/google-app-engine/app-standalone.go">
+</pre>
+
+
+<p>The handler-wireup that would normally also be a part of this Echo setup moves to separate files which
+take advantage of the ability to have multiple <code>init()</code> functions which run <em>after</em> the <code>e</code> Echo var is
+initialised but <em>before</em> the <code>main()</code> function is executed. These allow additional handlers to attach
+themselves to the instance - I&rsquo;ve found the <code>Group</code> feature naturally fits into this pattern with a file
+per REST endpoint, often with a higher-level <code>api</code> group created that they attach to instead of the root
+Echo instance directly (so things like CORS middleware can be added at this higher common-level).</p>
+
+<p><code>users.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/google-app-engine/users.go">
+</pre>
+
+
+<p>If we run our app it should execute as it did before when everything was in one file although we have
+at least gained the ability to organize our handlers a little more cleanly.</p>
+
+<h3 id="appengine-classic-and-managed-vms">AppEngine Classic and Managed VMs</h3>
+
+<p>So far we&rsquo;ve seen how to split apart the Echo creation and setup but still have the same app that
+still only runs standalone. Now we&rsquo;ll see hwo those changes allow us to add support for AppEngine
+hosting.</p>
+
+<p>Refer to the <a href="https://cloud.google.com/appengine/docs/go/">AppEngine site</a> for full configuration
+and deployment information.</p>
+
+<h4 id="app-yaml-configuration-file">app.yaml configuration file</h4>
+
+<p>Both of these are Platform as as Service options running on either sandboxed micro-containers
+or managed Compute Engine instances. Both require an <code>app.yaml</code> file to describe the app to
+the service. While the app <em>could</em> still serve all it&rsquo;s static files itself, one of the benefits
+of the platform is having Google&rsquo;s infrastructure handle that for us so it can be offloaded and
+the app only has to deal with dynamic requests. The platform also handles logging and http gzip
+compression so these can be removed from the codebase as well.</p>
+
+<p>The yaml file also contains other options to control instance size and auto-scaling so for true
+deployment freedom you would likely have separate <code>app-classic.yaml</code> and <code>app-vm.yaml</code> files and
+this can help when making the transition from AppEngine Classic to Managed VMs.</p>
+
+<p><code>app-engine.yaml</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/google-app-engine/app-engine.yaml">
+</pre>
+
+
+<h4 id="router-configuration">Router configuration</h4>
+
+<p>We&rsquo;ll now use the <a href="http://golang.org/pkg/go/build/">build constraints</a> again like we did when creating
+our <code>app-standalone.go</code> instance but this time with the opposite tags to use this file <em>if</em> the build has
+the appengine or appenginevm tags (added automatically when deploying to these platforms).</p>
+
+<p>This allows us to replace the <code>createMux()</code> function to create our Echo server <em>without</em> any of the
+static file handling and logging + gzip middleware which is no longer required. Also worth nothing is
+that GAE classic provides a wrapper to handle serving the app so instead of a <code>main()</code> function where
+we run the server, we instead wire up the router to the default <code>http.Handler</code> instead.</p>
+
+<p><code>app-engine.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/google-app-engine/app-engine.go">
+</pre>
+
+
+<p>Managed VMs are slightly different. They are expected to respond to requests on port 8080 as well
+as special health-check requests used by the service to detect if an instance is still running in
+order to provide automated failover and instance replacement. The <code>google.golang.org/appengine</code>
+package provides this for us so we have a slightly different version for Managed VMs:</p>
+
+<p><code>app-managed.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/google-app-engine/app-managed.go">
+</pre>
+
+
+<p>So now we have three different configurations. We can build and run our app as normal so it can
+be executed locally, on a full Compute Engine instance or any other traditional hosting provider
+(including EC2, Docker etc&hellip;). This build will ignore the code in appengine and appenginevm tagged
+files and the <code>app.yaml</code> file is meaningless to anything other than the AppEngine platform.</p>
+
+<p>We can also run locally using the <a href="https://cloud.google.com/appengine/downloads">Google AppEngine SDK for Go</a>
+either emulating <a href="https://cloud.google.com/appengine/docs/go/tools/devserver">AppEngine Classic</a>:</p>
+
+<pre><code>goapp serve
+</code></pre>
+
+<p>Or <a href="https://cloud.google.com/appengine/docs/managed-vms/sdk#run-local">Managed VMs</a>:</p>
+
+<pre><code>gcloud config set project [your project id]
+gcloud preview app run .
+</code></pre>
+
+<p>And of course we can deploy our app to both of these platforms for easy and inexpensive auto-scaling joy.</p>
+
+<p>Depending on what your app actually does it&rsquo;s possible you may need to make other changes to allow
+switching between AppEngine provided service such as Datastore and alternative storage implementations
+such as MongoDB. A combination of go interfaces and build constraints can make this fairly straightforward
+but is outside the scope of this recipe.</p>
+
+<h3 id="maintainers">Maintainers</h3>
+
+<ul>
+<li><a href="https://github.com/CaptainCodeman">CaptainCodeman</a></li>
+</ul>
+
+<h3 id="{#HUGOSHORTCODE-7#">[Source Code](</h3>
+
+<p>#})</p>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

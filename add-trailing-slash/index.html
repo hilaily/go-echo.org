@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        添加结尾斜杠 - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -187,7 +187,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/add-trailing-slash">
+          <a class="is-active" href="http://go-echo.org/add-trailing-slash">
             AddTrailingSlash(添加结尾斜杠)
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,38 @@
           <article class="content">
             <section>
               
+
+<h2 id="addtrailingslash-添加结尾斜杠-中间件">AddTrailingSlash(添加结尾斜杠) 中间件</h2>
+
+<p>AddTrailingSlash 中间件用语在请求 URI 后添加一个斜杠。</p>
+
+<h3 id="配置">配置</h3>
+
+<pre><code class="language-go">TrailingSlashConfig struct {
+  // Status code to be used when redirecting the request.
+  // Optional, but when provided the request is redirected using this code.
+  RedirectCode int
+}
+</code></pre>
+
+<p><em>用法</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Pre(middleware.AddTrailingSlash())
+</code></pre>
+
+<h3 id="自定义配置">自定义配置</h3>
+
+<p><em>用法</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Use(middleware.AddTrailingSlashWithConfig(TrailingSlashConfig{
+  RedirectCode: http.StatusMovedPermanently,
+}))
+</code></pre>
+
+<p>这将在请求的 URI 的末尾添加一个&rsquo;/&lsquo;并且做 <code>StatusMovedPermanenty</code> 跳转。</p>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

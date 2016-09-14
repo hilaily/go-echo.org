@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        Graceful Shutdown - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -370,7 +370,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/graceful-shutdown">
+          <a class="is-active" href="http://go-echo.org/graceful-shutdown">
             Graceful Shutdown
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,40 @@
           <article class="content">
             <section>
               
+
+<h2 id="graceful-shutdown-recipe">Graceful Shutdown Recipe</h2>
+
+<h3 id="using-grace-https-github-com-facebookgo-grace">Using <a href="https://github.com/facebookgo/grace">grace</a></h3>
+
+<p><code>server.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/graceful-shutdown/grace/server.go">
+</pre>
+
+
+<h3 id="using-graceful-https-github-com-tylerb-graceful">Using <a href="https://github.com/tylerb/graceful">graceful</a></h3>
+
+<p><code>server.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/graceful-shutdown/graceful/server.go">
+</pre>
+
+
+<h3 id="maintainers">Maintainers</h3>
+
+<ul>
+<li><a href="https://github.com/mertenvg">mertenvg</a></li>
+</ul>
+
+<h3 id="source-code">Source Code</h3>
+
+<ul>
+<li><a href="https://github.com/labstack/echox/tree/master/recipe/graceful-shutdown/graceful
+">graceful</a></li>
+<li><a href="https://github.com/labstack/echox/tree/master/recipe/graceful-shutdown/grace
+">grace</a></li>
+</ul>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

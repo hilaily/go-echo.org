@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        路由 - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -137,7 +137,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/routing">
+          <a class="is-active" href="http://go-echo.org/routing">
             路由
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,111 @@
           <article class="content">
             <section>
               
+
+<h2 id="路由">路由</h2>
+
+<p>Echo 的路由<a href="http://go-echo.org/index#performance">性能非常高</a> 而且扩展性强。
+该路由基于 <a href="http://en.wikipedia.org/wiki/Radix_tree">radix tree</a> 这个数据结构。它让路由的查询非常快。路由使用了
+ <a href="https://golang.org/pkg/sync/#Pool">sync pool</a> 来重复利用内存并且几乎达到了零内存占用。</p>
+
+<p>路由线路可以通过制定的HTTP方法，路径和一个匹配的handler来注册。例如，下面的代码则展示了一个路由线路的注册的例子，访问方式为 <code>Get</code>，
+访问路径为 <code>/hello</code>，处理结果是返回输出 <code>Hello World</code> 的响应。</p>
+
+<pre><code class="language-go">// 业务处理
+func hello(c echo.Context) error {
+  	return c.String(http.StatusOK, &quot;Hello, World!&quot;)
+}
+
+// 路由
+e.GET(&quot;/hello&quot;, hello)
+</code></pre>
+
+<p>你可以用 <code>Echo.Any(path string, h Handler)</code> 来为所有的HTTP方法发送注册handler；如果只想为某些方法注册的话则需要用 <code>Echo.Match(methods []string, path string, h Handler)</code>。</p>
+
+<p>Echo 通过 <code>func(echo.Context) error</code> 定义handler方法， <code>echo.Context</code> 已经内嵌了 HTTP 请求和响应的接口。</p>
+
+<h3 id="匹配所有">匹配所有</h3>
+
+<p>匹配零个或多个字符的路径。例如， <code>/users/*</code> 将会匹配:</p>
+
+<ul>
+<li><code>/users/</code></li>
+<li><code>/users/1</code></li>
+<li><code>/users/1/files/1</code></li>
+<li><code>/users/anything...</code></li>
+</ul>
+
+<h3 id="路径匹配顺序">路径匹配顺序</h3>
+
+<ul>
+<li>Static (固定路径)</li>
+<li>Param (参数路径)</li>
+<li>Match any (匹配所有)</li>
+</ul>
+
+<h4 id="示例">示例</h4>
+
+<pre><code class="language-go">e.GET(&quot;/users/:id&quot;, func(c echo.Context) error {
+	return c.String(http.StatusOK, &quot;/users/:id&quot;)
+})
+
+e.GET(&quot;/users/new&quot;, func(c echo.Context) error {
+	return c.String(http.StatusOK, &quot;/users/new&quot;)
+})
+
+e.GET(&quot;/users/1/files/*&quot;, func(c echo.Context) error {
+	return c.String(http.StatusOK, &quot;/users/1/files/*&quot;)
+})
+</code></pre>
+
+<p>上面定义的路由将按下面的优先级顺序匹配:</p>
+
+<ul>
+<li><code>/users/new</code></li>
+<li><code>/users/:id</code></li>
+<li><code>/users/1/files/*</code></li>
+</ul>
+
+<blockquote>
+<p>定义路由的顺序没有限制。</p>
+</blockquote>
+
+<h3 id="组路由">组路由</h3>
+
+<p><code>Echo#Group(prefix string, m ...Middleware) *Group</code></p>
+
+<p>拥有相同前缀的路由可以通过中间件定义一个子路由来化为一组。
+除了一些特殊的中间件，组路由也会继承父中间件。
+在组路由里使用中间件可以用<code>Group.Use(m ...Middleware)</code>。
+组路由可以嵌套。</p>
+
+<p>下面的代码，我们创建了一个 admin 组，使所有的 <code>/admin/*</code> 都要求 HTTP 基本认证。</p>
+
+<pre><code class="language-go">g := e.Group(&quot;/admin&quot;)
+g.Use(middleware.BasicAuth(func(username, password string) bool {
+	if username == &quot;joe&quot; &amp;&amp; password == &quot;secret&quot; {
+		return true
+	}
+	return false
+}))
+</code></pre>
+
+<h3 id="构造uri">构造URI</h3>
+
+<p><code>Echo.URI</code> 可以用来在任何业务处理代码里生成带有特殊参数的URI。
+这样当你重构自己的应用的时候，可以很方便的集中处理代码。</p>
+
+<p>下面的代码中 <code>e.URI(h, 1)</code> 将生成<code>/users/1</code>。</p>
+
+<pre><code class="language-go">// 业务处理
+h := func(c echo.Context) error {
+	return c.String(http.StatusOK, &quot;OK&quot;)
+}
+
+// 路由
+e.GET(&quot;/users/:id&quot;, h)
+</code></pre>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

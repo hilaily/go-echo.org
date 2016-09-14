@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        CSRF(跨站请求伪造) - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -215,7 +215,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/csrf">
+          <a class="is-active" href="http://go-echo.org/csrf">
             CSRF(跨站请求伪造)
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,82 @@
           <article class="content">
             <section>
               
+
+<h2 id="csrf-middleware-跨站请求伪造">CSRF Middleware(跨站请求伪造)</h2>
+
+<p>CSRF（Cross-site request forgery跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。 跟跨网站脚本（XSS）相比，XSS 利用的是用户对指定网站的信任，CSRF 利用的是网站对用户网页浏览器的信任。</p>
+
+<h3 id="配置">配置</h3>
+
+<pre><code class="language-go">CSRFConfig struct {
+  // Key to create CSRF token.
+  Secret []byte `json:&quot;secret&quot;`
+
+  // TokenLookup is a string in the form of &quot;&lt;source&gt;:&lt;key&gt;&quot; that is used
+  // to extract token from the request.
+  // Optional. Default value &quot;header:X-CSRF-Token&quot;.
+  // Possible values:
+  // - &quot;header:&lt;name&gt;&quot;
+  // - &quot;form:&lt;name&gt;&quot;
+  // - &quot;header:&lt;name&gt;&quot;
+  TokenLookup string `json:&quot;token_lookup&quot;`
+
+  // Context key to store generated CSRF token into context.
+  // Optional. Default value &quot;csrf&quot;.
+  ContextKey string `json:&quot;context_key&quot;`
+
+  // Name of the CSRF cookie. This cookie will store CSRF token.
+  // Optional. Default value &quot;csrf&quot;.
+  CookieName string `json:&quot;cookie_name&quot;`
+
+  // Domain of the CSRF cookie.
+  // Optional. Default value none.
+  CookieDomain string `json:&quot;cookie_domain&quot;`
+
+  // Path of the CSRF cookie.
+  // Optional. Default value none.
+  CookiePath string `json:&quot;cookie_path&quot;`
+
+  // Expiration time of the CSRF cookie.
+  // Optional. Default value 24H.
+  CookieExpires time.Time `json:&quot;cookie_expires&quot;`
+
+  // Indicates if CSRF cookie is secure.
+  CookieSecure bool `json:&quot;cookie_secure&quot;`
+  // Optional. Default value false.
+
+  // Indicates if CSRF cookie is HTTP only.
+  // Optional. Default value false.
+  CookieHTTPOnly bool `json:&quot;cookie_http_only&quot;`
+}
+</code></pre>
+
+<h3 id="默认配置">默认配置</h3>
+
+<pre><code class="language-go">DefaultCSRFConfig = CSRFConfig{
+  TokenLookup:   &quot;header:&quot; + echo.HeaderXCSRFToken,
+  ContextKey:    &quot;csrf&quot;,
+  CookieName:    &quot;csrf&quot;,
+  CookieExpires: time.Now().Add(24 * time.Hour),
+}
+</code></pre>
+
+<p><em>Usage</em></p>
+
+<p><code>e.Use(middleware.CSRF(&quot;secret&quot;))</code></p>
+
+<h3 id="自定义配置">自定义配置</h3>
+
+<p><em>Usage</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
+  TokenLookup: &quot;header:X-XSRF-TOKEN&quot;,
+}))
+</code></pre>
+
+<p>Example above uses <code>X-XSRF-TOKEN</code> request header to extract CSRF token.</p>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

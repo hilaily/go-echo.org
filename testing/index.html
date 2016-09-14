@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        测试 - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -165,7 +165,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/testing">
+          <a class="is-active" href="http://go-echo.org/testing">
             测试
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,158 @@
           <article class="content">
             <section>
               
+
+<h2 id="测试">测试</h2>
+
+<h3 id="测试业务逻辑">测试业务逻辑</h3>
+
+<p><code>GET</code> <code>/users/:id</code></p>
+
+<p>这个业务是根据用户的 id 从数据库取到该用户数据，如果用户不存在则返回<code>404</code>和提示语句。</p>
+
+<h4 id="创建-user">创建 User</h4>
+
+<p><code>POST</code> <code>/users</code></p>
+
+<ul>
+<li>接受 JSON 格式的数据。</li>
+<li>创建成功返回 <code>201 - Created</code>。</li>
+<li>发生错误返回 <code>500 - Internal Server Error</code>。</li>
+</ul>
+
+<h4 id="获取-user">获取 User</h4>
+
+<p><code>GET</code> <code>/users/:email</code></p>
+
+<ul>
+<li>获取成功返回 <code>200 - OK</code></li>
+<li>发生错误返回 <code>404 - Not Found</code> if user is not found otherwise <code>500 - Internal Server Error</code></li>
+</ul>
+
+<p><code>handler.go</code></p>
+
+<pre><code class="language-go">package handler
+
+import (
+	&quot;net/http&quot;
+
+	&quot;github.com/labstack/echo&quot;
+)
+
+type (
+	User struct {
+		Name  string `json:&quot;name&quot; form:&quot;name&quot;`
+		Email string `json:&quot;email&quot; form:&quot;email&quot;`
+	}
+	handler struct {
+		db map[string]*User
+	}
+)
+
+func (h *handler) createUser(c echo.Context) error {
+	u := new(User)
+	if err := c.Bind(u); err != nil {
+		return err
+	}
+	return c.JSON(http.StatusCreated, u)
+}
+
+func (h *handler) getUser(c echo.Context) error {
+	email := c.Param(&quot;email&quot;)
+	user := h.db[email]
+	if user == nil {
+		return echo.NewHTTPError(http.StatusNotFound, &quot;user not found&quot;)
+	}
+	return c.JSON(http.StatusOK, user)
+}
+</code></pre>
+
+<p><code>handler_test.go</code></p>
+
+<pre><code class="language-go">package handler
+
+import (
+	&quot;net/http&quot;
+	&quot;net/http/httptest&quot;
+	&quot;strings&quot;
+	&quot;testing&quot;
+
+	&quot;github.com/labstack/echo&quot;
+	&quot;github.com/labstack/echo/engine/standard&quot;
+	&quot;github.com/stretchr/testify/assert&quot;
+)
+
+var (
+	mockDB = map[string]*User{
+		&quot;jon@labstack.com&quot;: &amp;User{&quot;Jon Snow&quot;, &quot;jon@labstack.com&quot;},
+	}
+	userJSON = `{&quot;name&quot;:&quot;Jon Snow&quot;,&quot;email&quot;:&quot;jon@labstack.com&quot;}`
+)
+
+func TestCreateUser(t *testing.T) {
+	// 设置
+	e := echo.New()
+	req, err := http.NewRequest(echo.POST, &quot;/users&quot;, strings.NewReader(userJSON))
+	if assert.NoError(t, err) {
+		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+		rec := httptest.NewRecorder()
+		c := e.NewContext(standard.NewRequest(req, e.Logger()), standard.NewResponse(rec, e.Logger()))
+		h := &amp;handler{mockDB}
+
+		// 断言
+		if assert.NoError(t, h.createUser(c)) {
+			assert.Equal(t, http.StatusCreated, rec.Code)
+			assert.Equal(t, userJSON, rec.Body.String())
+		}
+	}
+}
+
+func TestGetUser(t *testing.T) {
+	// 设置
+	e := echo.New()
+	req := new(http.Request)
+	rec := httptest.NewRecorder()
+	c := e.NewContext(standard.NewRequest(req, e.Logger()), standard.NewResponse(rec, e.Logger()))
+	c.SetPath(&quot;/users/:email&quot;)
+	c.SetParamNames(&quot;email&quot;)
+	c.SetParamValues(&quot;jon@labstack.com&quot;)
+	h := &amp;handler{mockDB}
+
+	// 断言
+	if assert.NoError(t, h.getUser(c)) {
+		assert.Equal(t, http.StatusOK, rec.Code)
+		assert.Equal(t, userJSON, rec.Body.String())
+	}
+}
+</code></pre>
+
+<h4 id="使用-form-表单提交">使用 Form 表单提交</h4>
+
+<pre><code class="language-go">f := make(url.Values)
+f.Set(&quot;name&quot;, &quot;Jon Snow&quot;)
+f.Set(&quot;email&quot;, &quot;jon@labstack.com&quot;)
+req, err := http.NewRequest(echo.POST, &quot;/&quot;, strings.NewReader(f.Encode()))
+</code></pre>
+
+<h4 id="设置-url-参数">设置 URL 参数</h4>
+
+<pre><code class="language-go">c.SetParamNames(&quot;id&quot;, &quot;email&quot;)
+c.SetParamValues(&quot;1&quot;, &quot;jon@labstack.com&quot;)
+</code></pre>
+
+<h4 id="设置请求参数">设置请求参数</h4>
+
+<pre><code class="language-go">q := make(url.Values)
+q.Set(&quot;email&quot;, &quot;jon@labstack.com&quot;)
+req, err := http.NewRequest(echo.POST, &quot;/?&quot;+q.Encode(), nil)
+</code></pre>
+
+<h3 id="测试中间件">测试中间件</h3>
+
+<p><em>待更新</em></p>
+
+<p>你可以在<a href="https://github.com/labstack/echo/tree/master/middleware">这里</a>查看框架自带中间件的测试代码。</p>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

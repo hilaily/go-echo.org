@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        HTTP 请求 - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -151,7 +151,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/request">
+          <a class="is-active" href="http://go-echo.org/request">
             HTTP 请求
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,89 @@
           <article class="content">
             <section>
               
+
+<h2 id="http-请求">HTTP 请求</h2>
+
+<h3 id="action-路径处理">Action 路径处理</h3>
+
+<p><code>Context#Path()</code> 返回在路由注册的Action的路径，它可以被中间件使用来得到访问的目的地址。</p>
+
+<p><em>例如</em></p>
+
+<pre><code class="language-go">e.Use(func(c echo.Context) error {
+    println(c.Path()) // 输出 `/users/:name`
+    return nil
+})
+e.GET(&quot;/users/:name&quot;, func(c echo.Context) error) {
+    return c.String(http.StatusOK, name)
+})
+</code></pre>
+
+<h3 id="golang-org-x-net-context-对象">golang.org/x/net/context 对象</h3>
+
+<p><code>echo.Context</code> 内嵌了 <code>context.Context</code> 接口，所以<code>context.Context</code> 的所有方法<code>echo.Context</code>都支持。</p>
+
+<p><em>例如</em></p>
+
+<pre><code class="language-go">e.GET(&quot;/users/:name&quot;, func(c echo.Context) error) {
+    c.SetNetContext(context.WithValue(nil, &quot;key&quot;, &quot;val&quot;))
+    // 向后传递...
+    // 使用它...
+    val := c.Value(&quot;key&quot;).(string)
+    return c.String(http.StatusOK, name)
+})
+</code></pre>
+
+<h3 id="url-参数">URL 参数</h3>
+
+<p>URL 参数可以用参数名 <code>Context#Param(name string) string</code> 和参数索引(序号) <code>Context#P(i int) string</code> 取得。通过参数索引的方式性能会稍微好一点。</p>
+
+<p><em>例如</em></p>
+
+<pre><code class="language-go">e.GET(&quot;/users/:name&quot;, func(c echo.Context) error {
+	// 通过名称
+	name := c.Param(&quot;name&quot;)
+
+	// 通过索引值
+	name := c.P(0)
+
+	return c.String(http.StatusOK, name)
+})
+</code></pre>
+
+<pre><code class="language-sh">$ curl http://localhost:1323/users/joe
+</code></pre>
+
+<h3 id="请求参数">请求参数</h3>
+
+<p>请求参数可以通过参数名获取 <code>Context#QueryParam(name string)</code>。</p>
+
+<p><em>例如</em></p>
+
+<pre><code class="language-go">e.GET(&quot;/users&quot;, func(c echo.Context) error {
+	name := c.QueryParam(&quot;name&quot;)
+	return c.String(http.StatusOK, name)
+})
+</code></pre>
+
+<pre><code class="language-sh">$ curl -G -d &quot;name=joe&quot; http://localhost:1323/users
+</code></pre>
+
+<h3 id="表单参数">表单参数</h3>
+
+<p>表单参数可以使用参数名获取 <code>Context#FormValue(name string)</code>。</p>
+
+<p><em>例如</em></p>
+
+<pre><code class="language-go">e.POST(&quot;/users&quot;, func(c echo.Context) error {
+	name := c.FormValue(&quot;name&quot;)
+	return c.String(http.StatusOK, name)
+})
+</code></pre>
+
+<pre><code class="language-sh">$ curl -d &quot;name=joe&quot; http://localhost:1323/users
+</code></pre>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

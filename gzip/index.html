@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        Gzip - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -222,7 +222,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/gzip">
+          <a class="is-active" href="http://go-echo.org/gzip">
             Gzip
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,41 @@
           <article class="content">
             <section>
               
+
+<h2 id="gzip-middleware">Gzip Middleware</h2>
+
+<p>Gzip 中间件使用 gzip 压缩方案来对HTTP响应进行压缩。</p>
+
+<h3 id="配置">配置</h3>
+
+<pre><code class="language-go">GzipConfig struct {
+  // Gzip compression level.
+  // Optional. Default value -1.
+  Level int
+}
+</code></pre>
+
+<h3 id="默认配置">默认配置</h3>
+
+<pre><code class="language-go">DefaultGzipConfig = GzipConfig{
+  Level: -1,
+}
+</code></pre>
+
+<p><em>Usage</em></p>
+
+<p><code>e.Use(middleware.Gzip())</code></p>
+
+<h3 id="自定义配置">自定义配置</h3>
+
+<p><em>Usage</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
+  Level: 5
+}))
+</code></pre>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

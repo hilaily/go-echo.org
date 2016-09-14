@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        错误处理 - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -158,7 +158,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/error-handling">
+          <a class="is-active" href="http://go-echo.org/error-handling">
             错误处理
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,46 @@
           <article class="content">
             <section>
               
+
+<h2 id="错误处理">错误处理</h2>
+
+<p>Echo 支持从中间件或者action返回 HTTP 错误 集中处理。</p>
+
+<ul>
+<li>在统一的地方记录日志</li>
+<li>返回自定义的 HTTP 响应</li>
+</ul>
+
+<p>例如 一个基本的身份验证中间件验证失败返回
+<code>401 - Unauthorized</code> 错误, 终止了当前的 HTTP 请求。</p>
+
+<pre><code class="language-go">package main
+
+import (
+	&quot;net/http&quot;
+
+	&quot;github.com/labstack/echo&quot;
+)
+
+func main() {
+	e := echo.New()
+	e.Use(func(c echo.Context) error {
+		// 从 HTTP 请求中取出 credentials(一般为cookie)然后验证
+
+		// 验证失败
+		return echo.NewHTTPError(http.StatusUnauthorized)
+	})
+	e.GET(&quot;/welcome&quot;, welcome)
+	e.Run(&quot;:1323&quot;)
+}
+
+func welcome(c echo.Context) error {
+	return c.String(http.StatusOK, &quot;Welcome!&quot;)
+}
+</code></pre>
+
+<p>查看 <a href="http://go-echo.org/guide/customization#http-error-handler">HTTPErrorHandler</a> 怎样处理的。</p>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        概述 - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -180,7 +180,7 @@
     <ul class="menu-list">
       
         <li>
-          <a href="http://go-echo.org/overview">
+          <a class="is-active" href="http://go-echo.org/overview">
             概述
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,75 @@
           <article class="content">
             <section>
               
+
+<h2 id="中间件">中间件</h2>
+
+<p>中间件是一个函数，嵌入在HTTP 的请求和响应之间。它可以获得 <code>Echo#Context</code> 对象用来进行一些特殊的操作，
+比如记录每个请求或者统计请求数。</p>
+
+<p>Action的处理在所有的中间件运行完成之后。</p>
+
+<h3 id="中间件级别">中间件级别</h3>
+
+<h4 id="root-level-before-router">Root Level (Before router)</h4>
+
+<p><code>Echo#Pre()</code> 用于注册一个在路由执行之前运行的中间件，可以用来修改请求的一些属性。比如在请求路径结尾添加或者删除一个&rsquo;/&lsquo;来使之能与路由匹配。</p>
+
+<p>下面的这几个内建中间件应该被注册在这一级别：</p>
+
+<ul>
+<li>AddTrailingSlash</li>
+<li>RemoveTrailingSlash</li>
+<li>MethodOverride</li>
+</ul>
+
+<p><em>注意</em>: 由于在这个级别路由还没有执行，所以这个级别的中间件不能调用任何 <code>echo.Context</code> 的 API。</p>
+
+<h4 id="root-level-after-router">Root Level (After router)</h4>
+
+<p>大部分时间你将用到 <code>Echo#Use()</code> 在这个级别注册中间件。
+这个级别的中间件运行在路由处理完请求之后，可以调用所有的 <code>echo.Context</code> API。</p>
+
+<p>下面的这几个内建中间件应该被注册在这一级别：</p>
+
+<ul>
+<li>BodyLimit</li>
+<li>Logger</li>
+<li>Gzip</li>
+<li>Recover</li>
+<li>BasicAuth</li>
+<li>JWTAuth</li>
+<li>Secure</li>
+<li>CORS</li>
+<li>Static</li>
+</ul>
+
+<h4 id="group-level">Group Level</h4>
+
+<p>当在路由中创建一个组的时候，可以为这个组注册一个中间件。例如，给 admin 这个组注册一个 BasicAuth 中间件。</p>
+
+<p><em>用法</em></p>
+
+<pre><code class="language-go">e := echo.New()
+admin := e.Group(&quot;/admin&quot;, middleware.BasicAuth())
+</code></pre>
+
+<p>也可以在创建组之后用 <code>admin.Use()</code>注册该中间件。</p>
+
+<h4 id="route-level">Route Level</h4>
+
+<p>当你创建了一个新的路由，可以选择性的给这个路由注册一个中间件。</p>
+
+<p><em>用法</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.GET(&quot;/&quot;, &lt;Handler&gt;, &lt;Middleware...&gt;)
+</code></pre>
+
+<h3 id="{#HUGOSHORTCODE-1#">[Writing Custom Middleware](</h3>
+
+<p>#})</p>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

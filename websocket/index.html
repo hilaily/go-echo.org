@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        WebSocket - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -321,7 +321,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/websocket">
+          <a class="is-active" href="http://go-echo.org/websocket">
             WebSocket
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,71 @@
           <article class="content">
             <section>
               
+
+<h2 id="websocket-recipe">WebSocket Recipe</h2>
+
+<blockquote>
+<p>Only supported in <code>standard</code> engine.</p>
+</blockquote>
+
+<h3 id="using-net-websocket">Using <code>net</code> WebSocket</h3>
+
+<h4 id="server">Server</h4>
+
+<p><code>server.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/websocket/net/server.go">
+</pre>
+
+
+<h3 id="using-gorilla-websocket">Using <code>gorilla</code> WebSocket</h3>
+
+<h4 id="server-1">Server</h4>
+
+<p><code>server.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/websocket/gorilla/server.go">
+</pre>
+
+
+<h3 id="client">Client</h3>
+
+<p><code>index.html</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/websocket/public/index.html">
+</pre>
+
+
+<h3 id="output">Output</h3>
+
+<p><code>Client</code></p>
+
+<pre><code class="language-sh">Hello, Client!
+Hello, Client!
+Hello, Client!
+Hello, Client!
+Hello, Client!
+</code></pre>
+
+<p><code>Server</code></p>
+
+<pre><code class="language-sh">Hello, Server!
+Hello, Server!
+Hello, Server!
+Hello, Server!
+Hello, Server!
+</code></pre>
+
+<h3 id="maintainers">Maintainers</h3>
+
+<ul>
+<li><a href="https://github.com/vishr">vishr</a></li>
+</ul>
+
+<h3 id="{#HUGOSHORTCODE-4#">[Source Code](</h3>
+
+<p>#})</p>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        Index - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,410 @@
           <article class="content">
             <section>
               
+
+<h2 id="简易高效的-go-golang-语言-http-框架-比其他框架快速10倍">简易高效的 Go(Golang) 语言 HTTP 框架。比其他框架快速10倍。</h2>
+
+<h2 id="功能概览">功能概览</h2>
+
+<ul>
+<li>优化的 HTTP 路由。</li>
+<li>创建可靠并可伸缩的RESTful API。</li>
+<li>行于标准的HTTP服务器或FastHTTP服务器。</li>
+<li>组 APIs.</li>
+<li>可扩展的middleware框架。</li>
+<li>Define middleware at root, group or route level.</li>
+<li>为JSON, XML进行数据绑定，产生负荷。</li>
+<li>提供便捷的方法来发送各种HTTP相应。</li>
+<li>对HTTP错误进行集中处理。</li>
+<li>Template rendering with any template engine.</li>
+<li>定义属于你的日志格式。</li>
+<li>高度个性化。</li>
+</ul>
+
+<h2 id="性能">性能</h2>
+
+<ul>
+<li>环境:
+
+<ul>
+<li>Go 1.6</li>
+<li>wrk 4.0.0</li>
+<li>2 GB, 2 Core (DigitalOcean)</li>
+</ul></li>
+<li>测试方案: <a href="https://github.com/vishr/web-framework-benchmark">https://github.com/vishr/web-framework-benchmark</a></li>
+<li>日期: 4/4/2016</li>
+</ul>
+
+<p><img width="600" height="371" src="https://o8l6oohcu.qnssl.com/go-echo/echo.png"></p>
+
+<h2 id="快速开始">快速开始</h2>
+
+<h3 id="安装">安装</h3>
+
+<pre><code class="language-sh">$ go get github.com/labstack/echo/...
+</code></pre>
+
+<h3 id="编写-hello-world">编写 Hello, World!</h3>
+
+<p>创建 <code>server.go</code> 文件</p>
+
+<pre><code class="language-go">package main
+
+import (
+	&quot;net/http&quot;
+	&quot;github.com/labstack/echo&quot;
+	&quot;github.com/labstack/echo/engine/standard&quot;
+)
+
+func main() {
+	e := echo.New()
+	e.GET(&quot;/&quot;, func(c echo.Context) error {
+		return c.String(http.StatusOK, &quot;Hello, World!&quot;)
+	})
+	e.Run(standard.New(&quot;:1323&quot;))
+}
+</code></pre>
+
+<p>开启服务</p>
+
+<pre><code class="language-sh">$ go run server.go
+</code></pre>
+
+<p>在浏览器访问 <a href="http://localhost:1323">http://localhost:1323</a> 然后你就能在页面上看到
+Hello, World!</p>
+
+<h3 id="路由">路由</h3>
+
+<pre><code class="language-go">e.POST(&quot;/users&quot;, saveUser)
+e.GET(&quot;/users/:id&quot;, getUser)
+e.PUT(&quot;/users/:id&quot;, updateUser)
+e.DELETE(&quot;/users/:id&quot;, deleteUser)
+</code></pre>
+
+<h3 id="url路径参数">URL路径参数</h3>
+
+<pre><code class="language-go">func getUser(c echo.Context) error {
+	// User ID 来自于url `users/:id`
+	id := c.Param(&quot;id&quot;)
+}
+</code></pre>
+
+<h3 id="请求参数">请求参数</h3>
+
+<p><code>/show?team=x-men&amp;member=wolverine</code></p>
+
+<pre><code class="language-go">func show(c echo.Context) error {
+	// 从请求参数里获取 team 和 member 的值
+	team := c.QueryParam(&quot;team&quot;)
+	member := c.QueryParam(&quot;member&quot;)
+}
+</code></pre>
+
+<h3 id="表单-application-x-www-form-urlencoded">表单 <code>application/x-www-form-urlencoded</code></h3>
+
+<p><code>POST</code> <code>/save</code></p>
+
+<table>
+<thead>
+<tr>
+<th align="left">name</th>
+<th align="left">value</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">name</td>
+<td align="left">Joe Smith</td>
+</tr>
+
+<tr>
+<td align="left">email</td>
+<td align="left">joe@labstack.com</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-go">func save(c echo.Context) error {
+	// 获取 name 和 email 的值
+	name := c.FormValue(&quot;name&quot;)
+	email := c.FormValue(&quot;email&quot;)
+}
+</code></pre>
+
+<h3 id="表单-multipart-form-data">表单 <code>multipart/form-data</code></h3>
+
+<p><code>POST</code> <code>/save</code></p>
+
+<table>
+<thead>
+<tr>
+<th align="left">name</th>
+<th align="left">value</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">name</td>
+<td align="left">Joe Smith</td>
+</tr>
+
+<tr>
+<td align="left">email</td>
+<td align="left">joe@labstack.com</td>
+</tr>
+
+<tr>
+<td align="left">avatar</td>
+<td align="left">avatar</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-go">func save(c echo.Context) error {
+	// Get name and email
+	name := c.FormValue(&quot;name&quot;)
+	email := c.FormValue(&quot;email&quot;)
+	// Get avatar
+	avatar, err := c.FormFile(&quot;avatar&quot;)
+	if err != nil {
+		return err
+	}
+
+	// Source
+	src, err := avatar.Open()
+	if err != nil {
+		return err
+	}
+	defer src.Close()
+
+	// Destination
+	dst, err := os.Create(avatar.Filename)
+	if err != nil {
+		return err
+	}
+	defer dst.Close()
+
+	// Copy
+	if _, err = io.Copy(dst, src); err != nil {
+		return err
+	}
+
+	return c.HTML(http.StatusOK, &quot;&lt;b&gt;Thank you!&lt;/b&gt;&quot;)
+}
+</code></pre>
+
+<h3 id="处理请求">处理请求</h3>
+
+<ul>
+<li>在数据结构体里设置<code>JSON</code> 或 <code>XML</code> 或 <code>form</code> 直接匹配请求头的 <code>Content-Type</code>。</li>
+<li>结合响应状态将响应渲染为<code>JSON</code> 或者 <code>XML</code>。</li>
+</ul>
+
+<pre><code class="language-go">type User struct {
+	Name  string `json:&quot;name&quot; xml:&quot;name&quot; form:&quot;name&quot;`
+	Email string `json:&quot;email&quot; xml:&quot;email&quot; form:&quot;email&quot;`
+}
+
+e.POST(&quot;/users&quot;, func(c echo.Context) error {
+	u := new(User)
+	if err := c.Bind(u); err != nil {
+		return err
+	}
+	return c.JSON(http.StatusCreated, u)
+	// 或者
+	// return c.XML(http.StatusCreated, u)
+})
+</code></pre>
+
+<h3 id="静态资源">静态资源</h3>
+
+<p>定义<code>/static/*</code>目录为静态资源文件目录</p>
+
+<pre><code class="language-go">e.Static(&quot;/static&quot;, &quot;static&quot;)
+</code></pre>
+
+<h5 id="更多-http-go-echo-org-guide-static-files"><a href="http://go-echo.org/guide/static-files">更多&hellip;</a></h5>
+
+<h3 id="模板渲染-http-go-echo-org-guide-templates"><a href="http://go-echo.org/guide/templates">模板渲染</a></h3>
+
+<h3 id="中间件">中间件</h3>
+
+<pre><code class="language-go">// Root level middleware
+e.Use(middleware.Logger())
+e.Use(middleware.Recover())
+
+// Group level middleware
+g := e.Group(&quot;/admin&quot;)
+g.Use(middleware.BasicAuth(func(username, password string) bool {
+	if username == &quot;joe&quot; &amp;&amp; password == &quot;secret&quot; {
+		return true
+	}
+	return false
+}))
+
+// Route level middleware
+track := func(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		println(&quot;request to /users&quot;)
+		return next(c)
+	}
+}
+e.GET(&quot;/users&quot;, func(c echo.Context) error {
+	return c.String(http.StatusOK, &quot;/users&quot;)
+}, track)
+</code></pre>
+
+<h4 id="echo-自带的中间件">echo 自带的中间件</h4>
+
+<table>
+<thead>
+<tr>
+<th align="left">中间件</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left"><a href="http://go-echo.org/body-limit">BodyLimit</a></td>
+<td align="left">限制请求体</td>
+</tr>
+
+<tr>
+<td align="left"><a href="http://go-echo.org/logger">Logger</a></td>
+<td align="left">HTTP请求日志</td>
+</tr>
+
+<tr>
+<td align="left"><a href="http://go-echo.org/recover">Recover</a></td>
+<td align="left">Recover from panics</td>
+</tr>
+
+<tr>
+<td align="left"><a href="http://go-echo.org/gzip">Gzip</a></td>
+<td align="left">发送gzip压缩的 HTTP 响应</td>
+</tr>
+
+<tr>
+<td align="left"><a href="http://go-echo.org/basic-auth">BasicAuth</a></td>
+<td align="left">HTTP基本身份认证</td>
+</tr>
+
+<tr>
+<td align="left"><a href="http://go-echo.org/jwt">JWTAuth</a></td>
+<td align="left">JWT身份认证</td>
+</tr>
+
+<tr>
+<td align="left"><a href="http://go-echo.org/secure">Secure</a></td>
+<td align="left">防止攻击</td>
+</tr>
+
+<tr>
+<td align="left"><a href="http://go-echo.org/cors">CORS</a></td>
+<td align="left">跨源资源共享</td>
+</tr>
+
+<tr>
+<td align="left"><a href="http://go-echo.org/csrf">CSRF</a></td>
+<td align="left">跨站请求伪造</td>
+</tr>
+
+<tr>
+<td align="left"><a href="http://go-echo.org/static">Static</a></td>
+<td align="left">提供静态文件</td>
+</tr>
+
+<tr>
+<td align="left"><a href="http://go-echo.org/add-trailing-slash">AddTrailingSlash</a></td>
+<td align="left">Add trailing slash to the request URI</td>
+</tr>
+
+<tr>
+<td align="left"><a href="http://go-echo.org/remove-trailing-slash">RemoveTrailingSlash</a></td>
+<td align="left">Remove trailing slash from the request URI</td>
+</tr>
+
+<tr>
+<td align="left"><a href="http://go-echo.org/method-override">MethodOverride</a></td>
+<td align="left">覆盖请求方法</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="第三方中间件">第三方中间件</h4>
+
+<table>
+<thead>
+<tr>
+<th align="left">中间件</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left"><a href="https://github.com/xyproto/echoperm">echoperm</a></td>
+<td align="left">对用户、登陆状态与权限进行追踪。</td>
+</tr>
+
+<tr>
+<td align="left"><a href="https://github.com/mtojek/echopprof">echopprof</a></td>
+<td align="left">Adapt net/http/pprof to labstack/echo.</td>
+</tr>
+</tbody>
+</table>
+
+<h5 id="学习更多-http-go-echo-org-guide-middleware"><a href="http://go-echo.org/guide/middleware">学习更多&hellip;</a></h5>
+
+<h3 id="接下来">接下来</h3>
+
+<ul>
+<li>回到 <a href="http://go-echo.org/guide/installation">guide</a></li>
+<li>浏览 <a href="http://go-echo.org/recipes/hello-world">recipes</a></li>
+</ul>
+
+<h3 id="帮助">帮助</h3>
+
+<ul>
+<li><a href="https://gitter.im/labstack/echo">在线询问</a></li>
+<li><a href="https://github.com/labstack/echo/issues/new">新建一个issue</a></li>
+</ul>
+
+<h2 id="支持我们">支持我们</h2>
+
+<ul>
+<li>☆ 点赞</li>
+<li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=JD5R56K84A8G4&amp;lc=US&amp;item_name=LabStack&amp;item_number=echo&amp;currency_code=USD&amp;bn=PP-DonationsBF:btn_donate_LG.gif:NonHosted">打赏</a></li>
+<li>🌐 spread the word</li>
+<li><a href="#contribute:d680e8a854a7cbad6d490c445cba2eba">改进</a> 这个程序</li>
+</ul>
+
+<h2 id="贡献">贡献</h2>
+
+<p><strong>用 issues 完成所有工作</strong></p>
+
+<ul>
+<li>提交 issues</li>
+<li>发 PR 前的讨论</li>
+<li>提出新功能或者优化的建议</li>
+<li>完善／修复 文档</li>
+</ul>
+
+<h2 id="开发人员">开发人员</h2>
+
+<ul>
+<li><a href="https://github.com/vishr">Vishal Rana</a> - 作者</li>
+<li><a href="https://github.com/nr17">Nitin Rana</a> - 顾问</li>
+<li><a href="https://github.com/labstack/echo/graphs/contributors">其他贡献者</a></li>
+</ul>
+
+<h2 id="license">License</h2>
+
+<p><a href="https://github.com/labstack/echo/blob/master/LICENSE">MIT</a></p>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

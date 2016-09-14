@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        CRUD - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -293,7 +293,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/crud">
+          <a class="is-active" href="http://go-echo.org/crud">
             CRUD
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,85 @@
           <article class="content">
             <section>
               
+
+<h2 id="crud-示例">CRUD 示例</h2>
+
+<h3 id="服务端">服务端</h3>
+
+<p><code>server.go</code></p>
+
+<pre data-src="https://raw.githubusercontent.com/labstack/echox/master/recipe/crud/server.go">
+</pre>
+
+
+<h3 id="客户端">客户端</h3>
+
+<p><code>curl</code></p>
+
+<h4 id="创建-user">创建 User</h4>
+
+<pre><code class="language-sh">curl -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{&quot;name&quot;:&quot;Joe Smith&quot;}' \
+  localhost:1323/users
+</code></pre>
+
+<p><em>Response</em></p>
+
+<pre><code class="language-js">{
+  &quot;id&quot;: 1,
+  &quot;name&quot;: &quot;Joe Smith&quot;
+}
+</code></pre>
+
+<h4 id="获取-user">获取 User</h4>
+
+<pre><code class="language-sh">curl localhost:1323/users/1
+</code></pre>
+
+<p><em>Response</em></p>
+
+<pre><code class="language-js">{
+  &quot;id&quot;: 1,
+  &quot;name&quot;: &quot;Joe Smith&quot;
+}
+</code></pre>
+
+<h4 id="更新-user">更新 User</h4>
+
+<pre><code class="language-sh">curl -X PUT \
+  -H 'Content-Type: application/json' \
+  -d '{&quot;name&quot;:&quot;Joe&quot;}' \
+  localhost:1323/users/1
+</code></pre>
+
+<p><em>Response</em></p>
+
+<pre><code class="language-js">{
+  &quot;id&quot;: 1,
+  &quot;name&quot;: &quot;Joe&quot;
+}
+</code></pre>
+
+<h4 id="删除-user">删除 User</h4>
+
+<pre><code class="language-sh">curl -X DELETE localhost:1323/users/1
+</code></pre>
+
+<p><em>Response</em></p>
+
+<p><code>NoContent - 204</code></p>
+
+<h3 id="维护者">维护者</h3>
+
+<ul>
+<li><a href="https://github.com/vishr">vishr</a></li>
+</ul>
+
+<h3 id="{#HUGOSHORTCODE-2#">[Source Code](</h3>
+
+<p>#})</p>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

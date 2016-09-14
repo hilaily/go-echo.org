@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        Cookies - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -144,7 +144,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/cookies">
+          <a class="is-active" href="http://go-echo.org/cookies">
             Cookies
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,108 @@
           <article class="content">
             <section>
               
+
+<h2 id="cookies">Cookies</h2>
+
+<p>Cookie 是用户在访问网站时服务器发送过来存储在浏览器上的一小段数据。每次用户访问网页，浏览器都把 Cookies 发送回服务器以提醒服务器这个用户以前干过什么。
+Cookie 用来提供一个可靠的途径让服务器记住一些状态信息（比如在线商城中添加物品到购物车）或者记录用户的浏览器行为（比如点击了某个按钮，登录，哪个页面被访问过）。
+Cookie 也可以用来存储用户输入过的表单内容像电话号码，地址等等。</p>
+
+<h3 id="cookie-属性">Cookie 属性</h3>
+
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">可选</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left"><code>Name</code></td>
+<td align="left">No</td>
+</tr>
+
+<tr>
+<td align="left"><code>Value</code></td>
+<td align="left">No</td>
+</tr>
+
+<tr>
+<td align="left"><code>Path</code></td>
+<td align="left">Yes</td>
+</tr>
+
+<tr>
+<td align="left"><code>Domain</code></td>
+<td align="left">Yes</td>
+</tr>
+
+<tr>
+<td align="left"><code>Expires</code></td>
+<td align="left">Yes</td>
+</tr>
+
+<tr>
+<td align="left"><code>Secure</code></td>
+<td align="left">Yes</td>
+</tr>
+
+<tr>
+<td align="left"><code>HTTPOnly</code></td>
+<td align="left">Yes</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="创建一个-cookie">创建一个 Cookie</h3>
+
+<pre><code class="language-go">func writeCookie(c echo.Context) error {
+	cookie := new(echo.Cookie)
+	cookie.SetName(&quot;username&quot;)
+	cookie.SetValue(&quot;jon&quot;)
+	cookie.SetExpires(time.Now().Add(24 * time.Hour))
+	c.SetCookie(cookie)
+	return c.String(http.StatusOK, &quot;write a cookie&quot;)
+}
+</code></pre>
+
+<ul>
+<li>使用 <code>new(echo.Cookie)</code> 创建Cookie。</li>
+<li>使用 <code>Setter</code> 方法设置 cookie 的属性。</li>
+<li>最后，使用 <code>c.SetCookie(cookies)</code> 来给响应添加 <code>Set-Cookie</code> 头。</li>
+</ul>
+
+<h3 id="读取-cookie">读取 Cookie</h3>
+
+<pre><code class="language-go">func readCookie(c echo.Context) error {
+	cookie, err := c.Cookie(&quot;username&quot;)
+	if err != nil {
+		return err
+	}
+	fmt.Println(cookie.Name())
+	fmt.Println(cookie.Value())
+	return c.String(http.StatusOK, &quot;read a cookie&quot;)
+}
+</code></pre>
+
+<ul>
+<li>Cookie 通过名称从 HTTP 请求里读取 <code>c.Cookie(&quot;name&quot;)</code>。</li>
+<li>Cookie 的属性使用<code>Getter</code> 方法获取。</li>
+</ul>
+
+<h3 id="读取所有-cookies">读取所有 Cookies</h3>
+
+<pre><code class="language-go">func readAllCookies(c echo.Context) error {
+	for _, cookie := range c.Cookies() {
+		fmt.Println(cookie.Name())
+		fmt.Println(cookie.Value())
+	}
+	return c.String(http.StatusOK, &quot;read all cookie&quot;)
+}
+</code></pre>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

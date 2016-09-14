@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        Context - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -123,7 +123,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/context">
+          <a class="is-active" href="http://go-echo.org/context">
             Context
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,70 @@
           <article class="content">
             <section>
               
+
+<h2 id="context">Context</h2>
+
+<p>echo.Context represents the context of the current HTTP request.
+It holds request and response reference, path, path parameters, data, registered handler and APIs to read request and write response.
+Context is 100% compatible with standard context.Context.
+As Context is an interface, it is easy to extend it with custom APIs.</p>
+
+<h3 id="extending-context">Extending Context</h3>
+
+<p><strong>Define a custom context</strong></p>
+
+<pre><code class="language-go">    type CustomContext struct {
+	echo.Context
+    }
+
+    func (c *CustomContext) Foo() {
+        println(&quot;foo&quot;)
+    }
+
+    func (c *CustomContext) Bar() {
+        println(&quot;bar&quot;)
+    }
+</code></pre>
+
+<p><strong>Create a middleware to extend default context</strong></p>
+
+<pre><code class="language-go">    e.Use(func(h echo.HandlerFunc) echo.HandlerFunc {
+        return func(c echo.Context) error {
+            cc := &amp;CustomContext{c}
+            return h(cc)
+        }
+    })
+</code></pre>
+
+<blockquote>
+<p>This middleware should be registered before any other middleware.</p>
+</blockquote>
+
+<p><strong>Use in handler</strong></p>
+
+<pre><code class="language-go">e.Get(&quot;/&quot;, func(c echo.Context) error {
+	cc := c.(*CustomContext)
+	cc.Foo()
+	cc.Bar()
+	return cc.String(200, &quot;OK&quot;)
+})
+</code></pre>
+
+<h3 id="standard-context">Standard Context</h3>
+
+<p>echo.Context embeds standard context.Context interface, so all it’s functions are available right from echo.Context.</p>
+
+<p><em>Example</em></p>
+
+<pre><code class="language-go">e.GET(&quot;/users/:name&quot;, func(c echo.Context) error) {
+    c.SetContext(context.WithValue(nil, &quot;key&quot;, &quot;val&quot;))
+    // Pass it down...
+    // Use it...
+    val := c.Value(&quot;key&quot;).(string)
+    return c.String(http.StatusOK, name)
+})
+</code></pre>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

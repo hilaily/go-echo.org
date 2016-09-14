@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        自定义 - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -109,7 +109,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/customization">
+          <a class="is-active" href="http://go-echo.org/customization">
             自定义
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,94 @@
           <article class="content">
             <section>
               
+
+<h2 id="自定义">自定义</h2>
+
+<h3 id="http-错误处理">HTTP 错误处理</h3>
+
+<p><code>Echo#SetHTTPErrorHandler(h HTTPErrorHandler)</code> 注册了一个自定义的 <code>Echo#HTTPErrorHandler</code>.</p>
+
+<p>默认的 HTTP 错误处理规则如下：</p>
+
+<ul>
+<li>如果错误是<code>Echo#HTTPError</code>类型则发送一个状态码为 <code>HTTPError.Code</code>，内容为 <code>HTTPError.Message</code> 的HTTP 响应。</li>
+<li>否则返回 <code>500 - Internal Server Error</code>。</li>
+<li>如果开启了 debug 模式，则使用 <code>error.Error()</code> 返回消息。</li>
+</ul>
+
+<h3 id="debug">Debug</h3>
+
+<p><code>Echo#SetDebug(on bool)</code> 开启/关闭 debug 模式。</p>
+
+<h3 id="日志">日志</h3>
+
+<h4 id="自定义日志">自定义日志</h4>
+
+<p><code>Echo#SetLogger(l log.Logger)</code></p>
+
+<p>SetLogger 用来定义一个 自定义日志。</p>
+
+<h4 id="日志输出">日志输出</h4>
+
+<p><code>Echo#SetLogOutput(w io.Writer)</code> 设置日志输出的位置，默认是 <code>os.Stdout</code>。
+使用 <code>Echo#SetLogOutput(io.Discard)</code> 完全禁用日志。</p>
+
+<h4 id="日志级别">日志级别</h4>
+
+<p><code>Echo#SetLogLevel(l log.Level)</code></p>
+
+<p>SetLogLevel 用于设置日志级别，默认是 <code>3</code> (ERROR).
+可以使用的值：</p>
+
+<ul>
+<li><code>0</code> (DEBUG)</li>
+<li><code>1</code> (INFO)</li>
+<li><code>2</code> (WARN)</li>
+<li><code>3</code>   (ERROR)</li>
+<li><code>4</code>   (FATAL)</li>
+<li><code>5</code> (OFF)</li>
+</ul>
+
+<h3 id="http-engine">HTTP Engine</h3>
+
+<p>Echo 现在支持使用 standard 和 <a href="https://github.com/valyala/fasthttp">fasthttp</a> 提供 HTTP 服务。
+Echo 内部实现了这两个引擎的接口，可以根据需要无缝的切换这两种 HTTP 服务。</p>
+
+<h4 id="运行一个-standard-http-server">运行一个 standard HTTP server</h4>
+
+<p><code>e.Run(standard.New(&quot;:1323&quot;))</code></p>
+
+<h4 id="运行一个-fasthttp-server">运行一个 fasthttp server</h4>
+
+<p><code>e.Run(fasthttp.New(&quot;:1323&quot;))</code></p>
+
+<h4 id="运行一个带有-tls-配置的-http-服务">运行一个带有 TLS 配置的 HTTP 服务</h4>
+
+<p><code>e.Run(&lt;engine&gt;.WithTLS(&quot;:1323&quot;, &quot;&lt;certFile&gt;&quot;, &quot;&lt;keyFile&gt;&quot;))</code></p>
+
+<h4 id="运行一个带有服务配置文件的-http-服务">运行一个带有服务配置文件的 HTTP 服务</h4>
+
+<p><code>e.Run(&lt;engine&gt;.WithConfig(&lt;config&gt;))</code></p>
+
+<h5 id="配置">配置</h5>
+
+<pre><code class="language-go">Config struct {
+  Address      string        // 监听的 TCP 地址。
+  Listener     net.Listener  // 自定义 `net.Listener`. 如果设置了，服务器通过它接受连接。
+  TLSCertFile  string        // TLS 证书文件地址。
+  TLSKeyFile   string        // TLS key 文件地址。
+  ReadTimeout  time.Duration // 读取请求的最大时长。
+  WriteTimeout time.Duration // 返回响应的最大时长。
+}
+</code></pre>
+
+<h4 id="服务实例自己配置属性">服务实例自己配置属性</h4>
+
+<pre><code class="language-go">s := standard.New(&quot;:1323&quot;)
+s.MaxHeaderBytes = 1 &lt;&lt; 20
+e.Run(s)
+</code></pre>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

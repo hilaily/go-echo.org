@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        Remove Trailing Slash(移除结尾斜杠) - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -257,7 +257,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/remove-trailing-slash">
+          <a class="is-active" href="http://go-echo.org/remove-trailing-slash">
             RemoveTrailingSlash(移除结尾斜杠)
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,38 @@
           <article class="content">
             <section>
               
+
+<h2 id="removetrailingslash-移除结尾斜杠-中间件">RemoveTrailingSlash(移除结尾斜杠) 中间件</h2>
+
+<p>RemoveTrailingSlash 中间件 会从请求 URI 里移除到最后的斜杠。</p>
+
+<h3 id="配置">配置</h3>
+
+<pre><code class="language-go">TrailingSlashConfig struct {
+  // 当重定向一个请求的时候会用到状态码
+  // 可选，但是当提供的请求需要跳转则要使用到。
+  RedirectCode int
+}
+</code></pre>
+
+<p><em>用法</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Pre(middleware.RemoveTrailingSlash())
+</code></pre>
+
+<h3 id="自定义配置">自定义配置</h3>
+
+<p><em>用法</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Use(middleware.RemoveTrailingSlashWithConfig(TrailingSlashConfig{
+  RedirectCode: http.StatusMovedPermanently,
+}))
+</code></pre>
+
+<p>这样会移除掉最后的斜杠，同时带上<code>StatusMovedPermanently</code>(即301)重定向。</p>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>

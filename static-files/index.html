@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        standard - Go/Golang 框架 Echo 文档
+        静态文件 - Go/Golang 框架 Echo 文档
     </title>
     <meta name="description" content="golang, go, echo, echo 框架, Golang框架, 使用, 教程, 文档,  指南, 高性能, 简单高性能.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,7 +116,7 @@
         </li>
       
         <li>
-          <a href="http://go-echo.org/static-files">
+          <a class="is-active" href="http://go-echo.org/static-files">
             静态文件
           </a>
           
@@ -413,7 +413,7 @@
         </li>
       
         <li>
-          <a class="is-active" href="https://godoc.org/github.com/labstack/echo/engine/standard">
+          <a href="https://godoc.org/github.com/labstack/echo/engine/standard">
             standard
           </a>
           
@@ -436,6 +436,53 @@
           <article class="content">
             <section>
               
+
+<p>图片，JavaScript，CSS，PDF，字体文件等等&hellip;</p>
+
+<h2 id="静态文件">静态文件</h2>
+
+<h3 id="{#HUGOSHORTCODE-1#">[使用 Static 中间件](</h3>
+
+<p>#})</p>
+
+<h3 id="使用-echo-static">使用<code>Echo#Static()</code></h3>
+
+<p><code>Echo#Static(prefix, root string)</code> 用一个路径前缀注册了一个新的路由来提供静态文件的访问服务。改路径前缀作为根目录。</p>
+
+<p><em>用法 1</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Static(&quot;/static&quot;, &quot;assets&quot;)
+</code></pre>
+
+<p>这样会将所有访问<code>/static/*</code>的请求去 访问<code>assets</code>目录。例如，一个访问<code>/static/js/main.js</code>的请求会匹配到<code>assets/js/main.js</code>这个文件。</p>
+
+<p><em>用法 2</em></p>
+
+<pre><code class="language-go">e := echo.New()
+e.Static(&quot;/&quot;, &quot;assets&quot;)
+</code></pre>
+
+<p>这样会将所有<code>assets</code>目录的文件使用<code>/*</code>去访问。例如，一个访问<code>/js/main.js</code>的请求将会匹配到<code>assets/js/main.js</code>文件。</p>
+
+<h3 id="使用-echo-file">使用<code>Echo#File()</code></h3>
+
+<p><code>Echo#File(path, file string)</code> 使用一个路径注册一个新的路由去访问某个静态文件。</p>
+
+<p><em>用法 1</em></p>
+
+<p>将<code>public/index.html</code>作为主页。</p>
+
+<pre><code class="language-go">e.File(&quot;/&quot;, &quot;public/index.html&quot;)
+</code></pre>
+
+<p><em>用法 2</em></p>
+
+<p>给<code>images/favicon.ico</code>一个静态路径。</p>
+
+<pre><code class="language-go">e.File(&quot;/favicon.ico&quot;, &quot;images/favicon.ico&quot;)
+</code></pre>
+
             </section>
             <footer style="margin-top: 40px;">
               <div id="disqus_thread"></div>
