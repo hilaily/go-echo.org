@@ -18,14 +18,14 @@
 
 &lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
 
-&lt;p&gt;echo.Context represents the context of the current HTTP request.
-It holds request and response reference, path, path parameters, data, registered handler and APIs to read request and write response.
-Context is 100% compatible with standard context.Context.
-As Context is an interface, it is easy to extend it with custom APIs.&lt;/p&gt;
+&lt;p&gt;echo.Context 代表了当前 HTTP 请求的context（上下文？这里看个人理解吧，就不翻译了）。
+它含有请求和相应的引用，路径，路径参数，数据，注册的业务处理方法和 读取请求和输出响应的API。
+Context 100% 和标准的 context.Context 兼容。
+由于 Context 是一个借口，所以也可以很方便的使用自定义的 API 扩展。&lt;/p&gt;
 
-&lt;h3 id=&#34;extending-context&#34;&gt;Extending Context&lt;/h3&gt;
+&lt;h3 id=&#34;扩展-context&#34;&gt;扩展 Context&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;Define a custom context&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;自定义一个 context&lt;/strong&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;    type CustomContext struct {
 	echo.Context
@@ -40,7 +40,7 @@ As Context is an interface, it is easy to extend it with custom APIs.&lt;/p&gt;
     }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;Create a middleware to extend default context&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;创建一个中间件来扩展默认的 context&lt;/strong&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;    e.Use(func(h echo.HandlerFunc) echo.HandlerFunc {
         return func(c echo.Context) error {
@@ -51,10 +51,10 @@ As Context is an interface, it is easy to extend it with custom APIs.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;This middleware should be registered before any other middleware.&lt;/p&gt;
+&lt;p&gt;这个中间件要在所有其它中间件之前注册到路由上。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;strong&gt;Use in handler&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在业务处理中使用&lt;/strong&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.Get(&amp;quot;/&amp;quot;, func(c echo.Context) error {
 	cc := c.(*CustomContext)
@@ -64,11 +64,11 @@ As Context is an interface, it is easy to extend it with custom APIs.&lt;/p&gt;
 })
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;standard-context&#34;&gt;Standard Context&lt;/h3&gt;
+&lt;h3 id=&#34;标准的-context&#34;&gt;标准的 Context&lt;/h3&gt;
 
-&lt;p&gt;echo.Context embeds standard context.Context interface, so all it’s functions are available right from echo.Context.&lt;/p&gt;
+&lt;p&gt;echo.Context 内嵌了标准的 context.Context 接口，所以 context.Context 的所有方法 echo.Context 都可以使用。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Example&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;示例&lt;/em&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;e.GET(&amp;quot;/users/:name&amp;quot;, func(c echo.Context) error) {
     c.SetContext(context.WithValue(nil, &amp;quot;key&amp;quot;, &amp;quot;val&amp;quot;))
